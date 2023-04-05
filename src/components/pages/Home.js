@@ -1,11 +1,13 @@
 import React from "react";
+import SiteCard from '../SiteCard';
 
 const Home = () => {
     return (
         <>
-        <div>
-            <h1>Home Placeholder</h1>
+        <div> 
+
         </div>
+            <SiteCard></SiteCard>
         </>
     )
 }

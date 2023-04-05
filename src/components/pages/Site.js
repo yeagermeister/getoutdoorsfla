@@ -1,15 +1,15 @@
 import React from "react";
 import SiteCard from '../SiteCard';
 
-const Spring = () => {
+const Site = () => {
     return (
         <>
         <div>
-            <h1>Spring Placeholder</h1>
+            <h1>Site Placeholder</h1>
         </div>
             <SiteCard></SiteCard>
     </>
     )
 }
 
-export default Spring;
+export default Site;
