@@ -1,7 +1,8 @@
+//   These need set to global so they can be exported and available throughout the app 
 let latitude;
 let longitude;
 
-
+// Helper function to get coordinates.  These will be used to get distances for our site cards, and plot the lcoation on the map.
 export function getLocation() {
     if ("geolocation" in navigator) {
             navigator.geolocation.getCurrentPosition(function(position) {
@@ -19,5 +20,10 @@ export function getLocation() {
         console.log("Geolocation is not supported by this browser.");
     }
 }
+
+// Function to get zipcode for later use
+// export function getZipcode() {
+
+// };
 
 export {latitude, longitude};
