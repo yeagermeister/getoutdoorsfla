@@ -3,7 +3,8 @@ import React from 'react';
 import Start from './components/navbar/Start';
 import Login from './components/pages/Login';
 import Signup from './components/pages/Signup';
-import Spring from './components/pages/Site';
+import Site from './components/pages/Site';
+import Home from './components/pages/Home'
 import { BrowserRouter as Router, Routes, Route}
     from 'react-router-dom';
 import Submit from './components/pages/Submit';
@@ -16,8 +17,8 @@ function App() {
   <Router>
   <Start />
   <Routes>
-    <Route exact path='/' element={<Start />} />
-    <Route path='/spring' element={<Spring />} />
+    <Route exact path='/' element={<Home />} />
+    <Route path='/site' element={<Site />} />
     <Route path='/login' element={<Login />} />
     <Route path='/signup' element={<Signup />} />
     <Route path='/submit' element={<Submit />} />
