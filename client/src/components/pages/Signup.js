@@ -8,7 +8,7 @@ const Signup = () => {
     };
     return (
         <>
-            <h1>Sign Up!</h1>
+            <h2>Sign Up!</h2>
             <form onSubmit={handleSubmit(data => saveData(data))}>
                 <label>Username:</label>
                 <input className="spacing" name="username"/>

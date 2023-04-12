@@ -7,11 +7,12 @@ const Site = () => {
     return (
         <>
         <div>
-            <h1>Site Placeholder</h1>
+            <h2>Site Placeholder</h2>
         </div>
-            <SiteCard></SiteCard>
-            <Map></Map>
-            <Weather></Weather>
+            <SiteCard>
+                <Map></Map>
+                <Weather></Weather>
+            </SiteCard>
     </>
     )
 }
