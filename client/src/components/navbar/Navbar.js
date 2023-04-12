@@ -1,25 +1,35 @@
-import React, { useEffect, useState } from 'react';
-import { FaBars } from "react-icons/fa";
-import { NavLink as Link } from "react-router-dom";
+import React from 'react';
+import Login from './login';
+import Logout from './logout';
 
-const Navbar = () => {
+const Navbar = (props) => {
 
     return (
-<>
-      {/* {loggedIn ? (
-      ) : (
-      )} */}
-        <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="/home">
-          <image src="../images/logo.png" width="50" height="50" alt="" />
-        </a>
-		<a class='nav-link' href='./home'>Get Outdoors Florida</a>
-		<a class='nav-link' href='./signup'>Signup</a>
-		<a class='nav-link' href='./login'>Login</a>
-		<a class='nav-link' href='./logout'>Logout</a>
-		<a class='nav-link' href='./submit'>Submit a new location</a>
-      </nav>
-      </>
+      <nav className="navbar navbar-expand-lg">
+      <div className="container-fluid">
+      <a className="navbar-brand" href="/home">
+        <img src='/images/logo.png' className="icon" alt="" />
+      </a>
+      <a className='nav-link' href='/'>Get Outdoors Florida</a>
+        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <li className="nav-item">
+              <a className="nav-link active" aria-current="page" href="./signup">Signup</a>
+            </li>
+            {props.isLogedIn
+              ? <Logout />
+              : <Login />
+            }
+            <li className="nav-item">
+              <a className="nav-link active" aria-current="page" href="./submit">Submit a new location</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
     );
 };
 

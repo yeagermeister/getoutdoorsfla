@@ -1,29 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
-function SiteCard() {
+const SiteCard = (props) => {
     return (
-    <div>
-  <div class="row w-60 m-5 p-5">
-    <div class="col-md">
-      <div class="card border box border-rounded shadow myCard">
-        <h5 class="card-title text-center">Site Name</h5>
-        <div class="text-center">
-          <image src="{{spring.image_url}}" class="card-img-top border rounded img-border w-75"
-            alt="an image of a spring" />
+    <div className='container'>
+  <div className="row w-60 m-5 p-5">
+    {props.sites.map(item => (
+    <div key={item.id}className="col-sm">
+      <div className="card border box border-rounded shadow myCard">
+        <h5 className="card-title text-center">{item.name}</h5>
+        <div className="text-center">
+          <img src={item.imageUrl} className="card-img-top border rounded img-border w-75"
+            alt="a natural spring" />
         </div>
-        <div class="card-body ">
-          <p class="text-center card-text">Site Description</p>
+        <div className="card-body">
+          <p className="card-description">{item.description}</p>
         </div>
-        <p class="text-center">
-          <span id="spring{{spring.id}}" class="mr-5">67 miles away</span>
-
-          <a href="/springs/{{spring.id}}" class="btn btn-info btn-lg active " role="button" aria-pressed="true">More
+        <p className="text-center">
+          <span id={item.id} className="mr-5">67 miles away</span>
+          <a href={`/springs/${item.id}`} className="btn btn-info btn-sm active myButton" role="button" aria-pressed="true">More
             Information</a>
-
-          <span id="weather{{spring.id}}" class="ml-5"></span>
+          <span id={`weather"${item.id}`} className="ml-5"></span>
         </p>
       </div>
     </div>
+    ))}
   </div>
   </div>
     )

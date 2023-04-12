@@ -21,9 +21,4 @@ export function getLocation() {
     }
 }
 
-// Function to get zipcode for later use
-// export function getZipcode() {
-
-// };
-
 export {latitude, longitude};

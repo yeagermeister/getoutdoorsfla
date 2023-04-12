@@ -1,11 +1,23 @@
-import React from "react";
+import '../../form.css';
+import saveData from '../../utils/saveData';
 
 const Signup = () => {
+
+    function handleSubmit(data){
+
+    };
     return (
-        <div>
-            <h1>Signup Placeholder</h1>
-        </div>
-    )
+        <>
+            <h2>Sign Up!</h2>
+            <form onSubmit={handleSubmit(data => saveData(data))}>
+                <label>Username:</label>
+                <input className="spacing" name="username"/>
+                <label>Password:</label>
+                <input className="spacing" name="password" />
+                <input type="submit" className="myButton" />
+            </form>
+        </>
+    );
 };
 
 export default Signup;
