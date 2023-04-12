@@ -8,7 +8,7 @@ import Home from './components/pages/Home'
 import { BrowserRouter as Router, Routes, Route}
     from 'react-router-dom';
 import Submit from './components/pages/Submit';
-import { getLocation, latitude, longitude } from './utils/utils';
+import { getLocation, latitude, longitude } from './utils/location';
 
 
 function App() {

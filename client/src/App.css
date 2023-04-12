@@ -1,56 +1,21 @@
-/* .App {
-  text-align: center;
+
+:root {
+  --sky: #ADD8E6;
+  --sand: #e9e0cd;
+  --lightgreen: #7ad9ae;
+  --error: #FFA500;
+  --darkgreen: #5a8c5a;
+  --water: #41a3b0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
-/* Use San Francisco font for text */
 body {
-  font-family: "San Francisco", sans-serif;
-}
-
-/* Use minimalist color scheme */
-body {
-  background-color: #7ad9ae !important;
-  color: #ffffff;
+  background-color: var(--sand) !important;
 }
 
 .navbar {
-  background-color: #2d6b73;
+  background-image: linear-gradient(to bottom right, var(--sky), #409bba);
+  background-color: var(--sky) !important;
   color: #ffffff;
-  font-family: 'Gloock', serif;
 }
 
 .nav-link {
@@ -62,9 +27,25 @@ body {
 }
 
 .myCard {
-  color: #ffffff;
+  color: white;
   text-align: center;
   border-radius: 25px;
-  font-family: 'Gloock', serif;
-  background-color: #41a3b0 !important;
+  background-image: linear-gradient(to bottom left, #408475, var(--water) );
+  margin-bottom: 5%;
+}
+
+.card-description {
+  overflow: hidden;
+  height: 75px;
+  text-overflow: ellipsis;
+}
+
+.icon {
+  height: 50px;
+  width: 50px;
+  margin-left: 5px;
+}
+
+.myButton {
+  background-color: var(--darkgreen) !important;
 }
