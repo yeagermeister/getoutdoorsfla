@@ -17,7 +17,7 @@ const SiteCard = (props) => {
         </div>
         <p className="text-center">
           <span id={item.id} className="mr-5">67 miles away</span>
-          <a href={`/springs/${item.id}`} className="btn btn-info btn-sm active myButton" role="button" aria-pressed="true">More
+          <a href={`/site/${item.id}`} className="btn btn-info btn-sm active myButton" role="button" aria-pressed="true">More
             Information</a>
           <span id={`weather"${item.id}`} className="ml-5"></span>
         </p>

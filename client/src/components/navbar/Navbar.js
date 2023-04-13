@@ -19,7 +19,7 @@ const Navbar = (props) => {
             <li className="nav-item">
               <a className="nav-link active" aria-current="page" href="./signup">Signup</a>
             </li>
-            {props.isLogedIn
+            {props.isLoggedIn
               ? <Logout />
               : <Login />
             }
