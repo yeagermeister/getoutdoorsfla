@@ -1,0 +1,56 @@
+
+:root {
+  --sky: #ADD8E6;
+  --sand: #e9e0cd;
+  --lightgreen: #7ad9ae;
+  --error: #FFA500;
+  --darkgreen: #5a8c5a;
+  --water: #41a3b0;
+}
+
+body {
+  background-color: var(--sand) !important;
+}
+
+.navbar {
+  background-image: linear-gradient(to bottom right, var(--sky), #409bba);
+  background-color: var(--sky) !important;
+  color: #ffffff;
+}
+
+.nav-link {
+  color: #ffffff !important;
+  font-size: x-large !important;
+  margin-top: 5px;
+  margin-left: 15px;
+  text-decoration: none !important;
+}
+
+.myCard {
+  color: white;
+  text-align: center;
+  border-radius: 25px;
+  background-image: linear-gradient(to bottom left, #408475, var(--water) );
+  margin-bottom: 5%;
+}
+
+.card-description {
+  overflow: hidden;
+  height: 75px;
+  text-overflow: ellipsis;
+}
+
+.icon {
+  height: 50px;
+  width: 50px;
+  margin-left: 5px;
+}
+
+.myButton {
+  background-image: linear-gradient(to bottom right, #014358, rgb(113, 233, 113));
+}
+
+h2 {
+  background-image: linear-gradient(to bottom right, #014358, rgb(113, 233, 113));
+  text-align: center;
+}
