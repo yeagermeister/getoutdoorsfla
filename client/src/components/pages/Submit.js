@@ -14,6 +14,7 @@ function Submit() {
     const [swimmingHole, setSwimmngHole] = useState('');
     const [spring, setSpring] = useState('');
     const [zipcode, setZipcode] = useState('');
+    const [free, setFree] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
 
@@ -23,7 +24,7 @@ function Submit() {
         const inputType = target.name;
         const inputValue = target.value;
     
-        // Based on the input type, we set the state of either email, username, and password
+    
         if (inputType === 'springName') {
             setSpringName(inputValue);
         }
@@ -51,6 +52,9 @@ function Submit() {
         if (inputType === 'spring'){
             setSpring(inputValue);
         }
+        if (inputType === 'free'){
+            setSpring(inputValue);
+        }
         if (inputType === 'zipcode'){
             setZipcode(inputValue);
         }
@@ -66,6 +70,7 @@ function Submit() {
           // We want to exit out of this code block if something is wrong so that the user can correct it
           return;
         }
+        
         // If everything goes according to plan, we want to clear out the input after a successful registration.
         setSpringName('');
         setDescription('');
@@ -77,6 +82,7 @@ function Submit() {
         setSwimmngHole('');
         setSpring('');
         setZipcode('');
+        setFree('');
       };
 
     return (
@@ -113,6 +119,8 @@ function Submit() {
                     <li><input value={swimmingHole} name="swimmingHole" onChange={handleInputChange} type="checkbox" /></li>
                     <li><label>Spring</label></li>
                     <li><input value={spring} name="spring" onChange={handleInputChange} type="checkbox" /></li>
+                    <li><label>Free Admission?</label></li>
+                    <li><input value={spring} name="free" onChange={handleInputChange} type="checkbox" /></li>
                     </ul>
                 </div>
             </div>

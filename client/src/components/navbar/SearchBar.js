@@ -3,8 +3,7 @@ import React, { useEffect, useState } from 'react';
 function SearchBar() { 
     return (
         <>
-        <div className="container-fluid navbar pb-2">
-        <h1 className="pb-1">Find your fountain of youth!</h1>
+        <div className="container-fluid searchbar pb-2">
         <div className="form-check form-check-inline">
           <input className="form-check-input" type="checkbox" id="statePark" value="option1" />
           <label className="form-check-label" htmlFor="inlineCheckbox1">State Park</label>
@@ -19,14 +18,26 @@ function SearchBar() {
         </div>
         <div className="form-check form-check-inline">
           <input className="form-check-input" type="checkbox" id="scubaDiving" value="option3" />
-          <label className="form-check-label" htmlFor="inlineCheckbox3">Scuba Diving</label>
+          <label className="form-check-label" htmlFor="inlineCheckbox3">City Park</label>
+        </div>
+        <div className="form-check form-check-inline">
+          <input className="form-check-input" type="checkbox" id="pricingFee" value="option3" />
+          <label className="form-check-label" htmlFor="inlineCheckbox3">Beach</label>
+        </div>
+        <div className="form-check form-check-inline">
+          <input className="form-check-input" type="checkbox" id="pricingFee" value="option3" />
+          <label className="form-check-label" htmlFor="inlineCheckbox3">Swimming Hole</label>
+        </div>
+        <div className="form-check form-check-inline">
+          <input className="form-check-input" type="checkbox" id="pricingFee" value="option3" />
+          <label className="form-check-label" htmlFor="inlineCheckbox3">Spring</label>
         </div>
         <div className="form-check form-check-inline">
           <input className="form-check-input" type="checkbox" id="pricingFee" value="option3" />
           <label className="form-check-label" htmlFor="inlineCheckbox3">Free Admission</label>
         </div>
+        <p className='text-center'>Please select options above to filter sites.</p>
       </div>
-      <button className="btn-info ponce w-100" id="searchBtn" type="submit">Ponce!</button>
       </>
     );
 };
