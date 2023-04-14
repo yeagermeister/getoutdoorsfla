@@ -52,7 +52,7 @@ const Login = (props) => {
             ) : (
               <form onSubmit={handleFormSubmit}>
                 <label>Email:</label>
-                <input className="spacing" name="username" type="string" value={formState.username} onChange={handleChange} />
+                <input className="spacing" name="email" type="string" value={formState.username} onChange={handleChange} />
                 <label>Password:</label>
                 <input className="spacing" name="password" type="password" value={formState.password} onChange={handleChange} />
                 <button className="myButton" type="submit">Submit </button>
