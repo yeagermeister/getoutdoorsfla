@@ -1,2 +1,4 @@
 const Users = require('./Users')
-module.exports = {Users};
+const NewSite = require('./NewSite.js')
+const Site = require('./Site')
+module.exports = {Users, NewSite, Site};

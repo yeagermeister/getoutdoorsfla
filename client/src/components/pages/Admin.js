@@ -1,10 +1,11 @@
-
+import Users from '../admin/Users'
 
 
 const Admin = () => {
     return (
         <>
-            {/* <SiteCard sites={sites}/> */}
+        <h2>Site Administration</h2>
+            {<Users />}
         </>
     )
 }

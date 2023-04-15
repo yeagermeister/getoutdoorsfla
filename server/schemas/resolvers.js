@@ -1,4 +1,5 @@
 const { Users } = require('../models');
+const { NewSite } = require('../models')
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 
@@ -35,7 +36,15 @@ const resolvers = {
         const token = signToken(user);
   
         return { token, user };
-    },
+      },
+      addSite: async (parent, {user, description, zipcode, camping, pets, statepark, park, beach, swimmingHole, spring, free}) => {
+        // const user = await Users.findOne({_ID});
+        // if (!user) {
+        //   throw new AuthenticationError('No user found with this ID');
+        // }
+
+
+      },
   }, 
 };
 

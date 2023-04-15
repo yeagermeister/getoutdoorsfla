@@ -7,7 +7,6 @@ import Site from './components/pages/Site';
 import Home from './components/pages/Home';
 import Admin from './components/pages/Admin';
 import Submit from './components/pages/Submit';
-import Mongo from './components/pages/testmongo';
 
 import { BrowserRouter as Router, Routes, Route}from 'react-router-dom';
 import { getLocation, latitude, longitude } from './utils/location';
@@ -56,7 +55,6 @@ function App() {
       <Start />
       <Routes>
         <Route exact path='/' element={<Home />} />
-        <Route path='/mongo' element={<Mongo />} />
         <Route path='/site' element={<Site />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />

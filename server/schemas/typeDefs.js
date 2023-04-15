@@ -8,6 +8,21 @@ const typeDefs = gql`
     admin: Boolean
   }
 
+  type NewSite {
+    _id: ID!
+    siteName: String!
+    description: String!
+    zipcode: Int!
+    camping: Boolean
+    pets: Boolean
+    statepark: Boolean
+    park: Boolean
+    beach: Boolean
+    swimmingHole: Boolean
+    spring: Boolean
+    free: Boolean
+  }
+
   type Auth {
     token: ID!
     user: Users
@@ -16,10 +31,12 @@ const typeDefs = gql`
   type Query {
     user: [Users]
     users: [Users]
+    newsite: [NewSite]
   }
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
+    addSite(siteName: String!, description: String!, zipcode: Int!, camping: Boolean, pets: Boolean, statepark: Boolean, park: Boolean, beach: Boolean, swimmingHole: Boolean, spring: Boolean, free: Boolean): Auth
     login(email: String!, password: String!): Auth
   }
  

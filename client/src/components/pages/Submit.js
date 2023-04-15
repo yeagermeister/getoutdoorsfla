@@ -4,7 +4,7 @@ import '../../form.css';
 function Submit() {
     // Create state variables for the fields in the form
     // We are also setting their initial values to an empty string
-    const [springName, setSpringName] = useState('');
+    const [sitename, setSiteName] = useState('');
     const [description, setDescription] = useState('');
     const [camping, setCamping] = useState('');
     const [pets, setPets] = useState('');
@@ -25,8 +25,8 @@ function Submit() {
         const inputValue = target.value;
     
     
-        if (inputType === 'springName') {
-            setSpringName(inputValue);
+        if (inputType === 'sitename') {
+            setSiteName(inputValue);
         }
         if (inputType === 'description') {
             setDescription(inputValue);
@@ -70,9 +70,9 @@ function Submit() {
           // We want to exit out of this code block if something is wrong so that the user can correct it
           return;
         }
-        
+
         // If everything goes according to plan, we want to clear out the input after a successful registration.
-        setSpringName('');
+        setSiteName('');
         setDescription('');
         setCamping('');
         setPets('');
@@ -95,7 +95,7 @@ function Submit() {
                     <ul className='list-unstyled'>
                         <li><label>Location Name:</label></li>
 
-                        <li><input value={springName} name="springName" onChange={handleInputChange} type="text" /></li>
+                        <li><input value={sitename} name="sitename" onChange={handleInputChange} type="text" /></li>
                         <li><label>Description:</label></li>
                         <li><textarea value={description} name="description" onChange={handleInputChange}  rows={4} cols={40}/></li>
                         <li><label>Zicode:</label></li>
@@ -120,7 +120,7 @@ function Submit() {
                     <li><label>Spring</label></li>
                     <li><input value={spring} name="spring" onChange={handleInputChange} type="checkbox" /></li>
                     <li><label>Free Admission?</label></li>
-                    <li><input value={spring} name="free" onChange={handleInputChange} type="checkbox" /></li>
+                    <li><input value={free} name="free" onChange={handleInputChange} type="checkbox" /></li>
                     </ul>
                 </div>
             </div>
