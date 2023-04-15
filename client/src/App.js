@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react';
+import React, { useState, createContext } from 'react';
 import Start from './components/navbar/Start';
 import Login from './components/pages/Login';
 import Signup from './components/pages/Signup';
@@ -46,26 +46,43 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-
+const AuthContext = createContext(false);
 
 function App() {
   getLocation();
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+  }; 
+  console.log(isLoggedIn)
   return (
+    
+    <AuthContext.Provider value={{ isLoggedIn, onLogin: handleLogin, onLogout: handleLogout }}>
     <ApolloProvider client={client}>
       <Router>
-      <Start />
+      <Start isLoggedIn={isLoggedIn} />
       <Routes>
         <Route exact path='/' element={<Home />} />
         <Route path='/mongo' element={<Mongo />} />
         <Route path='/site' element={<Site />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/signup' element={<Signup />} />
+        <Route path='/login' element={<Login isLoggedIn={isLoggedIn} onLogin={handleLogin}/>} />
+        <Route path='/signup' element={<Signup isLoggedIn={isLoggedIn} onLogin={handleLogin} />} />
         <Route path='/submit' element={<Submit />} />
         <Route path='/admin' element={<Admin />} />
+        
       </Routes>
       </Router>
     </ApolloProvider>
+    </AuthContext.Provider>
+    
   );
 }
 
 export default App;
+export { AuthContext };

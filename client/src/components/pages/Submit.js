@@ -91,7 +91,7 @@ function Submit() {
           <form className="form">
             <p className="text-center">Please enter the information below to add a new location to the site.</p>
             <div className="row">
-                <div clasName="col-sm">
+                <div className="col-sm">
                     <ul className='list-unstyled'>
                         <li><label>Location Name:</label></li>
 
