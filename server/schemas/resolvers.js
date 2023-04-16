@@ -13,6 +13,9 @@ const resolvers = {
     user: async (parent, { username }) => {
       return Users.findOne({ username }).populate('thoughts');
     },
+    newSite: async () => {
+      return NewSite.find({});
+    }
   },
   
     Mutation: {
