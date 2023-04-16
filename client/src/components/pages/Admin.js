@@ -1,4 +1,6 @@
+import NewSite from '../admin/Newsite';
 import Users from '../admin/Users'
+import Site from '../admin/Sites'
 
 
 const Admin = () => {
@@ -6,6 +8,8 @@ const Admin = () => {
         <>
         <h2>Site Administration</h2>
             {<Users />}
+            {<NewSite />}
+            {<Site />}
         </>
     )
 }

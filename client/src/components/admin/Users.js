@@ -24,7 +24,7 @@ const Users = () => {
         <h2>Site Users</h2>
         <ul>
             {data.users.map((user) => (
-                <li key={user.id}>{user.id}, {user.username}, {user.email}</li>
+                <li key={user._id}>{user._id}, {user.username}, {user.email}, {user.admin} <button id={user._id}>Delete User</button></li>
             ))};
         </ul>
     </div>
