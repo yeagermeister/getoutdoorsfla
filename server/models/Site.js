@@ -14,12 +14,6 @@ const siteSchema = new Schema({
   imageUrl: {
     type: String,
   },
-  distance: {
-    type: Number,
-  },
-  weather: {
-    type: String,
-  },
   zipcode: {
     type: Number,
     required: true,
@@ -61,7 +55,7 @@ const siteSchema = new Schema({
     type: Number,
     required: true
   },
-  long: {
+  lon: {
     type: Number,
     required: true
   }

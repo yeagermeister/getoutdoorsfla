@@ -1,5 +1,6 @@
 const { Users } = require('../models');
-const { NewSite } = require('../models')
+const { NewSite } = require('../models');
+const { Site } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 
@@ -37,7 +38,10 @@ const resolvers = {
   
         return { token, user };
       },
-      addSite: async (parent, {user, description, zipcode, camping, pets, statepark, park, beach, swimmingHole, spring, free}) => {
+      addSite: async (parent, {sitename, description, zipcode, camping, pets, statepark, park, beach, swimmingHole, spring, free}) => {
+        const newSite = await NewSite.create( {sitename, description, zipcode, camping, pets, statepark, park, beach, swimmingHole, spring, free})
+        const token = signToken(newSite);
+        return { token, newSite };
         // const user = await Users.findOne({_ID});
         // if (!user) {
         //   throw new AuthenticationError('No user found with this ID');
@@ -45,7 +49,12 @@ const resolvers = {
 
 
       },
-  }, 
+      addProdSite: async (parent, {sitename, description, imageURL, zipcode, camping, pets, statepark, park, beach, swimmingHole, spring, free}) => {
+        const prodSite = await Site.create( {sitename, description, imageURL, zipcode, camping, pets, statepark, park, beach, swimmingHole, spring, free, lat, lon})
+        const token = signToken(prodSite);
+        return { token, prodSite };
+      }
+  }
 };
 
 module.exports = resolvers;
