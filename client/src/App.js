@@ -3,7 +3,7 @@ import React, { useState, createContext } from 'react';
 import Start from './components/navbar/Start';
 import Login from './components/pages/Login';
 import Signup from './components/pages/Signup';
-import Site from './components/pages/Site';
+// import Site from './components/pages/Site';
 import Home from './components/pages/Home';
 import Admin from './components/pages/Admin';
 import Submit from './components/pages/Submit';
@@ -62,22 +62,22 @@ function App() {
   console.log(isLoggedIn)
   return (
     
-    <AuthContext.Provider value={{ isLoggedIn, onLogin: handleLogin, onLogout: handleLogout }}>
+    // <AuthContext.Provider value={{ isLoggedIn, onLogin: handleLogin, onLogout: handleLogout }}>
     <ApolloProvider client={client}>
       <Router>
-      <Start isLoggedIn={isLoggedIn} />
+      <Start />
       <Routes>
         <Route exact path='/' element={<Home />} />
-        <Route path='/site' element={<Site />} />
-        <Route path='/login' element={<Login isLoggedIn={isLoggedIn} onLogin={handleLogin}/>} />
-        <Route path='/signup' element={<Signup isLoggedIn={isLoggedIn} onLogin={handleLogin} />} />
+        {/* <Route path='/site' element={<Site />} /> */}
+        <Route path='/login' element={<Login />} />
+        <Route path='/signup' element={<Signup />} />
         <Route path='/submit' element={<Submit />} />
         <Route path='/admin' element={<Admin />} />
         
       </Routes>
       </Router>
     </ApolloProvider>
-    </AuthContext.Provider>
+    // </AuthContext.Provider>
     
   );
 }

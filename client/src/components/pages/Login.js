@@ -17,7 +17,6 @@ const Login = (props) => {
       ...formState,
       [name]: value,
     });
-    props.onLogin();
   };
 
   // submit form

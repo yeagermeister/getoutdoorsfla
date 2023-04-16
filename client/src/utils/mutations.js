@@ -37,6 +37,19 @@ export const ADD_SITE = gql`
   }
 `;
 
+export const ADD_PROD_SITE = gql`
+  mutation addSite($siteName: String!, $description: String!, $imageURL: String!, $zipcode: Integer!, $camping: Boolean, $pets: Boolean, 
+      $statepark: Boolean, $park: Boolean, $beach: Boolean, $swimmingHole: Boolean, $spring: Boolean, $free: Boolean, $lat: Integer!, $lon: Integer!) {
+    addSite(sitename: $sitename, description: $description, imageURL: $imageURL, zipcode: $zipcode, camping: $camping, pets: $pets, 
+      statepark: $statepark, park: $park, beach: $beach, swimmingHole: $swimmingHole, spring: $spring, free: $free, lat: $lat, lon: $lon) {
+      token
+      user {
+        _id
+      }
+    }
+  }
+`;
+
 export const ADD_THOUGHT = gql`
   mutation addThought($thoughtText: String!, $thoughtAuthor: String!) {
     addThought(thoughtText: $thoughtText, thoughtAuthor: $thoughtAuthor) {
