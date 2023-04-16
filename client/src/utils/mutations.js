@@ -25,22 +25,15 @@ export const ADD_USER = gql`
 `;
 
 export const ADD_SITE = gql`
-  mutation addSite($siteName: String!, $description: String!, $zipcode: Integer!, $camping: Boolean, $pets: Boolean, 
-      $statepark: Boolean, $park: Boolean, $beach: Boolean, $swimmingHole: Boolean, $spring: Boolean, $free: Boolean) {
-    addSite(sitename: $sitename, description: $description, zipcode: $zipcode, camping: $camping, pets: $pets, 
-      statepark: $statepark, park: $park, beach: $beach, swimmingHole: $swimmingHole, spring: $spring, free: $free) {
-      token
-      user {
-        _id
-      }
-    }
+  mutation addSite($siteName: String!, $description: String!, $zipcode: Integer!) {
+    addSite(siteName: $siteName, description: $description, zipcode: $zipcode)
   }
 `;
 
 export const ADD_PROD_SITE = gql`
   mutation addSite($siteName: String!, $description: String!, $imageURL: String!, $zipcode: Integer!, $camping: Boolean, $pets: Boolean, 
       $statepark: Boolean, $park: Boolean, $beach: Boolean, $swimmingHole: Boolean, $spring: Boolean, $free: Boolean, $lat: Integer!, $lon: Integer!) {
-    addSite(sitename: $sitename, description: $description, imageURL: $imageURL, zipcode: $zipcode, camping: $camping, pets: $pets, 
+    addSite(siteName: $siteName, description: $description, imageURL: $imageURL, zipcode: $zipcode, camping: $camping, pets: $pets, 
       statepark: $statepark, park: $park, beach: $beach, swimmingHole: $swimmingHole, spring: $spring, free: $free, lat: $lat, lon: $lon) {
       token
       user {

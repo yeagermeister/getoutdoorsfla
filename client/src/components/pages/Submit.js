@@ -7,7 +7,7 @@ function Submit() {
     // Create state variables for the fields in the form
     // We are also setting their initial values to an empty string
     const [formState, setFormState] = useState({
-        sitename: '',
+        siteName: '',
         description: '',
         camping: '',
         pets: '',
@@ -39,7 +39,7 @@ function Submit() {
         // const inputValue = target.value;
     
     
-        // if (inputType === 'formstate.sitename') {
+        // if (inputType === 'formstate.siteName') {
         //     setSiteName(inputValue);
         // }
         // if (inputType === 'description') {
@@ -79,7 +79,7 @@ function Submit() {
         e.preventDefault();
     
         // First we check to see if the email is not valid or if the userName is empty. If so we set an error message to be displayed on the page.
-        if (!formState.zipcode || !formState.sitename || !formState.description) {
+        if (!formState.zipcode || !formState.siteName || !formState.description) {
         //   setErrorMessage('Site submission requires a name, description, and the zipcode');
           // We want to exit out of this code block if something is wrong so that the user can correct it
           return;
@@ -117,7 +117,7 @@ function Submit() {
                     <ul className='list-unstyled'>
                         <li><label>Location Name:</label></li>
 
-                        <li><input value={formState.sitename} name="sitename" onChange={handleInputChange} type="text" /></li>
+                        <li><input value={formState.siteName} name="siteName" onChange={handleInputChange} type="text" /></li>
                         <li><label>Description:</label></li>
                         <li><textarea value={formState.description} name="description" onChange={handleInputChange}  rows={4} cols={40}/></li>
                         <li><label>Zicode:</label></li>
