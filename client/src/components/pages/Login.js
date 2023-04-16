@@ -17,6 +17,7 @@ const Login = (props) => {
       ...formState,
       [name]: value,
     });
+    props.onLogin();
   };
 
   // submit form
@@ -29,6 +30,7 @@ const Login = (props) => {
       });
 
       Auth.login(data.login.token);
+      props.onLogin();
     } catch (e) {
       console.error(e);
     }
