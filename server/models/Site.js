@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 const siteSchema = new Schema({
-  sitename: {
+  siteName: {
     type: String,
     required: true,
     unique: true,

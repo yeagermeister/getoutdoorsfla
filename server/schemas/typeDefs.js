@@ -49,14 +49,14 @@ const typeDefs = gql`
   type Query {
     user: [Users]
     users: [Users]
-    newsite: [NewSite]
+    newSite: [NewSite]
   }
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
-    addSite(siteName: String!, description: String!, zipcode: Int!, camping: Boolean, pets: Boolean, statepark: Boolean, park: Boolean, beach: Boolean, swimmingHole: Boolean, spring: Boolean, free: Boolean): Auth
+    addSite(siteName: String!, description: String!, zipcode: Int!) : NewSite
     login(email: String!, password: String!): Auth
-    addProdSite(siteName: String!, description: String!, imageURL: String!, zipcode: Int!, camping: Boolean, pets: Boolean, statepark: Boolean, park: Boolean, beach: Boolean, swimmingHole: Boolean, spring: Boolean, free: Boolean, lat: Int!, lon: Int!): Auth
+    addProdSite(siteName: String!, description: String!, imageURL: String!, zipcode: Int!, camping: Boolean, pets: Boolean, statepark: Boolean, park: Boolean, beach: Boolean, swimmingHole: Boolean, spring: Boolean, free: Boolean, lat: Int!, lon: Int!): Site
   }
  
 `;

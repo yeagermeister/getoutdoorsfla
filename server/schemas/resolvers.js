@@ -38,8 +38,8 @@ const resolvers = {
   
         return { token, user };
       },
-      addSite: async (parent, {sitename, description, zipcode, camping, pets, statepark, park, beach, swimmingHole, spring, free}) => {
-        const newSite = await NewSite.create( {sitename, description, zipcode, camping, pets, statepark, park, beach, swimmingHole, spring, free})
+      addSite: async (parent, {siteName, description, zipcode, camping, pets, statepark, park, beach, swimmingHole, spring, free}) => {
+        const newSite = await NewSite.create( {siteName, description, zipcode, camping, pets, statepark, park, beach, swimmingHole, spring, free})
         const token = signToken(newSite);
         return { token, newSite };
         // const user = await Users.findOne({_ID});
@@ -49,8 +49,8 @@ const resolvers = {
 
 
       },
-      addProdSite: async (parent, {sitename, description, imageURL, zipcode, camping, pets, statepark, park, beach, swimmingHole, spring, free}) => {
-        const prodSite = await Site.create( {sitename, description, imageURL, zipcode, camping, pets, statepark, park, beach, swimmingHole, spring, free, lat, lon})
+      addProdSite: async (parent, {siteName, description, imageURL, zipcode, camping, pets, statepark, park, beach, swimmingHole, spring, free}) => {
+        const prodSite = await Site.create( {siteName, description, imageURL, zipcode, camping, pets, statepark, park, beach, swimmingHole, spring, free, lat, lon})
         const token = signToken(prodSite);
         return { token, prodSite };
       }
