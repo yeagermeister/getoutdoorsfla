@@ -26,8 +26,11 @@ const Navbar = (props) => {
               : <Login /* isLoggedIn={isLoggedIn} onLogin={handleLogin} onLogout={handleLogout} */ />
             }
             <li className="nav-item">
-            <Link className="nav-link active" aria-current="page" to="./submit">Submit a new location</Link>
-           </li>
+              <a className="nav-link active" aria-current="page" href="./submit">Submit a new location</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link active" aria-current="page" href="./admin">Admin</a>
+            </li>
           </ul>
         </div>
       </div>
