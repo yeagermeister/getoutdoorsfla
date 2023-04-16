@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import Auth from '../../utils/auth'
 
 function SearchBar() { 
     return (
         <>
+        {Auth.loggedIn () ? (
         <div className="container-fluid searchbar pb-2">
         <div className="form-check form-check-inline">
           <input className="form-check-input" type="checkbox" id="statePark" value="option1" />
@@ -38,7 +40,11 @@ function SearchBar() {
         </div>
         <p className='text-center'>Please select options above to filter sites.</p>
       </div>
+      ) : (
+        <div></div>
+      )}
       </>
+
     );
 };
 
