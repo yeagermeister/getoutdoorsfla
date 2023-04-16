@@ -9,17 +9,11 @@ function Submit() {
     const [formState, setFormState] = useState({
         siteName: '',
         description: '',
-        camping: '',
-        pets: '',
-        statepark: '',
-        park: '',
-        beach: '',
-        swimmingHole: '',
-        spring: '',
         zipcode: '',
-        free: '',
         errorMessage: ''
     });
+
+    const [isChecked, setIsChecked] = useState(false);
 
     const [addSite, {error, data }] = useMutation(ADD_SITE);
 
@@ -33,51 +27,31 @@ function Submit() {
         ...formState,
         [name]: value,
        });
-       
-        // const { target } = e;
-        // const inputType = target.name;
-        // const inputValue = target.value;
-    
-    
-        // if (inputType === 'formstate.siteName') {
-        //     setSiteName(inputValue);
-        // }
-        // if (inputType === 'description') {
-        //     setDescription(inputValue);
-        // } 
-        // if (inputType === 'camping'){
-        //     setCamping(inputValue);
-        // }
-        // if (inputType === 'pets'){
-        //     setPets(inputValue);
-        // }
-        // if (inputType === 'statepark'){
-        //     setStatepark(inputValue);
-        // }
-        // if (inputType === 'park'){
-        //     setPark(inputValue);
-        // }
-        // if (inputType === 'beach'){
-        //     setBeach(inputValue);
-        // }
-        // if (inputType === 'swimmingHole'){
-        //     setSwimmngHole(inputValue);
-        // }
-        // if (inputType === 'spring'){
-        //     setSpring(inputValue);
-        // }
-        // if (inputType === 'free'){
-        //     setSpring(inputValue);
-        // }
-        // if (inputType === 'zipcode'){
-        //     setZipcode(inputValue);
-        // }
       };
 
-      const handleFormSubmit = (e) => {
+      const handleCheckboxChange = (event) => {
+        setIsChecked(event.target.checked);
+      };
+
+
+      const handleFormSubmit = async (e) => {
         // Preventing the default behavior of the form submit (which is to refresh the page)
         e.preventDefault();
+        console.log(formState);
     
+        const myData = {
+          siteName: formState.siteName,
+          description: formState.description,
+          zipcode: formState.zipcode,
+          camping: handleCheckboxChange.camping,
+          pets: handleCheckboxChange.pets,
+          statepark: handleCheckboxChange.statepark,
+          park: handleCheckboxChange.park,
+          beach: handleCheckboxChange.beach,
+          swimmingHole: handleCheckboxChange.swimmingHole,
+          spring: handleCheckboxChange.spring,
+          free: handleCheckboxChange.free,
+        };
         // First we check to see if the email is not valid or if the userName is empty. If so we set an error message to be displayed on the page.
         if (!formState.zipcode || !formState.siteName || !formState.description) {
         //   setErrorMessage('Site submission requires a name, description, and the zipcode');
@@ -86,30 +60,17 @@ function Submit() {
         }
 
         try { 
-            const { data } = addSite({
-                variables: {...formState}
+            const { data } = await addSite({
+                variables: {...myData}
             })
         } catch(e) {
             console.error(e);
         }
 
-        // If everything goes according to plan, we want to clear out the input after a successful registration.
-        // setSiteName('');
-        // setDescription('');
-        // setCamping('');
-        // setPets('');
-        // setStatepark('');
-        // setPark('');
-        // setBeach('');
-        // setSwimmngHole('');
-        // setSpring('');
-        // setZipcode('');
-        // setFree('');
       };
 
     return (
         <div className='container'>
-          {/* <p>Hello {userName}</p> */}
           <form className="form">
             <p className="text-center">Please enter the information below to add a new location to the site.</p>
             <div className="row">
