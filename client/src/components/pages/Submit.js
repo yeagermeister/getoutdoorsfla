@@ -12,7 +12,7 @@ function Submit() {
         zipcode: '',
         errorMessage: ''
     });
-
+      
     const [checked, setChecked] = useState({
       camping: false,
       pets: false,
@@ -20,7 +20,7 @@ function Submit() {
       park: false,
       beach: false,
       swimmingHole: false,
-      Spring: false,
+      spring: false,
       free: false,
       
       
@@ -51,8 +51,21 @@ function Submit() {
       const handleFormSubmit = async (e) => {
         // Preventing the default behavior of the form submit (which is to refresh the page)
         e.preventDefault();
-        
-    
+        const zipcode = parseInt(formState.zipcode);
+        let myData = {
+          siteName: formState.siteName,
+          description: formState.description,
+          zipcode: zipcode,
+          camping: checked.camping,
+          pets: checked.pets,
+          statepark: checked.statepark,
+          park: checked.park,
+          beach: checked.beach,
+          swimmingHole: checked.swimmingHole,
+          spring: checked.spring,
+          free: checked.free,
+          // const zipcodeNumber = +formState.zipcode;
+        };
         
 
         
@@ -60,29 +73,19 @@ function Submit() {
         if (!formState.zipcode || !formState.siteName || !formState.description) {
         //   setErrorMessage('Site submission requires a name, description, and the zipcode');
           // We want to exit out of this code block if something is wrong so that the user can correct it
+          
           return;
         }
         else{
         try { 
 
-          let myData = {
-            siteName: formState.siteName,
-            description: formState.description,
-            zipcode: formState.zipcode,
-            camping: checked.camping,
-            pets: checked.pets,
-            statepark: checked.statepark,
-            park: checked.park,
-            beach: checked.beach,
-            swimmingHole: checked.swimmingHole,
-            spring: checked.spring,
-            free: checked.free,
-          };
           console.log(myData)
-            myData  = await addSite({
-                variables: {...myData}
-            })
+            const {data} = await addSite({
+                variables: {...myData},
+            }) 
+            console.log(data)
         } catch(e) {
+          console.log(data)
             console.error(e);
         }}
 
@@ -90,7 +93,7 @@ function Submit() {
 
     return (
         <div className='container'>
-          <form className="form">
+          <form className="form" onSubmit={handleFormSubmit}>
             <p className="text-center">Please enter the information below to add a new location to the site.</p>
             <div className="row">
                 <div className="col-sm">
@@ -100,8 +103,8 @@ function Submit() {
                         <li><input value={formState.siteName} name="siteName" onChange={handleInputChange} type="text" /></li>
                         <li><label>Description:</label></li>
                         <li><textarea value={formState.description} name="description" onChange={handleInputChange}  rows={4} cols={40}/></li>
-                        <li><label>Zicode:</label></li>
-                        <li><input value={formState.zipcode} name="zipcode" onChange={handleInputChange} type="integer" /></li>
+                        <li><label>Zipcode:</label></li>
+                        <li><input value={formState.zipcode} name="zipcode" onChange={handleInputChange} type="number" /></li>
                     </ul>
                 </div>
                 <div className="col-sm">
@@ -126,7 +129,7 @@ function Submit() {
                     </ul>
                 </div>
             </div>
-            <button type="button" onClick={handleFormSubmit}>Submit</button>
+            <button type="submit">Submit</button>
           </form>
           {error && (
             <div>
