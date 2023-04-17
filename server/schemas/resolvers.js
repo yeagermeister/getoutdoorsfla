@@ -23,6 +23,11 @@ const resolvers = {
         const token = signToken(user);
         return { token, user };
       },
+      deleteUser: async (_, { id }) => {
+        // Code to delete the user with the specified ID from the database or data source
+        const deletedUser = await Users.findByIdAndDelete(id);
+        return deletedUser;
+      },
       login: async (parent, { email, password }) => {
         const user = await Users.findOne({ email });
   

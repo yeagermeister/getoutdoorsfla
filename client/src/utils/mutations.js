@@ -97,3 +97,11 @@ export const ADD_COMMENT = gql`
     }
   }
 `;
+
+export const DELETE_USER = gql`
+mutation deleteUser($userId: ID!) {
+    deleteUser(id: $userId) {
+        _id
+    }
+}
+`;

@@ -1,35 +1,46 @@
-import { useQuery, gql } from '@apollo/client';
+import { useQuery, useMutation} from '@apollo/client';
 import React from 'react';
+import { DELETE_USER } from '../../utils/mutations';
+import { USERS_QUERY } from '../../utils/queries';
 
-const Users = () => {
-    const USERS_QUERY= gql`
-    query getUsers {
-        users {
-            _id
-            username
-            email
-            admin
-          }
+const Users = () => {    
+    function handleSubmit(e) {
+        console.log(e)
+        e.preventDeafault();
     }
-    `;
-    
+
+    const [deleteUser] = useMutation(DELETE_USER, {
+        update(cache, { data: { deleteUser } }) {
+            const { users } = cache.readQuery({ query: USERS_QUERY });
+            cache.writeQuery({
+                query: USERS_QUERY,
+                data: { users: users.filter(user => user._id !== deleteUser._id) }
+            });
+        }
+    });
+
+    const handleDelete = (userId) => {
+        deleteUser({
+            variables: { userId }
+        });
+    };
+
     const { data, loading, error } = useQuery(USERS_QUERY);
 
     if (loading) return "Loading...";
     if (error) return <pre>{error.message}</pre>
-    
+
     return (
     <>
     <div>
-        <h2>Site Users</h2>
         <ul>
             {data.users.map((user) => (
-                <li key={user._id}>{user._id}, {user.username}, {user.email}, {user.admin} <button id={user._id}>Delete User</button></li>
+                <li key={user._id}>{user._id}, {user.username}, {user.email}, {user.admin} <button onClick={() => handleDelete(user._id)}>Delete User</button></li>
             ))};
         </ul>
     </div>
     </>
     );
-;}
+};
 
 export default Users;
