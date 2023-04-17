@@ -3,6 +3,7 @@ import Auth from '../../utils/auth'
 import Login from './login';
 import Signup from './Signup';
 import Submit from './Submit';
+import Admin from './Admin'; 
 import { Link } from 'react-router-dom';
 
 const Navbar = (props) => {
@@ -27,9 +28,9 @@ const Navbar = (props) => {
               ? (<React.Fragment>
                 <li className="nav-item">
                   <p className="nav-link active" aria-current="page" onClick={logout}>Logout</p>
-                  {/* <a className="nav-link active" aria-current="page" href="./logout">Logout</a> */}
                 </li>
               <Submit />
+              <Admin />
               </React.Fragment>
               )
               : (<React.Fragment>
