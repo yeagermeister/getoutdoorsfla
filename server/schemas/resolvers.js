@@ -40,16 +40,10 @@ const resolvers = {
   
         return { token, user };
       },
-      addSite: async (parent, {siteName, description, zipcode, camping, pets, statepark, park, beach, swimmingHole, spring, free}) => {
-        const newSite = await NewSite.create( {siteName, description, zipcode, camping, pets, statepark, park, beach, swimmingHole, spring, free})
-        const token = signToken(newSite);
-        return { token, newSite };
-        // const user = await Users.findOne({_ID});
-        // if (!user) {
-        //   throw new AuthenticationError('No user found with this ID');
-        // }
-
-
+      addSite: async (parent, { siteName, description, zipcode, camping, pets, statepark, park, beach, swimmingHole, spring, free }) => {
+        const newSite = await NewSite.create( {siteName, description, zipcode, camping, pets, statepark, park, beach, swimmingHole, spring, free});
+        return newSite ;
+        
       },
       addProdSite: async (parent, {siteName, description, imageURL, zipcode, camping, pets, statepark, park, beach, swimmingHole, spring, free}) => {
         const prodSite = await Site.create( {siteName, description, imageURL, zipcode, camping, pets, statepark, park, beach, swimmingHole, spring, free, lat, lon})
