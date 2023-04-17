@@ -4,7 +4,7 @@ import { useQuery, gql } from '@apollo/client';
 const NewSite = () => {
     const NEWSITE_QUERY= gql`
     query getNewSite {
-        newsites {
+        newSite {
             _id
             siteName
             description
@@ -25,13 +25,14 @@ const NewSite = () => {
 
     if (loading) return "Loading...";
     if (error) return <pre>{error.message}</pre>
+    console.log(data)
     return (
         <>
         <div>
             <h2>New Sites</h2>
             <ul>
-                {data.newsites.map((newsite) => (
-                    <li key={newsite._id}>{newsite._id}, {newsite.siteName}, <button id={newsite._id}>Review Submission</button></li>
+                {data.newSite.map((site) => (
+                    <li key={site._id}>{site._id}, {site.siteName}, <button id={site._id}>Review Submission</button></li>
                 ))};
             </ul>
         </div>

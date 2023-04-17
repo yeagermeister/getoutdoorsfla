@@ -47,8 +47,7 @@ const resolvers = {
       },
       addProdSite: async (parent, {siteName, description, imageURL, zipcode, camping, pets, statepark, park, beach, swimmingHole, spring, free}) => {
         const prodSite = await Site.create( {siteName, description, imageURL, zipcode, camping, pets, statepark, park, beach, swimmingHole, spring, free, lat, lon})
-        const token = signToken(prodSite);
-        return { token, prodSite };
+        return prodSite;
       }
   }
 };
