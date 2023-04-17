@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import '../../form.css';
 import { useMutation } from '@apollo/client';
 import { ADD_SITE } from '../../utils/mutations';
-
+const myData = {}
 function Submit() {
     // Create state variables for the fields in the form
     // We are also setting their initial values to an empty string
@@ -12,8 +12,19 @@ function Submit() {
         zipcode: '',
         errorMessage: ''
     });
-
-    const [isChecked, setIsChecked] = useState(false);
+      
+    const [checked, setChecked] = useState({
+      camping: false,
+      pets: false,
+      statepark: false,
+      park: false,
+      beach: false,
+      swimmingHole: false,
+      spring: false,
+      free: false,
+      
+      
+      });
 
     const [addSite, {error, data }] = useMutation(ADD_SITE);
 
@@ -30,48 +41,59 @@ function Submit() {
       };
 
       const handleCheckboxChange = (event) => {
-        setIsChecked(event.target.checked);
+        setChecked({
+          ...checked,
+          [event.target.name]: event.target.checked
+        });
       };
 
 
       const handleFormSubmit = async (e) => {
         // Preventing the default behavior of the form submit (which is to refresh the page)
         e.preventDefault();
-        console.log(formState);
-    
-        const myData = {
+        const zipcode = parseInt(formState.zipcode);
+        let myData = {
           siteName: formState.siteName,
           description: formState.description,
-          zipcode: formState.zipcode,
-          camping: handleCheckboxChange.camping,
-          pets: handleCheckboxChange.pets,
-          statepark: handleCheckboxChange.statepark,
-          park: handleCheckboxChange.park,
-          beach: handleCheckboxChange.beach,
-          swimmingHole: handleCheckboxChange.swimmingHole,
-          spring: handleCheckboxChange.spring,
-          free: handleCheckboxChange.free,
+          zipcode: zipcode,
+          camping: checked.camping,
+          pets: checked.pets,
+          statepark: checked.statepark,
+          park: checked.park,
+          beach: checked.beach,
+          swimmingHole: checked.swimmingHole,
+          spring: checked.spring,
+          free: checked.free,
+          // const zipcodeNumber = +formState.zipcode;
         };
+        
+
+        
         // First we check to see if the email is not valid or if the userName is empty. If so we set an error message to be displayed on the page.
         if (!formState.zipcode || !formState.siteName || !formState.description) {
         //   setErrorMessage('Site submission requires a name, description, and the zipcode');
           // We want to exit out of this code block if something is wrong so that the user can correct it
+          
           return;
         }
-
+        else{
         try { 
-            const { data } = await addSite({
-                variables: {...myData}
-            })
+
+          console.log(myData)
+            const {data} = await addSite({
+                variables: {...myData},
+            }) 
+            console.log(data)
         } catch(e) {
+          console.log(data)
             console.error(e);
-        }
+        }}
 
       };
 
     return (
         <div className='container'>
-          <form className="form">
+          <form className="form" onSubmit={handleFormSubmit}>
             <p className="text-center">Please enter the information below to add a new location to the site.</p>
             <div className="row">
                 <div className="col-sm">
@@ -81,33 +103,33 @@ function Submit() {
                         <li><input value={formState.siteName} name="siteName" onChange={handleInputChange} type="text" /></li>
                         <li><label>Description:</label></li>
                         <li><textarea value={formState.description} name="description" onChange={handleInputChange}  rows={4} cols={40}/></li>
-                        <li><label>Zicode:</label></li>
-                        <li><input value={formState.zipcode} name="zipcode" onChange={handleInputChange} type="integer" /></li>
+                        <li><label>Zipcode:</label></li>
+                        <li><input value={formState.zipcode} name="zipcode" onChange={handleInputChange} type="number" /></li>
                     </ul>
                 </div>
                 <div className="col-sm">
                     <ul className='list-unstyled'>
                     <li><p>Please check all that apply</p></li>
                     <li><label>Camping Allowed?</label></li>
-                    <li><input value={formState.camping} name="camping" onChange={handleInputChange} type="checkbox" /></li>
+                    <li><input value={checked.camping} name="camping" onChange={handleCheckboxChange} type="checkbox" /></li>
                     <li><label>Pets Allowed?</label></li>
-                    <li><input value={formState.pets} name="pets" onChange={handleInputChange} type="checkbox" /></li>
+                    <li><input value={checked.pets} name="pets" onChange={handleCheckboxChange} type="checkbox" /></li>
                     <li><label>Statepark?</label></li>
-                    <li><input value={formState.statepark} name="statepark" onChange={handleInputChange} type="checkbox" /></li>
+                    <li><input value={checked.statepark} name="statepark" onChange={handleCheckboxChange} type="checkbox" /></li>
                     <li><label>City/County Park</label></li>
-                    <li><input value={formState.park} name="park" onChange={handleInputChange} type="checkbox" /></li>
+                    <li><input value={checked.park} name="park" onChange={handleCheckboxChange} type="checkbox" /></li>
                     <li><label>Beach</label></li>
-                    <li><input value={formState.beach} name="beach" onChange={handleInputChange} type="checkbox" /></li>
+                    <li><input value={checked.beach} name="beach" onChange={handleCheckboxChange} type="checkbox" /></li>
                     <li><label>Swimming Hole</label></li>
-                    <li><input value={formState.swimmingHole} name="swimmingHole" onChange={handleInputChange} type="checkbox" /></li>
+                    <li><input value={checked.swimmingHole} name="swimmingHole" onChange={handleCheckboxChange} type="checkbox" /></li>
                     <li><label>Spring</label></li>
-                    <li><input value={formState.spring} name="spring" onChange={handleInputChange} type="checkbox" /></li>
+                    <li><input value={checked.spring} name="spring" onChange={handleCheckboxChange} type="checkbox" /></li>
                     <li><label>Free Admission?</label></li>
-                    <li><input value={formState.free} name="free" onChange={handleInputChange} type="checkbox" /></li>
+                    <li><input value={checked.free} name="free" onChange={handleCheckboxChange} type="checkbox" /></li>
                     </ul>
                 </div>
             </div>
-            <button type="button" onClick={handleFormSubmit}>Submit</button>
+            <button type="submit">Submit</button>
           </form>
           {error && (
             <div>
