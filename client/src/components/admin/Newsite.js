@@ -25,11 +25,9 @@ const NewSite = () => {
 
     if (loading) return "Loading...";
     if (error) return <pre>{error.message}</pre>
-    console.log(data)
     return (
         <>
         <div>
-            <h2>New Sites</h2>
             <ul>
                 {data.newSite.map((site) => (
                     <li key={site._id}>{site._id}, {site.siteName}, <button id={site._id}>Review Submission</button></li>

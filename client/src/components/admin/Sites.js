@@ -34,7 +34,6 @@ const toggleSite = 0
   return (
     <>
       <div>
-        <h2>Sites</h2>
         <ul>
           {data.sites.map((site) => (
             <li key={site._id}>
