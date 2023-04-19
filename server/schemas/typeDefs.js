@@ -47,10 +47,12 @@ const typeDefs = gql`
   }
 
   type Query {
-    user(username:String!): Users
-    users: [Users]
-    newSite: [NewSite]
-    Site: [Site]
+    findOneUser(username:String!): Users
+    findAllUsers: [Users]
+    findAllNewSites: [NewSite]
+    findOneNewSite(siteName:String!): NewSite
+    findAllSites: [Site]
+    findOneSite(siteName:String!): Site
   }
 
   type Mutation {

@@ -6,18 +6,25 @@ const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
-    users: async () => {
+    findAllUsers: async () => {
       return Users.find({});
     },
-    user: async (parent, { username }) => {
+    findOneUser: async (parent, { username }) => {
       return Users.findOne({ username });
     },
-    newSite: async () => {
+    findAllNewSites: async () => {
       return NewSite.find({});
     },
-    Site: async () => {
+    findOneNewSite: async () => {
+      return NewSite.findOne({ siteName })
+    },
+    findAllSites: async () => {
       return Site.find({});
     },
+    findOneSite: async () => {
+      return Site.findOne({ siteName });
+    },
+
   },
   
     Mutation: {
