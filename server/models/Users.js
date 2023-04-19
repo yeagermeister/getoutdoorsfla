@@ -24,6 +24,18 @@ const userSchema = new Schema({
     required: true,
     default:false
   },
+  rating: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Ratings',
+    },
+  ],
+  comment: [    
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Comment',
+    },
+  ],
 });
 
 userSchema.pre('save', async function (next) {
