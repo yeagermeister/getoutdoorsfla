@@ -70,6 +70,14 @@ scalar Date
   }
 
   type Query {
+<<<<<<<<< Temporary merge branch 1
+    user(username: String!): Users
+    users: [Users]
+    newSite: [NewSite]
+    Site: [Site]
+    comments: [Comment]
+    ratings: [Rating]
+=========
     findOneUser(username:String!): Users
     findAllUsers: [Users]
     findAllNewSites: [NewSite]
@@ -77,12 +85,10 @@ scalar Date
     findAllSites: [Site]
     findOneSite(siteName:String!): Site
     findUserComments(username: String!): [Comment]
-    user(username: String!): Users
-    users: [Users]
-    newSite: [NewSite]
-    Site: [Site]
+
     comments: [Comment]
     ratings: [Rating]
+
   }
 
   type Mutation {
