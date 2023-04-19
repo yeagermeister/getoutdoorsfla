@@ -13,17 +13,17 @@ const resolvers = {
     findAllNewSites: async () => {
       return NewSite.find({});
     },
-    findOneNewSite: async () => {
+    findOneNewSite: async (parent, { siteName }) => {
       return NewSite.findOne({ siteName });
     },
     findAllSites: async () => {
       return Site.find({});
     },
-    findOneSite: async () => {
-      return Site.findOne({ siteName: siteName }).populate('Comments').populate('Ratings');
+    findOneSite: async (parent, { siteName }) => {
+      return Site.findOne({ siteName: siteName }).populate('comments').populate('ratings');
     },
     findUserComments: async() => {
-      Users.findOne({username: username})
+      Users.findOne({username: username}).populate('comments')
       return 
     }
 

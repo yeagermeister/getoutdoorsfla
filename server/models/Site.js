@@ -59,13 +59,13 @@ const siteSchema = new Schema({
     type: Number,
     required: true
   },
-  rating: [
+  ratings: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Ratings',
+      ref: 'Rating',
     },
   ],
-  comment: [    
+  comments: [    
     {
       type: Schema.Types.ObjectId,
       ref: 'Comment',
