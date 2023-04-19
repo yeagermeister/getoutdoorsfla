@@ -14,7 +14,10 @@ const resolvers = {
     },
     newSite: async () => {
       return NewSite.find({});
-    }
+    },
+    Site: async () => {
+      return Site.find({});
+    },
   },
   
     Mutation: {
@@ -45,14 +48,20 @@ const resolvers = {
   
         return { token, user };
       },
-      addSite: async (parent, { siteName, description, zipcode, camping, pets, statepark, park, beach, swimmingHole, spring, free }) => {
-        const newSite = await NewSite.create( {siteName, description, zipcode, camping, pets, statepark, park, beach, swimmingHole, spring, free});
+      addSite: async (parent, { NewSite }) => {
+        const newSite = await NewSite.create( {NewSite});
         return newSite ;
         
       },
-      addProdSite: async (parent, {siteName, description, imageURL, zipcode, camping, pets, statepark, park, beach, swimmingHole, spring, free}) => {
-        const prodSite = await Site.create( {siteName, description, imageURL, zipcode, camping, pets, statepark, park, beach, swimmingHole, spring, free, lat, lon})
+      addProdSite: async (parent, {site}) => {
+        try{console.log(site, "site");
+        const prodSite = await Site.create(site);
+      
         return prodSite;
+      }
+        catch(err){
+          console.log(err)
+        }  
       }
   }
 };

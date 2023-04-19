@@ -37,8 +37,8 @@ const typeDefs = gql`
     swimmingHole: Boolean
     spring: Boolean
     free: Boolean
-    lat: Int!
-    lon: Int!
+    lat: Float!
+    lon: Float!
   }
 
   type Auth {
@@ -50,16 +50,46 @@ const typeDefs = gql`
     user(username:String!): Users
     users: [Users]
     newSite: [NewSite]
+    Site: [Site]
   }
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     deleteUser(id: ID!): Users!
-    addSite(siteName: String!, description: String!, zipcode: Int!, camping: Boolean, pets: Boolean, statepark: Boolean, park: Boolean, beach: Boolean, swimmingHole: Boolean, spring: Boolean, free: Boolean): NewSite
+    addSite(NewSite: siteInput!): NewSite
     login(email: String!, password: String!): Auth
-    addProdSite(siteName: String!, description: String!, imageURL: String!, zipcode: Int!, camping: Boolean, pets: Boolean, statepark: Boolean, park: Boolean, beach: Boolean, swimmingHole: Boolean, spring: Boolean, free: Boolean, lat: Int!, lon: Int!): Site
+    addProdSite(site: prodSiteInput!): Site
   }
  
+  input siteInput {
+    siteName: String!
+    description: String!
+    zipcode: Int!
+    camping: Boolean
+    pets: Boolean
+    statepark: Boolean
+    park: Boolean
+    beach: Boolean
+    swimmingHole: Boolean
+    spring: Boolean
+    free: Boolean
+  }
+
+  input prodSiteInput {
+    siteName: String!
+    description: String!
+    zipcode: Int!
+    camping: Boolean
+    pets: Boolean
+    statepark: Boolean
+    park: Boolean
+    beach: Boolean
+    swimmingHole: Boolean
+    spring: Boolean
+    free: Boolean
+    lat: Float!
+    lon: Float!
+  }
 `;
 
 module.exports = typeDefs;
