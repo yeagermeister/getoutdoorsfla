@@ -37,8 +37,8 @@ const typeDefs = gql`
     swimmingHole: Boolean
     spring: Boolean
     free: Boolean
-    lat: Int!
-    lon: Int!
+    lat: Float!
+    lon: Float!
   }
 
 
