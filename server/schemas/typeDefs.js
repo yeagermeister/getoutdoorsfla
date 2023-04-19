@@ -52,6 +52,8 @@ scalar Date
     free: Boolean
     lat: Float!
     lon: Float!
+    rating: [Rating]
+    comment: [Comment]
   }
 
 
