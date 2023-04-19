@@ -7,6 +7,7 @@ import Signup from './components/pages/Signup';
 import Home from './components/pages/Home';
 import Admin from './components/pages/Admin';
 import Submit from './components/pages/Submit';
+import AdminNewSite from './components/pages/AdminNewSite';
 
 import { BrowserRouter as Router, Routes, Route}from 'react-router-dom';
 import { getLocation, latitude, longitude } from './utils/location';
@@ -18,8 +19,6 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-
-// const isLoggedIn = this.state.isLoggedIn;
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -62,22 +61,22 @@ function App() {
   console.log(isLoggedIn)
   return (
     
-    // <AuthContext.Provider value={{ isLoggedIn, onLogin: handleLogin, onLogout: handleLogout }}>
+
     <ApolloProvider client={client}>
       <Router>
       <Start />
       <Routes>
         <Route exact path='/' element={<Home />} />
-        {/* <Route path='/site' element={<Site />} /> */}
-        <Route path='/login' element={<Login />} />
-        <Route path='/signup' element={<Signup />} />
-        <Route path='/submit' element={<Submit />} />
-        <Route path='/admin' element={<Admin />} />
+        <Route exact path='/AdminNewSite/:id' element={<AdminNewSite />} />
+        <Route exact path='/login' element={<Login />} />
+        <Route exact path='/signup' element={<Signup />} />
+        <Route exact path='/submit' element={<Submit />} />
+        <Route exact path='/admin' element={<Admin />} />
         
       </Routes>
       </Router>
     </ApolloProvider>
-    // </AuthContext.Provider>
+
     
   );
 }
