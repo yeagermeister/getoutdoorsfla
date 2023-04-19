@@ -1,13 +1,19 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
+scalar Date
   type Users {
     _id: ID!
     username: String!
     email: String!
     admin: Boolean
   }
-
+  type Comment {
+    commentid: ID!
+    Comment: String!
+    createdAt: Date
+    username
+  }
   type NewSite {
     _id: ID!
     siteName: String!
@@ -64,12 +70,18 @@ const typeDefs = gql`
   }
 
   type Query {
-    user(username: String!): Users
-    users: [Users]
-    newSite: [NewSite]
-    Site: [Site]
+
+    findOneUser(username:String!): Users
+    findAllUsers: [Users]
+    findAllNewSites: [NewSite]
+    findOneNewSite(siteName:String!): NewSite
+    findAllSites: [Site]
+    findOneSite(siteName:String!): Site
+    findUserComments(username: String!): [Comment]
+
     comments: [Comment]
     ratings: [Rating]
+
   }
 
   type Mutation {

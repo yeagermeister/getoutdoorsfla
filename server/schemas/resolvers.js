@@ -1,23 +1,32 @@
-const { Users } = require('../models');
-const { NewSite } = require('../models');
-const { Site } = require('../models');
+const { Users, NewSite, Site, Comment, Rating } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
-    users: async () => {
+    findAllUsers: async () => {
       return Users.find({});
     },
-    user: async (parent, { username }) => {
+    findOneUser: async (parent, { username }) => {
       return Users.findOne({ username });
     },
-    newSite: async () => {
+    findAllNewSites: async () => {
       return NewSite.find({});
     },
-    Site: async () => {
+    findOneNewSite: async () => {
+      return NewSite.findOne({ siteName });
+    },
+    findAllSites: async () => {
       return Site.find({});
     },
+    findOneSite: async () => {
+      return Site.findOne({ siteName: siteName }).populate('Comments').populate('Ratings');
+    },
+    findUserComments: async() => {
+      Users.findOne({username: username})
+      return 
+    }
+
   },
   
     Mutation: {
