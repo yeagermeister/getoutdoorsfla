@@ -27,8 +27,8 @@ const Login = (props) => {
       const { data } = await login({
         variables: { ...formState },
       });
-      alert("hi")
-      console.log(data, data.login)
+      alert("Welcome back!")
+      
       Auth.login(data.login.token);
       props.onLogin();
     } catch (e) {

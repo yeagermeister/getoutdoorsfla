@@ -5,7 +5,7 @@ const siteSchema = new Schema({
     type: String,
     required: true,
     unique: true,
-    trim: true,
+    // trim: true,
   },
   description: {
     type: String,
