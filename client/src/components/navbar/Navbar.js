@@ -27,7 +27,7 @@ const Navbar = (props) => {
             {Auth.loggedIn ()
               ? (<React.Fragment>
                 <li className="nav-item">
-                  <p className="nav-link active" aria-current="page" onClick={logout}>Logout</p>
+                <Link to={`/home`} className="nav-link active"><p className="nav-link active" aria-current="page" onClick={logout}>Logout</p></Link>
                 </li>
               <Submit />
               <Admin />

@@ -1,25 +1,9 @@
 import React from 'react';
-import { useQuery, gql } from '@apollo/client';
+import { NEWSITE_QUERY } from '../../utils/queries';
+import { useQuery } from '@apollo/client'
+import { Link } from 'react-router-dom';
 
 const NewSite = () => {
-    const NEWSITE_QUERY= gql`
-    query getNewSite {
-        newSite {
-            _id
-            siteName
-            description
-            zipcode
-            camping
-            pets
-            statepark
-            park
-            beach
-            swimmingHole
-            spring
-            free
-          }
-    }
-    `;
 
     const { data, loading, error } = useQuery(NEWSITE_QUERY);
 
@@ -30,7 +14,11 @@ const NewSite = () => {
         <div>
             <ul>
                 {data.newSite.map((site) => (
-                    <li key={site._id}>{site._id}, {site.siteName}, <button id={site._id}>Review Submission</button></li>
+                    <li key={site._id}>{site._id}, {site.siteName}, 
+                        <Link to={`/AdminNewSite/${site._id}`}>
+                            <button id={site._id}>Review Submission</button>
+                        </Link>
+                    </li>
                 ))};
             </ul>
         </div>
