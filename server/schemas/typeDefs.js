@@ -12,7 +12,7 @@ scalar Date
     commentid: ID!
     Comment: String!
     createdAt: Date
-    username
+    username: String!
   }
   type NewSite {
     _id: ID!
