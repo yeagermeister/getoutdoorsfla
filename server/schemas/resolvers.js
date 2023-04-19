@@ -54,16 +54,61 @@ const resolvers = {
         
       },
       addProdSite: async (parent, {site}) => {
-        try{console.log(site, "site");
+        console.log(site, "site");
         const prodSite = await Site.create(site);
-      
         return prodSite;
-      }
-        catch(err){
-          console.log(err)
-        }  
-      }
-  }
-};
+      },
 
-module.exports = resolvers;
+      addComment: async (parent, { comment, siteId }, context) => {
+        if (context.user) {
+          const newComment = await Comment.create({
+            comment,
+            username: context.user._id,
+            site: siteId,
+          });
+          await Site.findByIdAndUpdate(siteId, { $push: { comments: newComment._id } });
+          return newComment;
+        }
+        throw new AuthenticationError('You need to be logged in!');
+      },
+      deleteComment: async (parent, { commentId }, context) => {
+        if (context.user) {
+          const comment = await Comment.findById(commentId);
+          if (comment.username.toString() === context.user._id.toString()) {
+            await Site.findByIdAndUpdate(comment.site, { $pull: { comments: comment._id } });
+            await comment.delete();
+            return comment;
+          }
+          throw new AuthenticationError('You cannot delete this comment');
+        }
+        throw new AuthenticationError('You need to be logged in!');
+      },
+      addRating: async (parent, { rating, siteId }, context) => {
+        if (context.user) {
+          const newRating = await Rating.create({
+            rating,
+            username: context.user._id,
+            site: siteId,
+          });
+          await Site.findByIdAndUpdate(siteId, { $push: { ratings: newRating._id } });
+          return newRating;
+        }
+        throw new AuthenticationError('You need to be logged in!');
+      },
+      deleteRating: async (parent, { ratingId }, context) => {
+        if (context.user) {
+          const rating = await Rating.findById(ratingId);
+          if (rating.username.toString() === context.user._id.toString()) {
+            await Site.findByIdAndUpdate(rating.site, { $pull: { ratings: rating._id } });
+            await rating.delete();
+            return rating;
+          }
+          throw new AuthenticationError('You cannot delete this rating');
+        }
+        throw new AuthenticationError('You need to be logged in!');
+      },
+    },
+  };
+  
+  module.exports = resolvers;
+  ``

@@ -37,9 +37,26 @@ const typeDefs = gql`
     swimmingHole: Boolean
     spring: Boolean
     free: Boolean
-    lat: Float!
-    lon: Float!
+    lat: Int!
+    lon: Int!
   }
+
+
+  type Comment {
+    commentId: ID!
+    comment: String!
+    createdAt: String!
+    username: Users!
+    site: Site!
+  }
+
+  type Rating {
+    ratingId: ID!
+    rating: Int!
+    username: Users!
+    site: Site!
+  }
+
 
   type Auth {
     token: ID!
@@ -47,10 +64,12 @@ const typeDefs = gql`
   }
 
   type Query {
-    user(username:String!): Users
+    user(username: String!): Users
     users: [Users]
     newSite: [NewSite]
     Site: [Site]
+    comments: [Comment]
+    ratings: [Rating]
   }
 
   type Mutation {
@@ -73,7 +92,12 @@ const typeDefs = gql`
     swimmingHole: Boolean
     spring: Boolean
     free: Boolean
+    addComment(comment: String!, username: String!, siteId: ID!): Comment
+    deleteComment(commentId: ID!): Comment!
+    addRating(rating: Int!, username: String!, siteId: ID!): Rating
+    deleteRating(ratingId: ID!): Rating!
   }
+
 
   input prodSiteInput {
     siteName: String!
