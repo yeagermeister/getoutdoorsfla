@@ -1,5 +1,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
+import { Link } from 'react-router-dom';
 // import { QUERY_USER } from './myQueries';
 
 const Admin = () => {
@@ -15,7 +16,7 @@ const Admin = () => {
     <>
         {/* {ifAdmin} */}
         <li className="nav-item">
-            <a className="nav-link active" aria-current="page" href="./admin">Admin</a>
+        <Link to={`/admin`} className="nav-link active"><a className="nav-link active" aria-current="page" href="./admin">Admin</a></Link>
         </li>
     </>
   );

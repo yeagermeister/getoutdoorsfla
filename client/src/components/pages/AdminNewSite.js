@@ -1,14 +1,16 @@
 import React from "react";
+import { useParams } from 'react-router-dom';
 
 
 
+const AdminNewSite = (props) => {
+    const { id } = useParams();
 
-const Home = () => {
     return (
         <>
-            <SiteCard sites={sites}/>
+            <h2>Admin New Sites {id}</h2>
         </>
     )
 }
 
-export default Home;
+export default AdminNewSite;
