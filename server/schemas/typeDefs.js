@@ -47,12 +47,30 @@ scalar Date
     lon: Float!
   }
 
+
+  type Comment {
+    commentId: ID!
+    comment: String!
+    createdAt: String!
+    username: Users!
+    site: Site!
+  }
+
+  type Rating {
+    ratingId: ID!
+    rating: Int!
+    username: Users!
+    site: Site!
+  }
+
+
   type Auth {
     token: ID!
     user: Users
   }
 
   type Query {
+
     findOneUser(username:String!): Users
     findAllUsers: [Users]
     findAllNewSites: [NewSite]
@@ -60,6 +78,10 @@ scalar Date
     findAllSites: [Site]
     findOneSite(siteName:String!): Site
     findUserComments(username: String!): [Comment]
+
+    comments: [Comment]
+    ratings: [Rating]
+
   }
 
   type Mutation {
@@ -82,7 +104,12 @@ scalar Date
     swimmingHole: Boolean
     spring: Boolean
     free: Boolean
+    addComment(comment: String!, username: String!, siteId: ID!): Comment
+    deleteComment(commentId: ID!): Comment!
+    addRating(rating: Int!, username: String!, siteId: ID!): Rating
+    deleteRating(ratingId: ID!): Rating!
   }
+
 
   input prodSiteInput {
     siteName: String!
