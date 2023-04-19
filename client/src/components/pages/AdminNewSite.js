@@ -8,7 +8,10 @@ const AdminNewSite = (props) => {
 
     return (
         <>
-            <h2>Admin New Sites {id}</h2>
+            <h2>Administer New Site</h2>
+            <h3>{id}</h3>
+
+            
         </>
     )
 }
