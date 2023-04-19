@@ -50,10 +50,10 @@ const resolvers = {
         return newSite ;
         
       },
-      addProdSite: async (parent, {siteName, description, imageURL, zipcode, camping, pets, statepark, park, beach, swimmingHole, spring, free}) => {
-        const prodSite = await Site.create( {siteName, description, imageURL, zipcode, camping, pets, statepark, park, beach, swimmingHole, spring, free, lat, lon})
+      addProdSite: async (parent, {siteName, description, imageURL, zipcode, camping, pets, statepark, park, beach, swimmingHole, spring, free, lat, lon}) => {
+        const prodSite = await Site.create({siteName, description, imageURL, zipcode, camping, pets, statepark, park, beach, swimmingHole, spring, free, lat, lon});
         return prodSite;
-      }
+      }      
   }
 };
 
