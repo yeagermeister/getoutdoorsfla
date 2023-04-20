@@ -108,3 +108,20 @@ mutation deleteUser($userId: ID!) {
     }
 }
 `;
+
+export const DELETE_NEW_SITE = gql`
+mutation deleteUser($userId: ID!) {
+  deleteUser(id: $userId) {
+      _id
+  }
+}
+`; 
+
+
+export const SEND_TO_PROD = gql`
+mutation deleteUser($userId: ID!) {
+  deleteUser(id: $userId) {
+      _id
+  }
+}
+`;
