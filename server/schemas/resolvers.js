@@ -8,7 +8,7 @@ const resolvers = {
       return Users.find({});
     },
     findOneUser: async (parent, { username }) => {
-      return Users.findOne({ username });
+      return Users.findOne({ username }).populate('comments');
     },
     findAllNewSites: async () => {
       return NewSite.find({});
@@ -22,7 +22,7 @@ const resolvers = {
     findOneSite: async (parent, { siteName }) => {
       return Site.findOne({ siteName: siteName }).populate('comments').populate('ratings');
     },
-    findUserComments: async() => {
+    findUserComments: async(parent, { username }) => {
       Users.findOne({username: username}).populate('comments')
       return 
     }
