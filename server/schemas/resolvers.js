@@ -62,6 +62,13 @@ const resolvers = {
         return newSite ;
         
       },
+
+      deleteSite: async (_, { id }) => {
+        const deletedNewSite = await NewSite.findByIdAndDelete(id);
+        return deletedNewSite ;
+        
+      },
+
       addProdSite: async (parent, {site}) => {
         console.log(site, "site");
         const prodSite = await Site.create(site);
