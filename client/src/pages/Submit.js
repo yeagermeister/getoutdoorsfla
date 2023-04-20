@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import '../../form.css';
+import '../form.css';
 import { useMutation } from '@apollo/client';
-import { ADD_SITE } from '../../utils/mutations';
-const myData = {}
+import { ADD_SITE } from '../utils/mutations';
 function Submit() {
     // Create state variables for the fields in the form
     // We are also setting their initial values to an empty string
@@ -78,8 +77,6 @@ function Submit() {
         }
         else{
         try { 
-
-          console.log(myData)
             const {data} = await addSite({
                 variables: {...myData},
             }) 
