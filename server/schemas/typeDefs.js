@@ -40,7 +40,7 @@ scalar Date
     _id: ID!
     siteName: String!
     description: String!
-    imageURL: String!
+    imageURL: String
     zipcode: Int!
     camping: Boolean
     pets: Boolean
@@ -82,7 +82,7 @@ scalar Date
     findOneUser(username:String!): Users
     findAllUsers: [Users]
     findAllNewSites: [NewSite]
-    findOneNewSite(siteName:String!): NewSite
+    findOneNewSite(_id:ID!): NewSite
     findAllSites: [Site]
     findOneSite(siteName:String!): Site
     findUserComments(username: String!): [Comment]

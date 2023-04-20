@@ -4,10 +4,10 @@ import { DELETE_USER } from '../../utils/mutations';
 import { USERS_QUERY } from '../../utils/queries';
 
 const Users = () => {    
-    function handleSubmit(e) {
-        console.log(e)
-        e.preventDeafault();
-    }
+    // function handleSubmit(e) {
+    //     console.log(e)
+    //     e.preventDeafault();
+    // }
 
     const [deleteUser] = useMutation(DELETE_USER, {
         update(cache, { data: { deleteUser } }) {
@@ -26,7 +26,6 @@ const Users = () => {
     };
 
     const { data, loading, error } = useQuery(USERS_QUERY);
-
     if (loading) return "Loading...";
     if (error) return <pre>{error.message}</pre>
 
@@ -34,7 +33,7 @@ const Users = () => {
     <>
     <div>
         <ul>
-            {data.users.map((user) => (
+            {data.findAllUsers.map((user) => (
                 <li key={user._id}>{user._id}, {user.username}, {user.email}, {user.admin} <button onClick={() => handleDelete(user._id)}>Delete User</button></li>
             ))};
         </ul>

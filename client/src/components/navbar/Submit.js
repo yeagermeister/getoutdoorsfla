@@ -5,10 +5,11 @@ const Submit = () => {
     return (
         <>
             <li className="nav-item">
-              <Link to={`/Submit`} className="nav-link active"><a className="nav-link active" aria-current="page" href="./Submit">Submit a new site!</a></Link>
+              <Link to={`/Submit`} className="nav-link active">Submit a new site!</Link>
             </li>
         </>
     )
 };
 
 export default Submit;
+
