@@ -18,7 +18,7 @@ const Navbar = (props) => {
       <Link className="navbar-brand" to="/">
           <img src='/images/logo.png' className="icon" alt="get outdoors florida" />
         </Link>
-        <Link className='nav-link' to='/'>Get Outdoors Florida</Link>
+        <Link className='nav-link nav-item' to='/'>Get Outdoors Florida</Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>

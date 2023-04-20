@@ -13,8 +13,8 @@ const resolvers = {
     findAllNewSites: async () => {
       return NewSite.find({});
     },
-    findOneNewSite: async (parent, { siteName }) => {
-      return NewSite.findOne({ siteName });
+    findOneNewSite: async (parent, { _id }) => {
+      return NewSite.findOne({ _id });
     },
     findAllSites: async () => {
       return Site.find({});

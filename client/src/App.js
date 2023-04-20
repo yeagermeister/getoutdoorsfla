@@ -3,7 +3,6 @@ import React, { useState, createContext } from 'react';
 import Start from './components/navbar/Start';
 import Login from './components/pages/Login';
 import Signup from './components/pages/Signup';
-// import Site from './components/pages/Site';
 import Home from './components/pages/Home';
 import Admin from './components/pages/Admin';
 import Submit from './components/pages/Submit';
@@ -58,7 +57,7 @@ function App() {
   const handleLogout = () => {
     setIsLoggedIn(false);
   }; 
-  console.log(isLoggedIn)
+
   return (
     
 

@@ -16,7 +16,7 @@ const Admin = () => {
     <>
         {/* {ifAdmin} */}
         <li className="nav-item">
-        <Link to={`/admin`} className="nav-link active"><a className="nav-link active" aria-current="page" href="./admin">Admin</a></Link>
+        <Link to={`/admin`} className="nav-link active">Admin</Link>
         </li>
     </>
   );
