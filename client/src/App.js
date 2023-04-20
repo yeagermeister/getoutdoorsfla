@@ -1,12 +1,13 @@
 import './App.css';
 import React, { useState, createContext } from 'react';
 import Start from './components/navbar/Start';
-import Login from './components/pages/Login';
-import Signup from './components/pages/Signup';
-import Home from './components/pages/Home';
-import Admin from './components/pages/Admin';
-import Submit from './components/pages/Submit';
-import AdminNewSite from './components/pages/AdminNewSite';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import Home from './pages/Home';
+import Admin from './pages/Admin';
+import Submit from './pages/Submit';
+import AdminNewSite from './pages/AdminNewSite';
+import { SiteProvider } from './context/SiteContext'
 
 import { BrowserRouter as Router, Routes, Route}from 'react-router-dom';
 import { getLocation, latitude, longitude } from './utils/location';
@@ -62,18 +63,19 @@ function App() {
     
 
     <ApolloProvider client={client}>
-      <Router>
-      <Start />
-      <Routes>
-        <Route exact path='/' element={<Home />} />
-        <Route exact path='/AdminNewSite/:id' element={<AdminNewSite />} />
-        <Route exact path='/login' element={<Login />} />
-        <Route exact path='/signup' element={<Signup />} />
-        <Route exact path='/submit' element={<Submit />} />
-        <Route exact path='/admin' element={<Admin />} />
-        
-      </Routes>
-      </Router>
+      <SiteProvider>
+        <Router>
+        <Start />
+        <Routes>
+          <Route exact path='/' element={<Home />} />
+          <Route exact path='/AdminNewSite/:id' element={<AdminNewSite />} />
+          <Route exact path='/login' element={<Login />} />
+          <Route exact path='/signup' element={<Signup />} />
+          <Route exact path='/submit' element={<Submit />} />
+          <Route exact path='/admin' element={<Admin />} />
+        </Routes>
+        </Router>
+      </SiteProvider>
     </ApolloProvider>
 
     

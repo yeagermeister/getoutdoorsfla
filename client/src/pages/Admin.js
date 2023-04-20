@@ -1,8 +1,8 @@
 import React from 'react';
 import Collapsible from 'react-collapsible';
-import NewSite from '../admin/Newsite';
-import Users from '../admin/Users'
-import Site from '../admin/Sites'
+import NewSite from '../components/admin/Newsite';
+import Users from '../components/admin/Users'
+import Site from '../components/admin/Sites'
 
 
 const Admin = () => {
