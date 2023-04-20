@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useParams } from 'react-router-dom';
-import '../../form.css';
+import '../form.css';
 import { useMutation, useQuery } from '@apollo/client';
-import { ADD_SITE, ADD_PROD_SITE} from '../../utils/mutations';
+import { ADD_SITE, ADD_PROD_SITE} from '../utils/mutations';
 // import queryString from 'query-string';
 // import { FIND_ONE_NEWSITE } from '../../utils/queries'
 

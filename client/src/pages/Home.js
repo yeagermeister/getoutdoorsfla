@@ -1,5 +1,5 @@
 import React from "react";
-import SiteCard from '../SiteCard';
+import SiteCard from '../components/SiteCard';
 
 // These need deleted after the database is connected
 const sites = [	
