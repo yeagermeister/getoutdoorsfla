@@ -78,8 +78,6 @@ function Submit() {
         }
         else{
         try { 
-
-          console.log(myData)
             const {data} = await addSite({
                 variables: {...myData},
             }) 
