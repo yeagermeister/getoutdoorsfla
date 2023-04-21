@@ -4,10 +4,6 @@ import { DELETE_USER } from '../../utils/mutations';
 import { USERS_QUERY } from '../../utils/queries';
 
 const Users = () => {    
-    // function handleSubmit(e) {
-    //     console.log(e)
-    //     e.preventDeafault();
-    // }
 
     const [deleteUser] = useMutation(DELETE_USER, {
         update(cache, { data: { deleteUser } }) {
@@ -21,7 +17,7 @@ const Users = () => {
 
     const handleDelete = (userId) => {
         deleteUser({
-            variables: { userId }
+            variables: { deleteUserId: userId }
         });
     };
 
