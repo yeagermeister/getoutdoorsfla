@@ -97,10 +97,10 @@ const AdminNewSite = (props) => {
         }
         else{
         try { 
+            console.log(myData)
             const {data} = await addSite({
                 variables: {...myData},
             }) 
-            console.log(data)
         } catch(e) {
           console.log(data)
             console.error(e);
@@ -140,7 +140,7 @@ const AdminNewSite = (props) => {
                                 <label>Zipcode:</label>
                                 <input value={formState.zipcode} name="zipcode" onChange={handleInputChange} type="number" />
                                 <label>imageURL:</label>
-                                <input value={formState.imageUrl} name="imageUrl" onChange={handleInputChange} type="number" />
+                                <input value={formState.imageUrl} name="imageUrl" onChange={handleInputChange} type="text" />
                                 <label>Latitude:</label>
                                 <input value={formState.latitude} name="latitude" onChange={handleInputChange} type="number" />
                                 <label>Longitude:</label>
