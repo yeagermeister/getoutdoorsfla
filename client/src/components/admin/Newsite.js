@@ -3,14 +3,10 @@ import { NEWSITE_QUERY } from '../../utils/queries';
 import { useQuery, useMutation } from '@apollo/client'
 import { Link } from 'react-router-dom';
 import { DELETE_NEW_SITE } from '../../utils/mutations';
-// import { SiteContext } from '../../context/SiteContext'
+
 
 const NewSite = () => {
-    // const { siteData, updateSiteData } = useContext(SiteContext);
-    // const handleUpdateSiteData = (site) => {
-    //     updateSiteData(site);
-    //   };
-
+    // Function to delete the site and update the Apollo cache.
     const [deleteSite] = useMutation(DELETE_NEW_SITE, {
         update(cache, { data: { deleteSite } }) {
             const { sites } = cache.readQuery({ query: NEWSITE_QUERY });
@@ -21,6 +17,7 @@ const NewSite = () => {
         }
     });
 
+    // Event handler for the delete buttom
     const handleDelete = (siteId) => {
         console.log(siteId);
         deleteSite({
@@ -28,10 +25,11 @@ const NewSite = () => {
         });
     };
 
-
+    // Querry to get all sites in the new site collection that need moderation.  The button links to the component and from to view a single new site and push it to prod.
     const { data, loading, error } = useQuery(NEWSITE_QUERY);
     if (loading) return "Loading...";
     if (error) return <pre>{error.message}</pre>
+
     return (
         <>
         <div>
@@ -41,7 +39,6 @@ const NewSite = () => {
                         <Link to={`/AdminNewSite/${site._id}/${site.siteName}/${site.description}/${site.zipcode}/${site.camping}/${site.pets}/${site.statepark}/${site.park}/${site.beach}/${site.swimmingHole}/${site.spring}/${site.free}/`}>
                             <button id={site._id}>Review Submission</button>
                         </Link>
-                        <button onClick={() => handleDelete(site._id)}>Delete Site</button>
                     </li>
                 ))};
             </ul>
