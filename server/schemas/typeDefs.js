@@ -94,6 +94,7 @@ scalar Date
     addUser(username: String!, email: String!, password: String!): Auth
     deleteUser(id: ID!): Users!
     addSite(NewSite: siteInput!): NewSite
+    deleteSite(id: ID!):NewSite!
     login(email: String!, password: String!): Auth
     addProdSite(site: prodSiteInput!): Site
     addComment(comment: String!, username: String!, siteId: ID!): Comment
