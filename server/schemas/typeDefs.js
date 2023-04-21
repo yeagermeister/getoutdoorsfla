@@ -93,7 +93,7 @@ scalar Date
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     deleteUser(id: ID!): Users!
-    addSite(NewSite: siteInput!): NewSite
+    addSite(siteName: String!, description: String!, zipcode: Int!, camping: Boolean, pets: Boolean, statepark: Boolean, park: Boolean, beach: Boolean, swimmingHole: Boolean, spring: Boolean, free: Boolean): NewSite!
     deleteSite(id: ID!):NewSite!
     login(email: String!, password: String!): Auth
     addProdSite(site: prodSiteInput!): Site

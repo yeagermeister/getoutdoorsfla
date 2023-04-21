@@ -49,7 +49,7 @@ function Submit() {
 
       const handleFormSubmit = async (e) => {
         // Preventing the default behavior of the form submit (which is to refresh the page)
-        e.preventDefault();
+        // e.preventDefault();
         const zipcode = parseInt(formState.zipcode);
         let myData = {
           siteName: formState.siteName,
@@ -80,9 +80,7 @@ function Submit() {
             const {data} = await addSite({
                 variables: {...myData},
             }) 
-            console.log(data)
         } catch(e) {
-          console.log(data)
             console.error(e);
         }}
 
