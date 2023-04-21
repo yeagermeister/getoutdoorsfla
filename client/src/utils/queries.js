@@ -71,12 +71,11 @@ query Query($siteName: String!) {
     rating {
       rating
       ratingId
-        }
-      }
     }
   }
 }
-`
+`;
+
 
 export const SITE_QUERY = gql`
 query sites {
