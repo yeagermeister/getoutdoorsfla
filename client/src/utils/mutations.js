@@ -29,18 +29,17 @@ export const ADD_USER = gql`
 `;
 
 export const ADD_SITE = gql`
-mutation Mutation($newSite: siteInput!) {
-  addSite(NewSite: $newSite) {
-    _id
-    beach
-    camping
-    description
+mutation AddSite($siteName: String!, $description: String!, $zipcode: Int!, $camping: Boolean, $pets: Boolean, $statepark: Boolean, $park: Boolean, $beach: Boolean, $swimmingHole: Boolean, $spring: Boolean, $free: Boolean) {
+  addSite(siteName: $siteName, description: $description, zipcode: $zipcode, camping: $camping, pets: $pets, statepark: $statepark, park: $park, beach: $beach, swimmingHole: $swimmingHole, spring: $spring, free: $free) {
     free
     park
     pets
+    description
+    statepark
+    beach
+    camping
     siteName
     spring
-    statepark
     swimmingHole
     zipcode
   }

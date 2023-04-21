@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { SiteContext } from '../context/SiteContext'
 import { useParams } from 'react-router-dom';
 import '../form.css';
 import { useMutation, useQuery } from '@apollo/client';
-import { ADD_SITE, ADD_PROD_SITE} from '../utils/mutations';
+import { ADD_SITE, ADD_PROD_SITE, DELETE_NEW_SITE} from '../utils/mutations';
 // import queryString from 'query-string';
 // import { FIND_ONE_NEWSITE } from '../../utils/queries'
 
@@ -10,20 +11,32 @@ import { ADD_SITE, ADD_PROD_SITE} from '../utils/mutations';
 
 const AdminNewSite = (props) => {
     const {id} = useParams();
-    // console.log(id, siteName);
+    const { siteData } = useContext(SiteContext); // Access the global state
 
-    // Get the data from the site ID that was passed in
-    // const [newSitedata, newSiteloading, newSiteerrors] = useQuery(FIND_ONE_NEWSITE);
+    const inCamping = siteData.camping.toString();
+    const inPets = siteData.pets.toString();
+    const inStatepark = siteData.statepark.toString();
+    const inPark = siteData.park.toString();
+    const inBeach = siteData.beach.toString();
+    const inSwimmingHole = siteData.swimmingHole.toString();
+    const inSpring = siteData.spring.toString();
+    const inFree = siteData.free.toString();
 
 
+    console.log(siteData._id)
     const [formState, setFormState] = useState({
-        siteName: '',
-        description: '',
-        zipcode: '',
+        siteName: siteData.siteName,
+        description: siteData.description,
+        zipcode: siteData.zipcode,
+        imageUrl: '',
+        latitude: '',
+        longitude: '',
         errorMessage: ''
     });
       
+   
     const [checked, setChecked] = useState({
+
       camping: false,
       pets: false,
       statepark: false,
@@ -32,9 +45,21 @@ const AdminNewSite = (props) => {
       swimmingHole: false,
       spring: false,
       free: false,
-      
-      
       });
+
+      useEffect(() => {
+        // Update checked state based on siteData
+        setChecked({
+            camping: siteData.camping,
+            pets: siteData.pets,
+            statepark: siteData.statepark,
+            park: siteData.park,
+            beach: siteData.beach,
+            swimmingHole: siteData.swimmingHole,
+            spring: siteData.spring,
+            free: siteData.free,
+        });
+    }, [siteData]);
 
     const [addSite, {error, data }] = useMutation(ADD_SITE);
 
@@ -98,6 +123,22 @@ const AdminNewSite = (props) => {
 
       };
 
+      const [deleteUser] = useMutation(DELETE_NEW_SITE, {
+        update(cache, { data: { deleteUser } }) {
+            // const { users } = cache.readQuery({ query: USERS_QUERY });
+            // cache.writeQuery({
+            //     // query: USERS_QUERY,
+            //     data: { users: users.filter(user => user._id !== deleteUser._id) }
+            // });
+        }
+    });
+
+    const handleDelete = (site) => {
+        deleteUser({
+            variables: { site }
+        });
+    };
+
     return (
         
         <div className='container-fluid'>
@@ -114,12 +155,12 @@ const AdminNewSite = (props) => {
                                 <label>Zipcode:</label>
                                 <input value={formState.zipcode} name="zipcode" onChange={handleInputChange} type="number" />
                                 <label>imageURL:</label>
-                                <input value={formState.zipcode} name="zipcode" onChange={handleInputChange} type="number" />
+                                <input value={formState.zipcode} name="imageUrl" onChange={handleInputChange} type="number" />
                                 <label>Latitude:</label>
-                                <input value={formState.zipcode} name="zipcode" onChange={handleInputChange} type="number" />
+                                <input value={formState.zipcode} name="latitude" onChange={handleInputChange} type="number" />
                                 <label>Longitude:</label>
-                                <input value={formState.zipcode} name="zipcode" onChange={handleInputChange} type="number" />
-                                <button type="delete">Delete</button>
+                                <input value={formState.zipcode} name="longitude" onChange={handleInputChange} type="number" />
+                                <button type="delete" onClick={() => handleDelete(siteData._id)}>Delete</button>
                             </div>
                             <div className="form-group col-sm-3 col-md-6">
                                 <p className="text-center">Please check all that apply</p>
@@ -127,48 +168,48 @@ const AdminNewSite = (props) => {
                                     <span className="input-group-addon">
                                         <input value={checked.camping} name="camping" onChange={handleCheckboxChange} type="checkbox" />
                                     </span>
-                                    <p className="left-margin">Camping Allowed?</p>
+                                    <p className="left-margin">Camping Allowed? ===== {inCamping}</p>
                                 </div>
                                 <div className="input-group">
                                     <span className="input-group-addon">
                                         <input value={checked.pets} name="pets" onChange={handleCheckboxChange} type="checkbox" />
                                     </span>
-                                    <p className="left-margin">Pets Allowed?</p>
+                                    <p className="left-margin">Pets Allowed? ===== {inPets} </p>
                                 </div>
                                 <div className="input-group">
                                     <span className="input-group-addon">
                                         <input value={checked.statepark} name="statepark" onChange={handleCheckboxChange} type="checkbox" />
                                     </span>
-                                    <p className="left-margin">Statepark</p>
+                                    <p className="left-margin">Statepark ===== {inStatepark}</p>
                                 </div>
                                 <div className="input-group">
                                     <span className="input-group-addon">
                                         <input value={checked.park} name="park" onChange={handleCheckboxChange} type="checkbox" />
                                     </span>
-                                    <p className="left-margin">City/County Park</p>
+                                    <p className="left-margin">City/County Park ===== {inPark}</p>
                                 </div>
                                 <div className="input-group">
                                     <span className="input-group-addon">
                                         <input value={checked.beach} name="beach" onChange={handleCheckboxChange} type="checkbox" />                                    </span>
-                                    <p className="left-margin">Beach</p>
+                                    <p className="left-margin">Beach ===== {inBeach}</p>
                                 </div>
                                 <div className="input-group">
                                     <span className="input-group-addon">
                                         <input value={checked.swimmingHole} name="swimmingHole" onChange={handleCheckboxChange} type="checkbox" />
                                     </span>
-                                    <p className="left-margin">Swimming Hole</p>
+                                    <p className="left-margin">Swimming Hole ===== {inSwimmingHole}</p>
                                 </div>
                                 <div className="input-group">
                                     <span className="input-group-addon">
                                         <input value={checked.spring} name="spring" onChange={handleCheckboxChange} type="checkbox" />
                                     </span>
-                                    <p className="left-margin">Spring</p>
+                                    <p className="left-margin">Spring ===== {inSpring}</p>
                                 </div>
                                 <div className="input-group">
                                     <span className="input-group-addon">
                                     <input value={checked.free} name="free" onChange={handleCheckboxChange} type="checkbox" />
                                     </span>
-                                    <p className="left-margin">Free Admission?</p>
+                                    <p className="left-margin">Free Admission? ===== {inFree}</p>
                                 </div>
                                 <button type="submit">Submit</button>
                             </div>

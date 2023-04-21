@@ -57,8 +57,8 @@ const resolvers = {
   
         return { token, user };
       },
-      addSite: async (parent, { NewSite }) => {
-        const newSite = await NewSite.create( {NewSite});
+      addSite: async (parent, { zipcode, siteName, description, camping, pets, statepark, park, beach, swimmingHole, spring, free }) => {
+        const newSite = await NewSite.create( { zipcode, siteName, description, camping, pets, statepark, park, beach, swimmingHole, spring, free});
         return newSite ;
         
       },
