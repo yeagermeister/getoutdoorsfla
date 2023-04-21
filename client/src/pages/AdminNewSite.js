@@ -26,7 +26,7 @@ const AdminNewSite = (props) => {
         siteName: siteName,
         description: description,
         zipcode: zipcode,
-        imageUrl: '',
+        imageURL: '',
         latitude: '',
         longitude: '',
         errorMessage: ''
@@ -45,7 +45,7 @@ const AdminNewSite = (props) => {
       free: false,
       });
 
-    const [addSite, {error, data }] = useMutation(SEND_TO_PROD);
+    const [addProdSite, {error, data }] = useMutation(SEND_TO_PROD);
 
     const handleInputChange = (e) => {
         // Getting the value and name of the input which triggered the change
@@ -69,6 +69,8 @@ const AdminNewSite = (props) => {
         // Preventing the default behavior of the form submit (which is to refresh the page)
         e.preventDefault();
         const zipcode = parseInt(formState.zipcode);
+        const lat = parseFloat(formState.zipcode);
+        const lon = parseFloat(formState.zipcode);
         let myData = {
           siteName: formState.siteName,
           description: formState.description,
@@ -81,9 +83,9 @@ const AdminNewSite = (props) => {
           swimmingHole: checked.swimmingHole,
           spring: checked.spring,
           free: checked.free,
-          imageUrl: formState.imageUrl,
-          lat: formState.latitude,
-          lon: formState.longitude
+          imageURL: formState.imageURL,
+          lat: lat,
+          lon: lon
         };
         
 
@@ -98,11 +100,11 @@ const AdminNewSite = (props) => {
         else{
         try { 
             console.log(myData)
-            const {data} = await addSite({
-                variables: {...myData},
+            const {data} = await addProdSite({
+                variables: {...myData}
             }) 
+            // console.log(addSite)
         } catch(e) {
-          console.log(data)
             console.error(e);
         }}
 
@@ -140,7 +142,7 @@ const AdminNewSite = (props) => {
                                 <label>Zipcode:</label>
                                 <input value={formState.zipcode} name="zipcode" onChange={handleInputChange} type="number" />
                                 <label>imageURL:</label>
-                                <input value={formState.imageUrl} name="imageUrl" onChange={handleInputChange} type="text" />
+                                <input value={formState.imageURL} name="imageURL" onChange={handleInputChange} type="text" />
                                 <label>Latitude:</label>
                                 <input value={formState.latitude} name="latitude" onChange={handleInputChange} type="number" />
                                 <label>Longitude:</label>

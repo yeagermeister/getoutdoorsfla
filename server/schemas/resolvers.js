@@ -69,9 +69,8 @@ const resolvers = {
         
       },
 
-      addProdSite: async (parent, {site}) => {
-        console.log(site, "site");
-        const prodSite = await Site.create(site);
+      addProdSite: async (parent, {siteName, description, zipcode, camping, pets, statepark, park, beach, swimmingHole, spring, free, lat, lon, imageURL}) => {
+        const prodSite = await Site.create({siteName, description, zipcode, camping, pets, statepark, park, beach, swimmingHole, spring, free, lat, lon, imageURL});
         return prodSite;
       },
 
@@ -127,4 +126,4 @@ const resolvers = {
   };
   
   module.exports = resolvers;
-  ``
+  
