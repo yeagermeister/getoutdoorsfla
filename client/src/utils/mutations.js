@@ -49,7 +49,6 @@ mutation AddSite($siteName: String!, $description: String!, $zipcode: Int!, $cam
 export const SEND_TO_PROD = gql`
 mutation Mutation($site: prodSiteInput!) {
   addProdSite(site: $site) {
-    _id
     beach
     camping
     description

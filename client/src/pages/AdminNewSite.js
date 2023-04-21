@@ -3,7 +3,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { useParams, Navigate, useNavigate } from 'react-router-dom';
 import '../form.css';
 import { useMutation, useQuery } from '@apollo/client';
-import { ADD_SITE, ADD_PROD_SITE, DELETE_NEW_SITE} from '../utils/mutations';
+import { ADD_SITE, SEND_TO_PROD, DELETE_NEW_SITE} from '../utils/mutations';
 import { NEWSITE_QUERY } from '../utils/queries'
 
 
@@ -45,7 +45,7 @@ const AdminNewSite = (props) => {
       free: false,
       });
 
-    const [addSite, {error, data }] = useMutation(ADD_SITE);
+    const [addSite, {error, data }] = useMutation(SEND_TO_PROD);
 
     const handleInputChange = (e) => {
         // Getting the value and name of the input which triggered the change
@@ -81,6 +81,9 @@ const AdminNewSite = (props) => {
           swimmingHole: checked.swimmingHole,
           spring: checked.spring,
           free: checked.free,
+          imageUrl: formState.imageUrl,
+          lat: formState.latitude,
+          lon: formState.longitude
         };
         
 
@@ -127,7 +130,7 @@ const AdminNewSite = (props) => {
             <h3>{id}</h3>
             <div className="row">
                 <div className="col-sm">
-                    <form className="w-100">
+                    <form className="w-100" onSubmit={handleFormSubmit}>
                         <div className="row">
                             <div className="form-group col-sm-3 col-md-6">          
                                 <label>Location Name:</label>
