@@ -9,13 +9,15 @@ import { Link } from 'react-router-dom';
 const Navbar = (props) => {
   const logout = (e) => {
     e.preventDefault();
-  Auth.logout()
+    Auth.logout()
   }
 
-    return (
-      <nav className="navbar navbar-expand-lg">
+  const isAdmin = Auth.loggedIn() && Auth.getProfile().data.isAdmin;
+
+  return (
+    <nav className="navbar navbar-expand-lg">
       <div className="container-fluid">
-      <Link className="navbar-brand" to="/">
+        <Link className="navbar-brand" to="/">
           <img src='/images/logo.png' className="icon" alt="get outdoors florida" />
         </Link>
         <Link className='nav-link nav-item' to='/'>Get Outdoors Florida</Link>
@@ -24,29 +26,27 @@ const Navbar = (props) => {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            {Auth.loggedIn ()
-              ? (<React.Fragment>
+            {Auth.loggedIn() ? (
+              <React.Fragment>
                 <li className="nav-item">
-                <Link to={`/home`} className="nav-link active"><p className="nav-link active" aria-current="page" onClick={logout}>Logout</p></Link>
+                  <Link to={`/home`} className="nav-link active">
+                    <p className="nav-link active" aria-current="page" onClick={logout}>Logout</p>
+                  </Link>
                 </li>
-              <Submit />
-              <Admin />
+                <Submit />
+                {isAdmin && <Admin />}
               </React.Fragment>
-              )
-              : (<React.Fragment>
-                 <Signup />
+            ) : (
+              <React.Fragment>
+                <Signup />
                 <Login />
-                </React.Fragment>
-              )
-            }
+              </React.Fragment>
+            )}
           </ul>
         </div>
       </div>
     </nav>
-    );
+  );
 };
 
 export default Navbar;
-
-
-// adding this for fun
