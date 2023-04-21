@@ -24,8 +24,8 @@ scalar Date
   type NewSite {
     _id: ID!
     siteName: String!
-    description: String!
-    zipcode: Int!
+    description: String
+    zipcode: Int
     camping: Boolean
     pets: Boolean
     statepark: Boolean
@@ -94,7 +94,7 @@ scalar Date
     addUser(username: String!, email: String!, password: String!): Auth
     deleteUser(id: ID!): Users!
     addSite(siteName: String!, description: String!, zipcode: Int!, camping: Boolean, pets: Boolean, statepark: Boolean, park: Boolean, beach: Boolean, swimmingHole: Boolean, spring: Boolean, free: Boolean): NewSite!
-    deleteSite(id: ID!):NewSite!
+    deleteSite(id: ID!): NewSite!
     login(email: String!, password: String!): Auth
     addProdSite(site: prodSiteInput!): Site
     addComment(comment: String!, username: String!, siteId: ID!): Comment

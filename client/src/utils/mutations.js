@@ -88,20 +88,17 @@ mutation Mutation($comment: String!, $username: String!, $siteId: ID!) {
 `;
 
 export const DELETE_USER = gql`
-mutation Mutation($deleteUserId: ID!) {
+mutation DeleteUser($deleteUserId: ID!) {
   deleteUser(id: $deleteUserId) {
-    _id
-    admin
-    email
     username
   }
 }
 `;
 
 export const DELETE_NEW_SITE = gql`
-mutation deleteUser($userId: ID!) {
-  deleteUser(id: $userId) {
-      _id
+mutation Mutation($deleteSiteId: ID!) {
+  deleteSite(id: $deleteSiteId) {
+    siteName
   }
 }
 `; 

@@ -49,15 +49,15 @@ const AuthContext = createContext(false);
 function App() {
   getLocation();
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-  };
+  // const handleLogin = () => {
+  //   setIsLoggedIn(true);
+  // };
 
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-  }; 
+  // const handleLogout = () => {
+  //   setIsLoggedIn(false);
+  // }; 
 
   return (
     
@@ -68,7 +68,7 @@ function App() {
         <Start />
         <Routes>
           <Route exact path='/' element={<Home />} />
-          <Route exact path='/AdminNewSite/:id' element={<AdminNewSite />} />
+          <Route exact path='/AdminNewSite/:id/:siteName/:description/:zipcode/:camping/:pets/:statepark/:park/:beach/:swimmingHole/:spring/:free' element={<AdminNewSite />} />
           <Route exact path='/login' element={<Login />} />
           <Route exact path='/signup' element={<Signup />} />
           <Route exact path='/submit' element={<Submit />} />

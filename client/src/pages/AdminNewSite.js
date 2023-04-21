@@ -1,33 +1,31 @@
 import React, { useState, useContext, useEffect } from "react";
-import { SiteContext } from '../context/SiteContext'
-import { useParams } from 'react-router-dom';
+// import { SiteContext } from '../context/SiteContext'
+import { useParams, Navigate, useNavigate } from 'react-router-dom';
 import '../form.css';
 import { useMutation, useQuery } from '@apollo/client';
 import { ADD_SITE, ADD_PROD_SITE, DELETE_NEW_SITE} from '../utils/mutations';
-// import queryString from 'query-string';
-// import { FIND_ONE_NEWSITE } from '../../utils/queries'
+import { NEWSITE_QUERY } from '../utils/queries'
 
 
 
 const AdminNewSite = (props) => {
-    const {id} = useParams();
-    const { siteData } = useContext(SiteContext); // Access the global state
+    const {id, siteName, description, zipcode, camping, pets, statepark, park, beach, swimmingHole, spring, free} = useParams();
+    // const { siteData } = useContext(SiteContext); // Access the global state
+    const navigate = useNavigate();
 
-    const inCamping = siteData.camping.toString();
-    const inPets = siteData.pets.toString();
-    const inStatepark = siteData.statepark.toString();
-    const inPark = siteData.park.toString();
-    const inBeach = siteData.beach.toString();
-    const inSwimmingHole = siteData.swimmingHole.toString();
-    const inSpring = siteData.spring.toString();
-    const inFree = siteData.free.toString();
+    const inCamping = camping.toString();
+    const inPets = pets.toString();
+    const inStatepark = statepark.toString();
+    const inPark = park.toString();
+    const inBeach = beach.toString();
+    const inSwimmingHole = swimmingHole.toString();
+    const inSpring = spring.toString();
+    const inFree = free.toString();
 
-
-    console.log(siteData._id)
     const [formState, setFormState] = useState({
-        siteName: siteData.siteName,
-        description: siteData.description,
-        zipcode: siteData.zipcode,
+        siteName: siteName,
+        description: description,
+        zipcode: zipcode,
         imageUrl: '',
         latitude: '',
         longitude: '',
@@ -47,23 +45,7 @@ const AdminNewSite = (props) => {
       free: false,
       });
 
-      useEffect(() => {
-        // Update checked state based on siteData
-        setChecked({
-            camping: siteData.camping,
-            pets: siteData.pets,
-            statepark: siteData.statepark,
-            park: siteData.park,
-            beach: siteData.beach,
-            swimmingHole: siteData.swimmingHole,
-            spring: siteData.spring,
-            free: siteData.free,
-        });
-    }, [siteData]);
-
     const [addSite, {error, data }] = useMutation(ADD_SITE);
-
-
 
     const handleInputChange = (e) => {
         // Getting the value and name of the input which triggered the change
@@ -123,21 +105,21 @@ const AdminNewSite = (props) => {
 
       };
 
-      const [deleteUser] = useMutation(DELETE_NEW_SITE, {
-        update(cache, { data: { deleteUser } }) {
-            // const { users } = cache.readQuery({ query: USERS_QUERY });
-            // cache.writeQuery({
-            //     // query: USERS_QUERY,
-            //     data: { users: users.filter(user => user._id !== deleteUser._id) }
-            // });
-        }
-    });
+      const [deleteNewSite] = useMutation(DELETE_NEW_SITE);
 
-    const handleDelete = (site) => {
-        deleteUser({
-            variables: { site }
-        });
-    };
+
+    const handleDelete = async (e, id) => {
+        e.preventDefault();
+
+        try {
+            const response = await deleteNewSite({ variables: {deleteSiteId: id } });
+            console.log('Deleted something:', response);
+            navigate.push('/admin'); // Redirect to /admin
+         } catch (err) {
+        // Handle error
+        console.error('Error deleting something:', err);
+      }
+    };  
 
     return (
         
@@ -155,12 +137,12 @@ const AdminNewSite = (props) => {
                                 <label>Zipcode:</label>
                                 <input value={formState.zipcode} name="zipcode" onChange={handleInputChange} type="number" />
                                 <label>imageURL:</label>
-                                <input value={formState.zipcode} name="imageUrl" onChange={handleInputChange} type="number" />
+                                <input value={formState.imageUrl} name="imageUrl" onChange={handleInputChange} type="number" />
                                 <label>Latitude:</label>
-                                <input value={formState.zipcode} name="latitude" onChange={handleInputChange} type="number" />
+                                <input value={formState.latitude} name="latitude" onChange={handleInputChange} type="number" />
                                 <label>Longitude:</label>
-                                <input value={formState.zipcode} name="longitude" onChange={handleInputChange} type="number" />
-                                <button type="delete" onClick={() => handleDelete(siteData._id)}>Delete</button>
+                                <input value={formState.longitude} name="longitude" onChange={handleInputChange} type="number" />
+                                <button type="delete" onClick={() => handleDelete(id)}>Delete</button>
                             </div>
                             <div className="form-group col-sm-3 col-md-6">
                                 <p className="text-center">Please check all that apply</p>

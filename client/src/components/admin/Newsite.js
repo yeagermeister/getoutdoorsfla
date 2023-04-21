@@ -1,14 +1,33 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import { NEWSITE_QUERY } from '../../utils/queries';
-import { useQuery } from '@apollo/client'
+import { useQuery, useMutation } from '@apollo/client'
 import { Link } from 'react-router-dom';
-import { SiteContext } from '../../context/SiteContext'
+import { DELETE_NEW_SITE } from '../../utils/mutations';
+// import { SiteContext } from '../../context/SiteContext'
 
 const NewSite = () => {
-    const { siteData, updateSiteData } = useContext(SiteContext);
-    const handleUpdateSiteData = (site) => {
-        updateSiteData(site);
-      };
+    // const { siteData, updateSiteData } = useContext(SiteContext);
+    // const handleUpdateSiteData = (site) => {
+    //     updateSiteData(site);
+    //   };
+
+    const [deleteSite] = useMutation(DELETE_NEW_SITE, {
+        update(cache, { data: { deleteSite } }) {
+            const { sites } = cache.readQuery({ query: NEWSITE_QUERY });
+            cache.writeQuery({
+                query: NEWSITE_QUERY,
+                data: { sites: sites.filter(site => site._id !== deleteSite._id) }
+            });
+        }
+    });
+
+    const handleDelete = (siteId) => {
+        console.log(siteId);
+        deleteSite({
+            variables: { siteId }
+        });
+    };
+
 
     const { data, loading, error } = useQuery(NEWSITE_QUERY);
     if (loading) return "Loading...";
@@ -19,9 +38,10 @@ const NewSite = () => {
             <ul>
                 {data.findAllNewSites.map((site) => (
                     <li key={site._id}>{site._id}, {site.siteName}, 
-                        <Link to={`/AdminNewSite/${site._id}`}>
-                            <button id={site._id} onClick={() => handleUpdateSiteData(site)}>Review Submission</button>
+                        <Link to={`/AdminNewSite/${site._id}/${site.siteName}/${site.description}/${site.zipcode}/${site.camping}/${site.pets}/${site.statepark}/${site.park}/${site.beach}/${site.swimmingHole}/${site.spring}/${site.free}/`}>
+                            <button id={site._id}>Review Submission</button>
                         </Link>
+                        <button onClick={() => handleDelete(site._id)}>Delete Site</button>
                     </li>
                 ))};
             </ul>
