@@ -1,7 +1,7 @@
 const { Users, NewSite, Site, Comment, Rating } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
-
+const mongooseLeanVirtuals = require('mongoose-lean-virtuals')
 const resolvers = {
   Query: {
     findAllUsers: async () => {
@@ -20,7 +20,7 @@ const resolvers = {
       return Site.find({});
     },
     findOneSite: async (parent, { _id }) => {
-      return Site.findOne({ _id }).populate('comments').populate('ratings');
+      return Site.findOne({ _id }).populate('comments').populate('ratings').lean({virtuals: true});
     },
     findUserComments: async(parent, { username }) => {
       Users.findOne({username: username}).populate('comments')
