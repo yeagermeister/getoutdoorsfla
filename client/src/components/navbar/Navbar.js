@@ -16,7 +16,6 @@ const Navbar = (props) => {
     Auth.logout();
   }
   const id = Auth.getProfile();
-  console.log(id);
   
   const { loading, data } = useQuery(FIND_ONE_USER, {
     skip: !Auth.loggedIn(),

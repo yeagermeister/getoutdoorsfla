@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
 const Weather = (props) => {
-    console.log(props.site.zipcode)
   const [weatherData, setWeatherData] = useState(null);
   const [error, setError] = useState(null);
   let zipcode = props.site.zipcode
@@ -17,7 +16,6 @@ const Weather = (props) => {
     fetch(`https://weatherapi-com.p.rapidapi.com/forecast.json?q=${zipcode}`, options)
       .then(response => response.json())
       .then(data => {
-        console.log(data)
         setWeatherData({
             
           cityName: data.location.name,

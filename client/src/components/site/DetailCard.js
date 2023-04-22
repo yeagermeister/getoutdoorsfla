@@ -31,7 +31,7 @@ const Detail = (props) => {
                 <div className='col-sm'>
                     <div className='row'>
                         <h5>Map</h5>
-                        <Map />
+                        <Map site={props.site} />
                     </div>
                     <div className='row'>
                         <h5>Weather</h5>
@@ -40,7 +40,7 @@ const Detail = (props) => {
                 </div>
             </div>
             <div className='row'>
-                <Comments/>
+                <Comments site={props.site}/>
                 
             </div>
         </div>
