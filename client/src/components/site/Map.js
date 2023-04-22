@@ -29,4 +29,14 @@ function mapContainer(status) {
     }
 }
 
-export default mapContainer
+
+const Map = () => {
+    return (
+        <>
+        <mapContainer>
+            
+        </mapContainer>
+        </>
+    )
+};
+export default Map;
