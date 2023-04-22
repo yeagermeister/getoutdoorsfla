@@ -20,8 +20,13 @@ const Navbar = (props) => {
   console.log(id);
 
   const { loading, data } = useQuery(FIND_ONE_USER, {
-    variables: { _id: id.data._id, username: id.data.username, email: id.data.email, admin: id.data.admin },
-    skip: !id.data._id
+    skip: !Auth.loggedIn(),
+    variables: {
+      _id: id?.data?._id,
+      username: id?.data?.username,
+      email: id?.data?.email,
+      admin: id?.data?.admin
+    }
   });
 
   useEffect(() => {

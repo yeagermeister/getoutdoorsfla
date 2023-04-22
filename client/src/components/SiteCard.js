@@ -20,11 +20,11 @@ const SiteCard = ({ sites }) => {
                 <p className='card-description'>{site.description}</p>
               </div>
               <p className='text-center'>
-                <span id={site.id} className='mr-5'>
+                <span id={`distance${site.id}`} className='mr-5'>
                   67 miles away
                 </span>
                 <Link to={`/Site/${site._id}`}><button className='btn btn-info btn-sm active myButton'>More Information</button></Link>
-                <span id={`weather"${site._id}`} className='ml-5'></span>
+                <span id={`weather${site._id}`} className='ml-5'></span>
               </p>
             </div>
           </div>
