@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const SiteCard = ({ sites }) => {
   return (
@@ -10,7 +11,7 @@ const SiteCard = ({ sites }) => {
               <h5 className='card-title text-center'>{site.siteName}</h5>
               <div className='text-center'>
                 <img
-                  src={site.imageUrl}
+                  src={site.imageURL}
                   className='card-img-top border rounded img-border w-75'
                   alt='a natural spring'
                 />
@@ -22,15 +23,8 @@ const SiteCard = ({ sites }) => {
                 <span id={site.id} className='mr-5'>
                   67 miles away
                 </span>
-                <a
-                  href={`/site/${site.id}`}
-                  className='btn btn-info btn-sm active myButton'
-                  role='button'
-                  aria-pressed='true'
-                >
-                  More Information
-                </a>
-                <span id={`weather"${site.id}`} className='ml-5'></span>
+                <Link to={`/Site/${site._id}`}><button className='btn btn-info btn-sm active myButton'>More Information</button></Link>
+                <span id={`weather"${site._id}`} className='ml-5'></span>
               </p>
             </div>
           </div>
