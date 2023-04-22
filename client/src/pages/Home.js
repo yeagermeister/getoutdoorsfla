@@ -1,46 +1,22 @@
 import React from "react";
 import SiteCard from '../components/SiteCard';
+import { FIND_ALL_SITES } from '../utils/queries';
+import { useQuery } from '@apollo/client';
 
 // These need deleted after the database is connected
-const sites = [	
-    {
-      id: 1,
-      name: 'Weeki Wachee Springs State Park',
-        description: 'Weeki Wachee Springs State Park is a Florida State Park located in Weeki Wachee, Florida. The park is home to Weeki Wachee Springs, a first magnitude spring and a popular destination for swimming, snorkeling, and scuba diving. The park is also known for its live mermaid shows.',
-        imageUrl: '/images/Weeki-Wachee-Springs.jpg',
-        distance: '',
-        weather: '',
-        zipcode: 34606,
-        fees: "$6/car",
-        pets: false,
-        statepark: true,
-        camping: true,
-        scuba: false,
-        lat: 28.5179,
-        lng: -82.5747
-    },
-    {
-      id: 2,
-        name: 'Manatee Springs State Park',
-        description: 'Manatee Springs State Park is a Florida State Park located in Chiefland, Florida. The park is home to Manatee Springs, a first magnitude spring and a popular destination for swimming, snorkeling, and scuba diving.',
-        imageUrl: '/images/Manatee-Spring-State.jpg',
-        distance: '',
-        weather: '',
-        zipcode: 32626,
-        fees: "$6/car",
-        pets: false,
-        statepark: true,
-        camping: true,
-        scuba: false,
-        lat: 29.4975,
-        lng: -82.9758
-    }
-    ];
+//  Get a list of all sites
+
 
 const Home = () => {
+
+    const { data, loading, error } = useQuery(FIND_ALL_SITES);
+    if (loading) return "Loading...";
+    if (error) return <pre>{error.message}</pre>
+    console.log(data);
+
     return (
         <>
-            <SiteCard sites={sites}/>
+            <SiteCard sites={data.findAllSites}/>
         </>
     )
 }

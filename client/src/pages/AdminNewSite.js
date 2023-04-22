@@ -1,10 +1,10 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState } from "react";
 // import { SiteContext } from '../context/SiteContext'
-import { useParams, Navigate, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import '../form.css';
-import { useMutation, useQuery } from '@apollo/client';
-import { ADD_SITE, SEND_TO_PROD, DELETE_NEW_SITE} from '../utils/mutations';
-import { NEWSITE_QUERY } from '../utils/queries'
+import { useMutation } from '@apollo/client';
+import { SEND_TO_PROD, DELETE_NEW_SITE} from '../utils/mutations';
+
 
 
 
@@ -113,8 +113,8 @@ const AdminNewSite = (props) => {
       const [deleteNewSite] = useMutation(DELETE_NEW_SITE);
 
 
-    const handleDelete = async (e, id) => {
-        e.preventDefault();
+    const handleDelete = async (id) => {
+
 
         try {
             const response = await deleteNewSite({ variables: {deleteSiteId: id } });
@@ -147,7 +147,6 @@ const AdminNewSite = (props) => {
                                 <input value={formState.latitude} name="latitude" onChange={handleInputChange} type="number" />
                                 <label>Longitude:</label>
                                 <input value={formState.longitude} name="longitude" onChange={handleInputChange} type="number" />
-                                <button type="delete" onClick={() => handleDelete(id)}>Delete</button>
                             </div>
                             <div className="form-group col-sm-3 col-md-6">
                                 <p className="text-center">Please check all that apply</p>
@@ -202,6 +201,7 @@ const AdminNewSite = (props) => {
                             </div>
                         </div>
                     </form>
+                    <button type="delete" onClick={() => handleDelete(id)}>Delete</button>
                 </div>
             </div>
         {error && (

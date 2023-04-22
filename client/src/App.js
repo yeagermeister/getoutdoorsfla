@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import Admin from './pages/Admin';
 import Submit from './pages/Submit';
 import AdminNewSite from './pages/AdminNewSite';
+import Site from './pages/Site'
 import { SiteProvider } from './context/SiteContext'
 
 import { BrowserRouter as Router, Routes, Route}from 'react-router-dom';
@@ -73,6 +74,7 @@ function App() {
           <Route exact path='/signup' element={<Signup />} />
           <Route exact path='/submit' element={<Submit />} />
           <Route exact path='/admin' element={<Admin />} />
+          <Route exact path='/site/:id' element={<Site />} />
         </Routes>
         </Router>
       </SiteProvider>

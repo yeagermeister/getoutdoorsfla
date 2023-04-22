@@ -34,7 +34,8 @@ const Navbar = (props) => {
                   </Link>
                 </li>
                 <Submit />
-                {isAdmin && <Admin />}
+                {/* {isAdmin && <Admin />} */}
+                <Admin />
               </React.Fragment>
             ) : (
               <React.Fragment>

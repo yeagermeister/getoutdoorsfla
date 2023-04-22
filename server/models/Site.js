@@ -11,7 +11,7 @@ const siteSchema = new Schema({
     type: String,
     required: true,
   },
-  imageUrl: {
+  imageURL: {
     type: String,
   },
   zipcode: {
