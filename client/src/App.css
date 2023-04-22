@@ -40,6 +40,11 @@ body {
   margin-bottom: 5%;
 }
 
+#map {
+  height:400px;
+  width:100%;
+}
+
 .card-description {
   overflow: hidden;
   height: 75px;
