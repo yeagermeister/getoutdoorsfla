@@ -42,8 +42,8 @@ query sites {
 `;
 
 export const FIND_ONE_SITE = gql`
-query Query($siteName: String!) {
-  findOneSite(siteName: $siteName) {
+query Query($id: ID!) {
+  findOneSite(_id: $id) {
     _id
     beach
     camping
@@ -111,6 +111,19 @@ query Query($username: String!) {
       _id
       siteName
     }
+  }
+}
+`
+export const FIND_ALL_SITES = gql`
+query FindAllSites {
+  findAllSites {
+    _id
+    description
+    imageURL
+    lat
+    lon
+    siteName
+    zipcode
   }
 }
 `

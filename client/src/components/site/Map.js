@@ -28,5 +28,4 @@ function mapContainer(status) {
             );
     }
 }
-
-export default mapContainer;
+import React from 'react';

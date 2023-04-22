@@ -84,7 +84,7 @@ scalar Date
     findAllNewSites: [NewSite]
     findOneNewSite(_id:ID!): NewSite
     findAllSites: [Site]
-    findOneSite(siteName:String!): Site
+    findOneSite(_id: ID!): Site
     findUserComments(username: String!): [Comment]
     comments: [Comment]
     ratings: [Rating]
