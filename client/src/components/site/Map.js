@@ -23,7 +23,7 @@ function mapContainer(status) {
             case Status.SUCCESS:
                 return (
                     <Wrapper apiKey={process.env.GOOGLE_MAPS_API}>
-                        <MyMapComponent center={{lat: 37.7749, lng: -122.4194}} zoom={12} />
+                        <MyMapComponent center={{lat: data.findOneSite.lat, lng: data.findOneSite.lon}} zoom={12} />
                     </Wrapper>
                 );
                 default:
