@@ -8,7 +8,6 @@ export function getLocation() {
             navigator.geolocation.getCurrentPosition(function(position) {
                 latitude = position.coords.latitude;
                 longitude = position.coords.longitude;
-                console.log("Latitude: " + latitude + ", Longitude: " + longitude);
             },
             function(error) {
                 if (error.code === error.PERMISSION_DENIED) {
