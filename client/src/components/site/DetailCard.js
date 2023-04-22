@@ -35,7 +35,7 @@ const Detail = (props) => {
                     </div>
                     <div className='row'>
                         <h5>Weather</h5>
-                        {/* <Weather /> */}
+                        <Weather site={props.site}/>
                     </div>
                 </div>
             </div>
