@@ -1,4 +1,5 @@
 const { Schema, Types, model } = require('mongoose');
+const mongooseLeanVirtuals = require('mongoose-lean-virtuals');
 
 const ratingSchema = new Schema({
   ratingId: {
@@ -22,7 +23,28 @@ const ratingSchema = new Schema({
         ref: 'Site',
       },
   ],
+},
+
+{
+  toJSON: {
+    virtuals: true,
+  },
 });
+
+// Add virtual for average rating per site
+ratingSchema.virtual('averageRating').get(function () {
+  return Rating.aggregate([
+    { $match: { site: this.site } },
+    { $group: { _id: null, average: { $avg: '$rating' } } },
+  ])
+    .then((result) => {
+      return result[0].average;
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+});
+ratingSchema.plugin(mongooseLeanVirtuals)
 
 const Rating = model('Rating', ratingSchema);
 

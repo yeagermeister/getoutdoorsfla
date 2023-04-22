@@ -64,8 +64,8 @@ const AdminNewSite = (props) => {
         // Preventing the default behavior of the form submit (which is to refresh the page)
         e.preventDefault();
         const zipcode = parseInt(formState.zipcode);
-        const lat = parseFloat(formState.zipcode);
-        const lon = parseFloat(formState.zipcode);
+        const lat = parseFloat(formState.latitude);
+        const lon = parseFloat(formState.longitude);
         let myData = {
           siteName: formState.siteName,
           description: formState.description,
@@ -92,11 +92,10 @@ const AdminNewSite = (props) => {
         }
         else{
         try { 
-            console.log(myData)
+            
             const {data} = await addProdSite({
                 variables: {...myData}
             }) 
-            // console.log(addSite)
         } catch(e) {
             console.error(e);
         }}

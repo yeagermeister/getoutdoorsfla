@@ -19,7 +19,7 @@ const NewSite = () => {
 
     // Event handler for the delete buttom
     const handleDelete = (siteId) => {
-        console.log(siteId);
+        
         deleteSite({
             variables: { siteId }
         });

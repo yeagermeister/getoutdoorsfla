@@ -31,16 +31,16 @@ const Detail = (props) => {
                 <div className='col-sm'>
                     <div className='row'>
                         <h5>Map</h5>
-                        <Map />
+                        <Map site={props.site} />
                     </div>
                     <div className='row'>
                         <h5>Weather</h5>
-                        {/* <Weather /> */}
+                        <Weather site={props.site}/>
                     </div>
                 </div>
             </div>
             <div className='row'>
-                <Comments/>
+                <Comments site={props.site}/>
                 
             </div>
         </div>

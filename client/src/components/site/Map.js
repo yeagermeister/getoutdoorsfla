@@ -1,42 +1,50 @@
-import { Wrapper, Status, Spinner, ErrorComponent } from "@googlemaps/react-wrapper";
+import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import { useEffect, useRef } from "react";
 import React from 'react';
-function MyMapComponent({ center, zoom }) {
-    const ref = useRef();
 
-    useEffect(() => {
-        new window.google.maps.Map(ref.current, {
-            center,
-            zoom,
-        });
-    }, [center, zoom]);
+const Map = (props) => {
+   
 
-    return <div ref={ref} id="map" />;
-}
+    
+    function MyMapComponent({ center, zoom }) {
+     console.log(center)
+        const ref = useRef();
+    
+        useEffect(() => {
+            new window.google.maps.Map(ref.current, {
+                center,
+                zoom,
+            });
+        }, [center, zoom]);
+    
+        return <div ref={ref} id="map" />;
+    }
 
-// function mapContainer(status) {
-//     switch (status) {
-//         case Status.LOADING:
-//             return <Spinner />;
-//         case Status.FAILURE:
-//             return <ErrorComponent />;
-//             case Status.SUCCESS:
-//                 return (
-//                     <Wrapper apiKey={process.env.GOOGLE_MAPS_API}>
-//                         <MyMapComponent center={{lat: data.findOneSite.lat, lng: data.findOneSite.lon}} zoom={12} />
-//                     </Wrapper>
-//                 );
-//                 default:
-//             return <Spinner />;
-    // }
-// }
+    function mapContainer(Status, site) {
+        if (!site) {
+            // Site is null or undefined, handle this case accordingly
+            return <div>No site data</div>;
+          }
+        let center={lat: site.lat, lng: site.lon}
+        console.log(site)
+        
+            return (
+                <Wrapper apiKey={'AIzaSyAUPFIpucG-X584hME5DFs-4Yu28ny2vVk'}>
+                    <MyMapComponent  center={center} zoom={12} />
+                    <div>hello</div>
+                </Wrapper>
+            );
+        }
+
+               
+       
+    
 
 
 
-const Map = () => {
     return (
         <>
-            {/* {mapContainer(Status.SUCCESS)} */}
+            {mapContainer(Status.SUCCESS, props.site)}
         </>
     )
 };
