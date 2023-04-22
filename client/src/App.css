@@ -69,3 +69,7 @@ h2 {
 .details {
   background-color: var(--darkgreen);
 }
+
+.tag {
+  margin-left: 15px;
+}

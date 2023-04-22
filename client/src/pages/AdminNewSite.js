@@ -5,9 +5,6 @@ import '../form.css';
 import { useMutation } from '@apollo/client';
 import { SEND_TO_PROD, DELETE_NEW_SITE} from '../utils/mutations';
 
-
-
-
 const AdminNewSite = (props) => {
     const {id, siteName, description, zipcode, camping, pets, statepark, park, beach, swimmingHole, spring, free} = useParams();
     // const { siteData } = useContext(SiteContext); // Access the global state
@@ -32,7 +29,6 @@ const AdminNewSite = (props) => {
         errorMessage: ''
     });
       
-   
     const [checked, setChecked] = useState({
 
       camping: false,
@@ -64,7 +60,6 @@ const AdminNewSite = (props) => {
         });
       };
 
-
       const handleFormSubmit = async (e) => {
         // Preventing the default behavior of the form submit (which is to refresh the page)
         e.preventDefault();
@@ -88,8 +83,6 @@ const AdminNewSite = (props) => {
           lon: lon
         };
         
-
-        
         // First we check to see if the email is not valid or if the userName is empty. If so we set an error message to be displayed on the page.
         if (!formState.zipcode || !formState.siteName || !formState.description) {
         //   setErrorMessage('Site submission requires a name, description, and the zipcode');
@@ -110,12 +103,9 @@ const AdminNewSite = (props) => {
 
       };
 
-      const [deleteNewSite] = useMutation(DELETE_NEW_SITE);
-
+    const [deleteNewSite] = useMutation(DELETE_NEW_SITE);
 
     const handleDelete = async (id) => {
-
-
         try {
             const response = await deleteNewSite({ variables: {deleteSiteId: id } });
             console.log('Deleted something:', response);
