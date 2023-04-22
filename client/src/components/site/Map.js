@@ -1,5 +1,5 @@
-import { Wrapper, Status } from "@googlemaps/react-wrapper";
-require('dotenv').config();
+import { Wrapper, Status, Spinner, ErrorComponent } from "@googlemaps/react-wrapper";
+import { useRef, useEffect } from "react";
 import React from 'react';
 function MyMapComponent({ center, zoom }) {
     const ref = useRef();
