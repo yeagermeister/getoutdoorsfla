@@ -40,7 +40,7 @@ const Detail = (props) => {
                 </div>
             </div>
             <div className='row'>
-                <Comments site={props.site}/>
+                <Comments site={props}/>
                 
             </div>
         </div>
