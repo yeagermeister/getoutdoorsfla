@@ -3,13 +3,13 @@ import Map from '../../components/site/Map';
 import Weather from '../../components/site/Weather';
 
 const Detail = (props) => {
-    console.log(props.site);
     return (
         <>
         <div className='col-sm'>
             <div className='row'>
                 <div className='col-sm-3 details'>
-                    <h5>Details</h5>
+                    <p>{props.site.description}</p>    
+                    <img src={props.site.imageURL} alt="Outdoor Imagery" />
                     <p></p>
                 </div>
                 <div className='col-sm'>
