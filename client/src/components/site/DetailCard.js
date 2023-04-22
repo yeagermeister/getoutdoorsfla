@@ -1,7 +1,7 @@
 import React from 'react';
 import Map from '../../components/site/Map';
 import Weather from '../../components/site/Weather';
-
+import Comments from '../../components/site/Comments';
 const Detail = (props) => {
     console.log(props.site);
     return (
@@ -24,7 +24,8 @@ const Detail = (props) => {
                 </div>
             </div>
             <div className='row'>
-                <h5>comments</h5>
+                <Comments/>
+                
             </div>
         </div>
         <Map />
