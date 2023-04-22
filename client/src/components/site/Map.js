@@ -1,6 +1,6 @@
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
 require('dotenv').config();
-
+import React from 'react';
 function MyMapComponent({ center, zoom }) {
     const ref = useRef();
 
@@ -28,4 +28,5 @@ function mapContainer(status) {
             );
     }
 }
-import React from 'react';
+
+export default mapContainer
