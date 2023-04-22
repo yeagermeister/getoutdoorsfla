@@ -1,25 +1,22 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import { Link } from 'react-router-dom';
-// import { QUERY_USER } from './myQueries';
+import { FIND_ONE_USER } from '../../utils/queries';
+import Auth  from '../../utils/auth';
 
 const Admin = () => {
 
-  // const { loading, error, data } = useQuery(QUERY_USER);
-
-  // if (loading) return <p>Loading...</p>;
-  // if (error) return <p>Error </p>;
-
-  // const ifAdmin = !!data?.myField;
 
   return (
     <>
-        {/* {ifAdmin} */}
+    
         <li className="nav-item">
-        <Link to={`/admin`} className="nav-link active">Admin</Link>
+          <Link to={`/admin`} className="nav-link active">Admin</Link>
         </li>
+   
     </>
   );
 };
 
 export default Admin;
+
