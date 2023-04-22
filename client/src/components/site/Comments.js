@@ -1,7 +1,50 @@
 import React, { useState, useEffect } from 'react';
-const Comments = ({comments}) => {
+import { useMutation } from '@apollo/client';
+import { ADD_COMMENT} from '../../utils/mutations';
+import { gql } from '@apollo/client'
+const Comments = ({ comments, siteId }) => {
+    const [commentText, setCommentText] = useState('');
+    const [username, setUsername] = useState('');
+    const [addComment, { error }] = useMutation(ADD_COMMENT, {
+        update(cache, { data: { addComment } }) {
+            // Update the site's comment list in the cache
+            cache.modify({
+              id: cache.identify(siteId),
+              fields: {
+                comments(existingComments = []) {
+                  const newCommentRef = cache.writeFragment({
+                    data: addComment,
+                    fragment: gql`
+                      fragment NewComment on Comment {
+                        commentId
+                        comment
+                        createdAt
+                        username {
+                          username
+                        }
+                      }
+                    `,
+                  });
+                  return [...existingComments, newCommentRef];
+                },
+              },
+            });
+          },
+        });
 
-
+        const handleFormSubmit = async (event) => {
+            event.preventDefault();
+            try {
+              await addComment({
+                variables: { comment: commentText, username, siteId },
+              });
+              setCommentText('');
+              setUsername('');
+            } catch (err) {
+              console.error(err);
+            }
+          };
+          
 // let comment = props.data.findOneSite.comment
 return (
 

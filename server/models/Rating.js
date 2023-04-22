@@ -24,6 +24,20 @@ const ratingSchema = new Schema({
   ],
 });
 
+// Add virtual for average rating per site
+ratingSchema.virtual('averageRating').get(function () {
+  return Rating.aggregate([
+    { $match: { site: this.site } },
+    { $group: { _id: null, average: { $avg: '$rating' } } },
+  ])
+    .then((result) => {
+      return result[0].average;
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+});
+
 const Rating = model('Rating', ratingSchema);
 
 module.exports = Rating;

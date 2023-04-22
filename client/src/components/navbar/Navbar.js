@@ -15,21 +15,25 @@ const Navbar = (props) => {
     e.preventDefault();
     Auth.logout();
   }
-
   const id = Auth.getProfile();
   console.log(id);
-
+  
   const { loading, data } = useQuery(FIND_ONE_USER, {
-    variables: { _id: id.data._id, username: id.data.username, email: id.data.email, admin: id.data.admin },
-    skip: !id.data._id
+    skip: !Auth.loggedIn(),
+    variables: {
+      _id: id?.data?._id,
+      username: id?.data?.username,
+      email: id?.data?.email,
+      admin: id?.data?.admin
+    }
   });
-
+  
   useEffect(() => {
     if (!loading && data) {
       setIsAdmin(data.findOneUser.admin);
     }
   }, [loading, data]);
-
+  
   return (
     <nav className="navbar navbar-expand-lg">
       <div className="container-fluid">
