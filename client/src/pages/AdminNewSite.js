@@ -6,7 +6,7 @@ import { useMutation } from '@apollo/client';
 import { SEND_TO_PROD, DELETE_NEW_SITE} from '../utils/mutations';
 
 const AdminNewSite = (props) => {
-    const {id, siteName, description, zipcode, camping, pets, statepark, park, beach, swimmingHole, spring, free} = useParams();
+    const {id, siteName, description, zipcode, camping, pets, statepark, park, beach, swimmingHole, spring, free, altText} = useParams();
     // const { siteData } = useContext(SiteContext); // Access the global state
     const navigate = useNavigate();
 
@@ -24,6 +24,7 @@ const AdminNewSite = (props) => {
         description: description,
         zipcode: zipcode,
         imageURL: '',
+        altText: '',
         latitude: '',
         longitude: '',
         errorMessage: ''
@@ -69,6 +70,7 @@ const AdminNewSite = (props) => {
         let myData = {
           siteName: formState.siteName,
           description: formState.description,
+          altText: formState.altText,
           zipcode: zipcode,
           camping: checked.camping,
           pets: checked.pets,
@@ -132,6 +134,8 @@ const AdminNewSite = (props) => {
                                 <input value={formState.zipcode} name="zipcode" onChange={handleInputChange} type="number" />
                                 <label>imageURL:</label>
                                 <input value={formState.imageURL} name="imageURL" onChange={handleInputChange} type="text" />
+                                <label>altText:</label>
+                                <input value={formState.altText} name="altText" onChange={handleInputChange} type="text" />
                                 <label>Latitude:</label>
                                 <input value={formState.latitude} name="latitude" onChange={handleInputChange} type="number" />
                                 <label>Longitude:</label>

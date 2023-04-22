@@ -47,8 +47,8 @@ mutation AddSite($siteName: String!, $description: String!, $zipcode: Int!, $cam
 `;
 
 export const SEND_TO_PROD = gql`
-mutation AddProdSite($siteName: String!, $description: String!, $zipcode: Int!, $free: Boolean, $lat: Float!, $lon: Float!, $imageURL: String!, $statepark: Boolean, $spring: Boolean, $camping: Boolean, $pets: Boolean, $park: Boolean, $beach: Boolean, $swimmingHole: Boolean) {
-  addProdSite(siteName: $siteName, description: $description, zipcode: $zipcode, free: $free, lat: $lat, lon: $lon, imageURL: $imageURL, statepark: $statepark, spring: $spring, camping: $camping, pets: $pets, park: $park, beach: $beach, swimmingHole: $swimmingHole) {
+mutation AddProdSite($siteName: String!, $description: String!, $zipcode: Int!, $free: Boolean, $lat: Float!, $lon: Float!, $imageURL: String!, $statepark: Boolean, $spring: Boolean, $camping: Boolean, $pets: Boolean, $park: Boolean, $beach: Boolean, $swimmingHole: Boolean, $altText: String!) {
+  addProdSite(siteName: $siteName, description: $description, zipcode: $zipcode, free: $free, lat: $lat, lon: $lon, imageURL: $imageURL, statepark: $statepark, spring: $spring, camping: $camping, pets: $pets, park: $park, beach: $beach, swimmingHole: $swimmingHole, altText: $altText) {
     spring
     statepark
     siteName
@@ -63,6 +63,7 @@ mutation AddProdSite($siteName: String!, $description: String!, $zipcode: Int!, 
     pets
     swimmingHole
     zipcode
+    altText
   }
 }
 `;

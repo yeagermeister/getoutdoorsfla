@@ -52,6 +52,7 @@ scalar Date
     free: Boolean
     lat: Float!
     lon: Float!
+    altText: String!
     rating: [Rating]
     comment: [Comment]
   }
@@ -96,7 +97,7 @@ scalar Date
     addSite(siteName: String!, description: String!, zipcode: Int!, camping: Boolean, pets: Boolean, statepark: Boolean, park: Boolean, beach: Boolean, swimmingHole: Boolean, spring: Boolean, free: Boolean): NewSite!
     deleteSite(id: ID!): NewSite!
     login(email: String!, password: String!): Auth
-    addProdSite(siteName: String!, description: String!, zipcode: Int!, camping: Boolean, pets: Boolean, statepark: Boolean, park: Boolean, beach: Boolean, swimmingHole: Boolean, spring: Boolean, free: Boolean, lat: Float!, lon: Float!, imageURL: String ): Site!
+    addProdSite(siteName: String!, description: String!, zipcode: Int!, camping: Boolean, pets: Boolean, statepark: Boolean, park: Boolean, beach: Boolean, swimmingHole: Boolean, spring: Boolean, free: Boolean, lat: Float!, lon: Float!, imageURL: String, altText: String! ): Site!
     addComment(comment: String!, username: String!, siteId: ID!): Comment
     deleteComment(commentId: ID!): Comment!
     addRating(rating: Int!, username: String!, siteId: ID!): Rating
