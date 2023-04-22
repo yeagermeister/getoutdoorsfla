@@ -59,6 +59,10 @@ const siteSchema = new Schema({
     type: Number,
     required: true
   },
+  altText: {
+    type: String,
+    required: true
+  },
   ratings: [
     {
       type: Schema.Types.ObjectId,

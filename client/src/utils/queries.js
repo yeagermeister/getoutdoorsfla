@@ -71,6 +71,7 @@ query Query($id: ID!) {
     rating {
       rating
       ratingId
+      altText
     }
   }
 }
@@ -83,6 +84,7 @@ query sites {
     _id
     description
     imageURL
+    altText
     lat
     lon
     rating {
