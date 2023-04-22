@@ -68,10 +68,10 @@ query Query($id: ID!) {
     imageURL
     free
     description
+    altText
     rating {
       rating
       ratingId
-      altText
     }
   }
 }
@@ -126,6 +126,7 @@ query FindAllSites {
     lon
     siteName
     zipcode
+    altText
   }
 }
 `
