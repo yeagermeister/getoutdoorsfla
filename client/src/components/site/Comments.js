@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_COMMENT} from '../../utils/mutations';
+import { Link } from 'react-router-dom'
 import { gql } from '@apollo/client'
 import Auth from '../../utils/auth'
 const Comments = ({ site }) => {
 
 
   const [commentText, setCommentText] = useState('');
-  let user = Auth.getProfile()
+ 
 
   const [sitenum, setUsernum] = useState('');
   const [usernamed, setUsername] = useState('');
@@ -16,11 +17,16 @@ const Comments = ({ site }) => {
   useEffect(() => {
     
     setUsernum(site.site._id);
-    setUsername(user.data.username);
+    let user = Auth.getProfile()
+    if (user){
+      setUsername(user.data.username);
+    }
+    
     setComments(site.site.comment);
     
-  }, [site, user]);
- 
+  }, [site]);
+ console.log(site.site.comments)
+ let sitecomments = site.site.comments
   const [addComment, { error }] = useMutation(ADD_COMMENT, {
     update(cache, { data: { addComment } }) {
       // Update the site's comment list in the cache
@@ -61,31 +67,33 @@ const Comments = ({ site }) => {
   };
 
   return (
-    <div className="ui comments">
-      <h3 className="ui dividing header">Comments</h3>
-      {comments ? (
-        comments.map(comment => (
-        <div className="comment">
-          <div className="content">
-            <a className="author">{comment.username}</a>
-            <div className="metadata">
-              <span className="date">{comment.createdAt}</span>
-            </div>
-            <div className="text">{comment.comment}</div>
-          </div>
-        </div> 
-      ))):
-      
-      <p>Be the first to leave a Comment!</p>}
-      <form className="ui reply form">
-        <div className="field">
-          <textarea value={commentText} onChange={(event) => setCommentText(event.target.value)} />
+    <div>
+      {Auth.loggedIn() && (
+        <form onSubmit={handleFormSubmit}>
+          <textarea
+            placeholder="Leave a comment about this site..."
+            value={commentText}
+            onChange={(event) => setCommentText(event.target.value)}
+          />
+          <button type="submit">Add Comment</button>
+        </form>
+      )}
+      {!Auth.loggedIn() && (
+        <p>
+          You need to be logged in to leave a comment.{' '}
+          <Link to="/login">Click here to log in.</Link>
+        </p>
+      )}
+      {sitecomments ? (
+        sitecomments.map(comment => (
+        <div key={comment._id}>
+          <p>{comment.comment}</p>
+          <p>
+            Posted by {comment.username ? comment.username.username : 'Unknown'}{' '}
+            on {comment.createdAt}
+          </p>
         </div>
-        <div className="ui blue labeled submit icon button">
-          <i className="icon edit"/>
-          <button onClick={handleFormSubmit}>Add Reply</button>
-        </div>
-      </form>
+      ))): <div>no comments yet!</div>}
     </div>
   );
 };

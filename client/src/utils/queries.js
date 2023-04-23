@@ -60,6 +60,9 @@ query FindOneSite($id: ID!) {
     lat
     lon
     altText
+    comments {
+      comment
+    }
   }
 }
 `;
