@@ -54,7 +54,7 @@ scalar Date
     lon: Float!
     altText: String!
     rating: [Rating]
-    comment: [Comment]
+    comments: [Comment]
   }
 
 
@@ -85,7 +85,7 @@ scalar Date
     findAllNewSites: [NewSite]
     findOneNewSite(_id:ID!): NewSite
     findAllSites: [Site]
-    findOneSite(_id: ID!): Site
+    findOneSite(_id: ID!): Site 
     findUserComments(username: String!): [Comment]
     comments: [Comment]
     ratings: [Rating]

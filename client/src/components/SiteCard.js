@@ -13,7 +13,7 @@ const SiteCard = ({ sites }) => {
                 <img
                   src={site.imageURL}
                   className='card-img-top border rounded img-border w-75'
-                  alt='a natural spring'
+                  alt={site.altText}
                 />
               </div>
               <div className='card-body'>

@@ -12,7 +12,7 @@ const Detail = (props) => {
             <div className='row'>
                 <div className='col-sm-3 details'>
                     <p>{props.site.description}</p>    
-                    <img src={props.site.imageURL} alt="Outdoor Imagery" />
+                    <img src={props.site.imageURL} alt={props.site.altText} />
                     {props.site.free && 
                         <p>This site has free admission!</p>
                     }
@@ -40,7 +40,7 @@ const Detail = (props) => {
                 </div>
             </div>
             <div className='row'>
-                <Comments site={props.site}/>
+                <Comments site={props}/>
                 
             </div>
         </div>
