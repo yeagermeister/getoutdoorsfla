@@ -5,7 +5,7 @@ const commentSchema = new Schema({
     type: Schema.Types.ObjectId,
     default: () => new Types.ObjectId(),
   },
-  Comment: {
+  comment: {
     type: String,
     required: true,
   },
@@ -16,7 +16,7 @@ const commentSchema = new Schema({
   username: [
     {
         type: Schema.Types.ObjectId,
-        ref: 'User',
+        ref: 'Users',
       },
   ],
   site: [

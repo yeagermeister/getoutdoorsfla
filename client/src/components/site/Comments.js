@@ -4,17 +4,28 @@ import { ADD_COMMENT} from '../../utils/mutations';
 import { gql } from '@apollo/client'
 import Auth from '../../utils/auth'
 const Comments = ({ site }) => {
+
+
   const [commentText, setCommentText] = useState('');
- console.log(site)
   let user = Auth.getProfile()
-  let username = user.username
-  let siteId = site._id
-  let comments = site.comment
+
+  const [sitenum, setUsernum] = useState('');
+  const [usernamed, setUsername] = useState('');
+  const [comments, setComments] = useState(site.comment);
+
+  useEffect(() => {
+    
+    setUsernum(site.site._id);
+    setUsername(user.data.username);
+    setComments(site.site.comment);
+    
+  }, [site, user]);
+ 
   const [addComment, { error }] = useMutation(ADD_COMMENT, {
     update(cache, { data: { addComment } }) {
       // Update the site's comment list in the cache
       cache.modify({
-        id: cache.identify(siteId),
+        id: cache.identify(sitenum),
         fields: {
           comments(existingComments = []) {
             const newCommentRef = cache.writeFragment({
@@ -37,12 +48,11 @@ const Comments = ({ site }) => {
     },
   });
 
-  const handleFormSubmit = async (event, commentText, username, siteId) => {
-    console.log(username)
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
       await addComment({
-        variables: { comment: commentText, siteId: siteId, username: username },
+        variables: { comment: commentText, siteId: sitenum, username: usernamed },
       });
       setCommentText('');
     } catch (err) {
