@@ -42,37 +42,24 @@ query sites {
 `;
 
 export const FIND_ONE_SITE = gql`
-query Query($id: ID!) {
+query FindOneSite($id: ID!) {
   findOneSite(_id: $id) {
     _id
-    beach
-    camping
-    comments {
-      comment
-      commentId
-      createdAt
-      username {
-        username
-        _id
-      }
-    }
-    zipcode
-    swimmingHole
-    statepark
-    spring
     siteName
-    pets
-    park
-    lon
-    lat
-    imageURL
-    free
     description
+    imageURL
+    zipcode
+    camping
+    pets
+    statepark
+    park
+    beach
+    swimmingHole
+    spring
+    free
+    lat
+    lon
     altText
-    rating {
-      rating
-      ratingId
-    }
   }
 }
 `;
