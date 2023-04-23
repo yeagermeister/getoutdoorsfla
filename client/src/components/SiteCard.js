@@ -47,7 +47,6 @@ const SiteCard = ({ sites }) => {
                   67 miles away
                 </span>
                 <Link to={`/Site/${site._id}`}><button className='btn btn-info btn-sm active myButton'>More Information</button></Link>
-                {/* {getWeather(site.zipcode)} */}
                 <span id={`weather${site._id}`} className='ml-5'><img src={icon} alt='weather icon' /></span>
                 
               </p>

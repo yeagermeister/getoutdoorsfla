@@ -47,7 +47,7 @@ query Query($id: ID!) {
     _id
     beach
     camping
-    comment {
+    comments {
       comment
       commentId
       createdAt

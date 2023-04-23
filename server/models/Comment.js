@@ -13,18 +13,16 @@ const commentSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-  username: [
-    {
-        type: Schema.Types.ObjectId,
-        ref: 'Users',
-      },
-  ],
-  site: [
-    {
-        type: Schema.Types.ObjectId,
-        ref: 'Site',
-      },
-  ],
+  userID: {
+    type: Schema.Types.ObjectId,
+    ref: 'Users',
+  },
+  
+  site: {
+      type: Schema.Types.ObjectId,
+      ref: 'Site',
+  },
+
 });
 
 const Comment = model('Comment', commentSchema);

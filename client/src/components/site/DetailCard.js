@@ -3,9 +3,8 @@ import Map from '../../components/site/Map';
 import Weather from '../../components/site/Weather';
 import Comments from '../../components/site/Comments';
 const Detail = (props) => {
-    // if(props.site.free) {
-    //     return
-    // }
+
+    console.log(props.site)
     return (
         <>
         <div className='col-sm'>
