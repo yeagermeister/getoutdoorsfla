@@ -87,8 +87,6 @@ scalar Date
     findAllSites: [Site]
     findOneSite(_id: ID!): Site 
     findUserComments(username: String!): [Comment]
-    comments: [Comment]
-    ratings: [Rating]
   }
 
   type Mutation {

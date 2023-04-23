@@ -20,21 +20,22 @@ const resolvers = {
       return Site.find({});
     },
     findOneSite: async (parent, { _id }) => {
-      return Site.findOne({ _id })
-        .populate({
-          path: 'comments',
-          populate: {
-            path: 'username',
-            select: 'username'
-          }
-        })
+      const site = await Site.findOne({ _id })
         .populate('ratings')
         .lean({ virtuals: true });
+        const comments = await Comment.find({_id})
+
+      console.log(site, comments); // add this line to log the site object
+
+      return site;
     },
-    findUserComments: async(parent, { username }) => {
-      Users.findOne({username: username}).populate('comments')
-      return 
+    findUserComments: async (parent, {username}) => {
+      const comments = Comment.find({username}).populate('site')
+      return comments
     }
+    // findUserComments: async (parent, { username }) => {
+    //   return Comment.find({ username }).populate('site');
+    // }
 
   },
   
