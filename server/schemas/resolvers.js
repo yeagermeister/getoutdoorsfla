@@ -20,7 +20,16 @@ const resolvers = {
       return Site.find({});
     },
     findOneSite: async (parent, { _id }) => {
-      return Site.findOne({ _id }).populate('comments').populate('ratings').lean({virtuals: true});
+      return Site.findOne({ _id })
+        .populate({
+          path: 'comments',
+          populate: {
+            path: 'username',
+            select: 'username'
+          }
+        })
+        .populate('ratings')
+        .lean({ virtuals: true });
     },
     findUserComments: async(parent, { username }) => {
       Users.findOne({username: username}).populate('comments')
@@ -78,10 +87,12 @@ const resolvers = {
         if (context.user) {
           const newComment = await Comment.create({
             comment,
-            username: context.user._id,
+            username: context.user.username,
             site: siteId,
           });
-          await Site.findByIdAndUpdate(siteId, { $push: { comments: newComment._id } });
+          const site = await Site.findByIdAndUpdate(siteId);
+         site.comments.push(newComment);
+         await site.save()
           return newComment;
         }
         throw new AuthenticationError('You need to be logged in!');
