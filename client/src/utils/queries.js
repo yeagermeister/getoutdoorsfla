@@ -62,6 +62,7 @@ query FindOneSite($id: ID!) {
     altText
     comments {
       comment
+      createdAt
     }
   }
 }

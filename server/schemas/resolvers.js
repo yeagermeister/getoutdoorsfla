@@ -23,7 +23,12 @@ const resolvers = {
 
 
     findOneSite: async (parent, { _id }) => {
-      const site = await Site.findOne({ _id }).populate('comments')
+      const site = await Site.findOne({ _id }).populate({path: 'comments',
+      populate: {
+        path: 'username',
+        select: 'username'
+      }
+    })
         .populate('ratings')
         .lean({ virtuals: true });
        
