@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { getWeather, iconUrl } from '../utils/weather';
 
 const SiteCard = ({ sites }) => {
   return (
@@ -24,6 +25,7 @@ const SiteCard = ({ sites }) => {
                   67 miles away
                 </span>
                 <Link to={`/Site/${site._id}`}><button className='btn btn-info btn-sm active myButton'>More Information</button></Link>
+                {this.getWeather(site.zipcode)}
                 <span id={`weather${site._id}`} className='ml-5'></span>
               </p>
             </div>

@@ -6,7 +6,7 @@ import { useMutation } from '@apollo/client';
 import { SEND_TO_PROD, DELETE_NEW_SITE} from '../utils/mutations';
 
 const AdminNewSite = (props) => {
-    const {id, siteName, description, zipcode, camping, pets, statepark, park, beach, swimmingHole, spring, free, altText} = useParams();
+    const {id, siteName, description, zipcode, camping, pets, statepark, park, beach, swimmingHole, spring, free} = useParams();
     // const { siteData } = useContext(SiteContext); // Access the global state
     const navigate = useNavigate();
 
