@@ -13,8 +13,8 @@ const commentSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-  userID: {
-    type: Schema.Types.ObjectId,
+  username: {
+    type: String,
     ref: 'Users',
   },
   

@@ -76,13 +76,6 @@ mutation Mutation($comment: String!, $username: String!, $siteId: ID!) {
     comment
     commentId
     createdAt
-    username {
-      username
-    }
-    site {
-      siteName
-      _id
-    }
   }
 }
 `;
