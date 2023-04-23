@@ -19,7 +19,7 @@ const commentSchema = new Schema({
   },
   
   site: {
-      type: Schema.Types.ObjectId,
+      type: String,
       ref: 'Site',
   },
 

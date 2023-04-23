@@ -19,16 +19,19 @@ const resolvers = {
     findAllSites: async () => {
       return Site.find({});
     },
+
+
+
     findOneSite: async (parent, { _id }) => {
-      const site = await Site.findOne({ _id })
+      const site = await Site.findOne({ _id }).populate('comments')
         .populate('ratings')
         .lean({ virtuals: true });
-        const comments = await Comment.find({_id})
-
-      console.log(site, comments); // add this line to log the site object
-
+       
       return site;
     },
+
+
+    
     findUserComments: async (parent, {username}) => {
       const comments = Comment.find({username}).populate('site')
       return comments
