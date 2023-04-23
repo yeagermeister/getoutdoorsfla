@@ -13,12 +13,13 @@ const Site = (props) => {
   const { data, loading, error } = useQuery(FIND_ONE_SITE, {
         variables: { id: id } 
   })
+console.log(id);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
-  const free = data.findOneSite.free
-
+  // const free = data.findOneSite.free
+console.log(data.findOneSite);
   return (
     <>
       <div>

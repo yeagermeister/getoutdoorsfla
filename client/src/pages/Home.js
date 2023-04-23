@@ -15,9 +15,9 @@ const Home = () => {
     
 
     return (
-
-                <SiteCard sites={data.findAllSites}/>
-
+        <>
+            <SiteCard sites={data.findAllSites}/>
+        </>
     )
 }
 
