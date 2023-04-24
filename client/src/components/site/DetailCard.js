@@ -2,6 +2,8 @@ import React from 'react';
 import Map from '../../components/site/Map';
 import Weather from '../../components/site/Weather';
 import Comments from '../../components/site/Comments';
+import StarRating from "../../components/site/Rating";
+
 const Detail = (props) => {
 
     console.log(props.site)
@@ -9,13 +11,13 @@ const Detail = (props) => {
         <>
         <div className='col-sm'>
             <div className='row'>
-                <div className='col-sm-3 details'>
+                <div className='col-sm-3 siteCard'>
                     <p>{props.site.description}</p>    
-                    <img src={props.site.imageURL} alt={props.site.altText} />
+                    <img className="w-30 imgthumbnail px-1" src={props.site.imageURL} alt={props.site.altText} />
                     {props.site.free && 
                         <p>This site has free admission!</p>
                     }
-                    <p>Tags: 
+                    <p className='siteCard'>Amenities: 
                         {props.site.beach && <span className='tag'>Beach</span>}
                         {props.site.pets && <span className='tag'>Pet Friendly</span>}
                         {props.site.park && <span className='tag'>Community Park</span>}
@@ -25,7 +27,9 @@ const Detail = (props) => {
                         {props.site.camping && <span className='tag'>camping</span>}
                     </p>
                     <p>Average Rating:</p>
-                    <p>Your Rating:</p>
+                    <p>Your Rating:
+                        <StarRating />
+                    </p>
                 </div>
                 <div className='col-sm'>
                     <div className='row'>
