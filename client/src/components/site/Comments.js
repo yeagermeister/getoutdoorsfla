@@ -26,8 +26,9 @@ const Comments = ({ site }) => {
     
   }, [site]);
   console.log(usernamed)
- console.log(site.site.comments)
+ 
  let sitecomments = site.site.comments
+ console.log(sitecomments[0].userID.username)
   const [addComment, { error }] = useMutation(ADD_COMMENT, {
     update(cache, { data: { addComment } }) {
       // Update the site's comment list in the cache
@@ -90,7 +91,7 @@ const Comments = ({ site }) => {
         <div key={comment._id}>
           <p>{comment.comment}</p>
           <p>
-            Posted by {comment.username ? comment.username.username : 'Unknown'}{' '}
+            Posted by {comment.userID ? comment.userID.username : 'Unknown'}{' '}
             on {comment.createdAt}
           </p>
         </div>
