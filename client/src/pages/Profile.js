@@ -24,18 +24,19 @@ const Profile = () => {
   if (loading) {
     return <div>Loading...</div>;
   }
-
+  console.log(data)
+  const commentData = data.findUserComments
   return (
     <div>
       <h1>Welcome to {user.username}'s Profile</h1>
       <div>
         <h2>My Comments:</h2>
         <ul>
-          {user.comments ?(user.comments.map((comment) => (
+          {commentData ?(commentData.map((comment) => (
             <li key={comment._id}>
-              <a href={`/posts/${comment.post._id}`}>
-                {comment.post.title}: {comment.text}
-              </a>
+              <p>comment:{comment.comment} </p>
+              <p>on: {comment.site.siteName} </p>
+              <p> at: {comment.createdAt}</p>
             </li>
           ))) : <div> no comments yet!</div>}
          
