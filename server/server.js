@@ -2,6 +2,7 @@ const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
 const { authMiddleware } = require('./utils/auth');
+const axios = require('axios')
 
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
@@ -23,6 +24,28 @@ if (process.env.NODE_ENV === 'production') {
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
+
+app.get('/proxy', async (req, res) => {
+  try {
+    const origins = req.query.params.origins; // Get origins from query parameter
+    const destinations = req.query.params.destinations; // Get destinations from query parameter
+
+    // Make the request to the external API with origins and destinations as parameters
+    const response = await axios.get('https://maps.googleapis.com/maps/api/distancematrix/json', {
+      params: {
+        key: 'AIzaSyCPmuYKoJgPVO2j1Z8L-lwQp89bKOOP8ic', // Update with your actual API key
+        origins: origins,
+        destinations: destinations,
+      }
+    });
+
+    // Send the response back to the client
+    res.json(response.data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to fetch data' });
+  }
 });
 
 
