@@ -63,6 +63,9 @@ query FindOneSite($id: ID!) {
     comments {
       comment
       createdAt
+      username {
+        username
+      }
     }
   }
 }

@@ -19,12 +19,13 @@ const Comments = ({ site }) => {
     setUsernum(site.site._id);
     let user = Auth.getProfile()
     if (user){
-      setUsername(user.data.username);
+      setUsername(user.data._id);
     }
     
     setComments(site.site.comment);
     
   }, [site]);
+  console.log(usernamed)
  console.log(site.site.comments)
  let sitecomments = site.site.comments
   const [addComment, { error }] = useMutation(ADD_COMMENT, {
@@ -58,7 +59,7 @@ const Comments = ({ site }) => {
     event.preventDefault();
     try {
       await addComment({
-        variables: { comment: commentText, siteId: sitenum, username: usernamed },
+        variables: { comment: commentText, siteId: sitenum, userID: usernamed },
       });
       setCommentText('');
     } catch (err) {

@@ -23,7 +23,7 @@ const Map = (props) => {
     function mapContainer(Status, site) {
         if (!site) {
             // Site is null or undefined, handle this case accordingly
-            return <div>No site data</div>;
+            return <div></div>;
           }
         let center={lat: site.lat, lng: site.lon}
         console.log(site)
@@ -31,7 +31,6 @@ const Map = (props) => {
             return (
                 <Wrapper apiKey={'AIzaSyCPmuYKoJgPVO2j1Z8L-lwQp89bKOOP8ic'}>
                     <MyMapComponent  center={center} zoom={12} />
-                    <div>hello</div>
                 </Wrapper>
             );
         }

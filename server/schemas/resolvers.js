@@ -25,7 +25,7 @@ const resolvers = {
     findOneSite: async (parent, { _id }) => {
       const site = await Site.findOne({ _id }).populate({path: 'comments',
       populate: {
-        path: 'username',
+        path: 'userID',
         select: 'username'
       }
     })
@@ -92,20 +92,18 @@ const resolvers = {
         return prodSite;
       },
 
-      addComment: async (parent, { comment, siteId }, context) => {
-        if (context.user) {
+      addComment: async (parent, { comment, siteId, userID }) => {
           const newComment = await Comment.create({
             comment,
-            username: context.user.username,
+            userID: userID,
             site: siteId,
           });
           const site = await Site.findByIdAndUpdate(siteId);
          site.comments.push(newComment);
          await site.save()
           return newComment;
-        }
-        throw new AuthenticationError('You need to be logged in!');
       },
+
       deleteComment: async (parent, { commentId }, context) => {
         if (context.user) {
           const comment = await Comment.findById(commentId);
