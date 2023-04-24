@@ -60,6 +60,13 @@ query FindOneSite($id: ID!) {
     lat
     lon
     altText
+    comments {
+      comment
+      createdAt
+      userID {
+        username
+      }
+    }
   }
 }
 `;
@@ -91,8 +98,8 @@ query FindOneNewSite($findOneNewSiteId: ID!) {
 `;
 
 export const FIND_USER_COMMENTS = gql`
-query Query($username: String!) {
-  findUserComments(username: $username) {
+query Query($userID: String!) {
+  findUserComments(userID: $userID) {
     comment
     commentId
     createdAt

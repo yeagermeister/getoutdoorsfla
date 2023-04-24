@@ -23,7 +23,12 @@ const resolvers = {
 
 
     findOneSite: async (parent, { _id }) => {
-      const site = await Site.findOne({ _id }).populate('comments')
+      const site = await Site.findOne({ _id }).populate({path: 'comments',
+      populate: {
+        path: 'userID',
+        select: 'username'
+      }
+    })
         .populate('ratings')
         .lean({ virtuals: true });
        
@@ -32,8 +37,8 @@ const resolvers = {
 
 
     
-    findUserComments: async (parent, {username}) => {
-      const comments = Comment.find({username}).populate('site')
+    findUserComments: async (parent, {userID}) => {
+      const comments = Comment.find({userID}).populate('site')
       return comments
     }
     // findUserComments: async (parent, { username }) => {
@@ -87,20 +92,18 @@ const resolvers = {
         return prodSite;
       },
 
-      addComment: async (parent, { comment, siteId }, context) => {
-        if (context.user) {
+      addComment: async (parent, { comment, siteId, userID }) => {
           const newComment = await Comment.create({
             comment,
-            username: context.user.username,
+            userID: userID,
             site: siteId,
           });
           const site = await Site.findByIdAndUpdate(siteId);
          site.comments.push(newComment);
          await site.save()
           return newComment;
-        }
-        throw new AuthenticationError('You need to be logged in!');
       },
+
       deleteComment: async (parent, { commentId }, context) => {
         if (context.user) {
           const comment = await Comment.findById(commentId);

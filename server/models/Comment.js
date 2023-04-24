@@ -13,7 +13,7 @@ const commentSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-  username: {
+  userID: {
     type: String,
     ref: 'Users',
   },
