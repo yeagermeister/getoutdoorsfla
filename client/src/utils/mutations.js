@@ -94,4 +94,19 @@ mutation Mutation($deleteSiteId: ID!) {
     _id
   }
 }
-`; 
+`;
+
+export const NEW_RATING = gql`
+mutation Mutation($rating: Int!, $username: String!, $siteId: ID!) {
+  addRating(rating: $rating, username: $username, siteId: $siteId) {
+    rating
+    ratingId
+    site {
+      _id
+    }
+    username {
+      username
+    }
+  }
+}
+`
