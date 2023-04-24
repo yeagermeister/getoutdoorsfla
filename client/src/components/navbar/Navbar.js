@@ -4,6 +4,7 @@ import Login from './login';
 import Signup from './Signup';
 import Submit from './Submit';
 import Admin from './Admin'; 
+import Profile from './Profile'
 import { Link } from 'react-router-dom';
 import { FIND_ONE_USER } from '../../utils/queries';
 import { useQuery } from '@apollo/client';
@@ -53,6 +54,7 @@ const Navbar = (props) => {
                   </Link>
                 </li>
                 <Submit />
+                <Profile />
                 {isAdmin && <Admin />}
               </React.Fragment>
             ) : (
