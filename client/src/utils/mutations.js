@@ -71,8 +71,8 @@ mutation AddProdSite($siteName: String!, $description: String!, $zipcode: Int!, 
 
 
 export const ADD_COMMENT = gql`
-mutation Mutation($comment: String!, $username: String!, $siteId: ID!) {
-  addComment(comment: $comment, username: $username, siteId: $siteId) {
+mutation Mutation($comment: String!, $userID: String!, $siteId: ID!) {
+  addComment(comment: $comment, userID: $userID, siteId: $siteId) {
     comment
     commentId
     createdAt

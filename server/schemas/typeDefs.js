@@ -12,7 +12,7 @@ scalar Date
     commentId: ID!
     comment: String!
     createdAt: Date
-    username: Users!
+    userID: Users!
     site: Site!
   }
   type Rating {
@@ -58,22 +58,6 @@ scalar Date
   }
 
 
-  type Comment {
-    commentId: ID!
-    comment: String!
-    createdAt: Date
-    username: Users!
-    site: Site!
-  }
-
-  type Rating {
-    ratingId: ID!
-    rating: Int!
-    username: Users!
-    site: Site!
-  }
-
-
   type Auth {
     token: ID!
     user: Users
@@ -96,7 +80,7 @@ scalar Date
     deleteSite(id: ID!): NewSite!
     login(email: String!, password: String!): Auth
     addProdSite(siteName: String!, description: String!, zipcode: Int!, camping: Boolean, pets: Boolean, statepark: Boolean, park: Boolean, beach: Boolean, swimmingHole: Boolean, spring: Boolean, free: Boolean, lat: Float!, lon: Float!, imageURL: String, altText: String! ): Site!
-    addComment(comment: String!, username: String!, siteId: ID!): Comment
+    addComment(comment: String!, userID: String!, siteId: ID!): Comment
     deleteComment(commentId: ID!): Comment!
     addRating(rating: Int!, username: String!, siteId: ID!): Rating
     deleteRating(ratingId: ID!): Rating!
