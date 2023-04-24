@@ -12,8 +12,6 @@ const baseUrl = 'https://maps.googleapis.com/maps/api/distancematrix/json';
 
 
 
-
-
 export async function getDistance(originLat, originLng, destinationLat, destinationLng) {
 
 // Define the parameters for the API request
