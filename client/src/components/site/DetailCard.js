@@ -28,7 +28,7 @@ const Detail = (props) => {
                     </p>
                     <p>Average Rating:</p>
                     <p>Your Rating:
-                        <StarRating />
+                        <StarRating site={props}/>
                     </p>
                 </div>
                 <div className='col-sm'>

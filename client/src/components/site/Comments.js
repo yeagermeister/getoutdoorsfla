@@ -25,7 +25,6 @@ const Comments = ({ site }) => {
     setComments(site.site.comment);
     
   }, [site]);
-  console.log(usernamed)
  
  let sitecomments = site.site.comments
 
