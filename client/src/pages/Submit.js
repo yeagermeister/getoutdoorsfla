@@ -5,6 +5,7 @@ import { ADD_SITE } from '../utils/mutations';
 function Submit() {
     // Create state variables for the fields in the form
     // We are also setting their initial values to an empty string
+    // checkboxes have to be handled seperately than text boxes
     const [formState, setFormState] = useState({
         siteName: '',
         description: '',
