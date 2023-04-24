@@ -6,6 +6,7 @@ import Signup from './pages/Signup';
 import Home from './pages/Home';
 import Admin from './pages/Admin';
 import Submit from './pages/Submit';
+import Profile from './pages/Profile';
 import AdminNewSite from './pages/AdminNewSite';
 import Site from './pages/Site'
 import { SiteProvider } from './context/SiteContext'
@@ -73,6 +74,7 @@ function App() {
           <Route exact path='/login' element={<Login />} />
           <Route exact path='/signup' element={<Signup />} />
           <Route exact path='/submit' element={<Submit />} />
+          <Route exact path='/Profile' element={<Profile />} />
           <Route exact path='/admin' element={<Admin />} />
           <Route exact path='/site/:id' element={<Site />} />
         </Routes>

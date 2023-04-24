@@ -98,8 +98,8 @@ query FindOneNewSite($findOneNewSiteId: ID!) {
 `;
 
 export const FIND_USER_COMMENTS = gql`
-query Query($username: String!) {
-  findUserComments(username: $username) {
+query Query($userID: String!) {
+  findUserComments(userID: $userID) {
     comment
     commentId
     createdAt

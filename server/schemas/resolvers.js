@@ -37,8 +37,8 @@ const resolvers = {
 
 
     
-    findUserComments: async (parent, {username}) => {
-      const comments = Comment.find({username}).populate('site')
+    findUserComments: async (parent, {userID}) => {
+      const comments = Comment.find({userID}).populate('site')
       return comments
     }
     // findUserComments: async (parent, { username }) => {
