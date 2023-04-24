@@ -71,10 +71,22 @@ h2 {
   text-align: center;
 }
 
-.details {
-  background-color: var(--darkgreen);
-}
 
 .tag {
   margin-left: 15px;
+}
+
+.siteCard {
+  color: var(--sand);
+  background-color: var(--darkgreen);
+  margin: 5px;
+}
+
+.imgthumbnail {
+  padding: 0.25rem;
+  background-color: var(--lightgreen);
+  border: 1px solid var(--water);
+  border-radius: 0.375rem;
+  max-width: 97%;
+  height: auto;
 }
