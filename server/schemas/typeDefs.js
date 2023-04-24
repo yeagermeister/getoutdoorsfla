@@ -82,7 +82,7 @@ scalar Date
     addProdSite(siteName: String!, description: String!, zipcode: Int!, camping: Boolean, pets: Boolean, statepark: Boolean, park: Boolean, beach: Boolean, swimmingHole: Boolean, spring: Boolean, free: Boolean, lat: Float!, lon: Float!, imageURL: String, altText: String! ): Site!
     addComment(comment: String!, userID: String!, siteId: ID!): Comment
     deleteComment(commentId: ID!): Comment!
-    addRating(rating: Int!, username: String!, siteId: ID!): Rating
+    addRating(rating: Int!, siteId: ID!): Rating
     deleteRating(ratingId: ID!): Rating!
   }
  

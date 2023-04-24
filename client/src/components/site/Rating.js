@@ -9,22 +9,18 @@ const StarRating = ({site}) => {
 
 
     const [updateRating] = useMutation(NEW_RATING);
-    const [sitenum, setUsernum] = useState('');
-    const [usernamed, setUsername] = useState('');
+    const [siteId, setUsernum] = useState('');
+    
 
     useEffect(() => {
         setUsernum(site.site._id);
-
-        let user = Auth.getProfile()
-        if (user){
-          setUsername(user.data._id);
-        }        
+             
       }, [site]);
 
     const handleRatingChange = async (newRating) => {
         setRating(newRating);
         try {
-            const response = await updateRating({ variables: {rating: newRating ,username: usernamed, siteID: sitenum} });
+            const response = await updateRating({ variables: {rating: rating, siteId: siteId} });
             console.log('Deleted something:', response);
          } catch (err) {
         // Handle error
