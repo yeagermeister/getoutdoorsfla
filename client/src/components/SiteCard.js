@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import { getWeather, iconUrl } from '../utils/weather';
+import { getDistance } from '../utils/distance'
+import { latitude, longitude } from '../utils/location';
 
 const SiteCard = ({ sites }) => {
   const [enrichedSites, setEnrichedSites] = useState([]);
-
   const icon = "https://" + iconUrl;
 
   useEffect(() => {
@@ -20,6 +21,17 @@ const SiteCard = ({ sites }) => {
       } catch (error) {
         console.error('Error enriching data:', error)
     }
+    try {
+      const enrichedData = await Promise.all(sites.map(async (site) => {
+        const response= await getDistance(site.lat, site.lon, latitude, longitude);
+        const enrichedSite = response;
+        console.log(response)
+        return {...site, ...enrichedSite};
+      }));
+      setEnrichedSites(enrichedData);
+    } catch (error) {
+      console.error('Error enriching data:', error)
+  }
   };
   
   getData();
@@ -44,7 +56,7 @@ const SiteCard = ({ sites }) => {
               </div>
               <p className='text-center'>
                 <span id={`distance${site.id}`} className='mr-5'>
-                  67 miles away
+               miles away
                 </span>
                 <Link to={`/Site/${site._id}`}><button className='btn btn-info btn-sm active myButton'>More Information</button></Link>
                 <span id={`weather${site._id}`} className='ml-5'><img src={icon} alt='weather icon' /></span>
