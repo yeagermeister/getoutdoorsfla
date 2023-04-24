@@ -67,7 +67,7 @@ const SiteCard = ({ sites }) => {
               </div>
               <p className='text-center'>
               <span id={`distance${site.id}`} className='mr-5'>
-                  {distances.find(distanceData => distanceData.id === site.id)?.distance.toFixed(0)} miles away
+              {distances[index] ? distances[index].distance.toFixed(0) : ''} miles away
                 </span>
                 <Link to={`/Site/${site._id}`}><button className='btn btn-info btn-sm active myButton'>More Information</button></Link>
                 <span id={`weather${site._id}`} className='ml-5'><img src={icon} alt='weather icon' /></span>
