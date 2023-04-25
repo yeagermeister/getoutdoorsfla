@@ -11,18 +11,16 @@ const ratingSchema = new Schema({
     required: true,
     maxlength: 1,
   },
-  username: [
+  userID: 
     {
         type: Schema.Types.ObjectId,
-        ref: 'User',
+        ref: 'Users',
       },
-  ],
-  site: [
+  site: 
     {
-        type: Schema.Types.ObjectId,
+        type: String,
         ref: 'Site',
       },
-  ],
 },
 
 {
