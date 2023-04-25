@@ -8,7 +8,7 @@ const resolvers = {
       return Users.find({});
     },
     findOneUser: async (parent, { username }) => {
-      return Users.findOne({ username }).populate('comments');
+      return Users.findOne({ username }).populate('comments').populate('ratings');
     },
     findAllNewSites: async () => {
       return NewSite.find({});
@@ -40,10 +40,12 @@ const resolvers = {
     findUserComments: async (parent, {userID}) => {
       const comments = Comment.find({userID}).populate('site')
       return comments
+    },
+
+    findUserRatings: async (parent, { userID }) => {
+      const ratings = Rating.find({userID}).populate('site')
+      return ratings
     }
-    // findUserComments: async (parent, { username }) => {
-    //   return Comment.find({ username }).populate('site');
-    // }
 
   },
   
@@ -120,7 +122,7 @@ const resolvers = {
         if (context.user) {
           const newRating = await Rating.create({
             rating,
-            username: context.user._id,
+            userID: context.user._id,
             site: siteId,
           });
           await Site.findByIdAndUpdate(siteId, { $push: { ratings: newRating._id } });

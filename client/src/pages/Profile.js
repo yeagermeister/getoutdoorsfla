@@ -1,8 +1,7 @@
 import React, { useEffect, useState} from 'react';
 import { useQuery } from '@apollo/client';
-import { FIND_USER_COMMENTS } from '../utils/queries';
+import { FIND_USER_COMMENTS, FIND_USER_RATINGS } from '../utils/queries';
 import Auth from '../utils/auth';
-
 const Profile = () => {
   const user = Auth.getProfile();
   const [userID, setUserID] = useState('');
@@ -16,6 +15,9 @@ const Profile = () => {
   const { loading, data } = useQuery(FIND_USER_COMMENTS, {
     variables: { userID: userID || "" }, // provide a default value if username is falsy
   });
+  const { load, data: dater } = useQuery(FIND_USER_RATINGS, {
+    variables: { userID: userID || "" }, // provide a default value if username is falsy
+  });
 
   if (!Auth.loggedIn()) {
     return <div>You must be logged in to view this page.</div>;
@@ -24,7 +26,8 @@ const Profile = () => {
   if (loading) {
     return <div>Loading...</div>;
   }
-  console.log(data)
+  console.log(data, dater)
+  const ratingData = dater.findUserRatings
   const commentData = data.findUserComments
   return (
     <div>
@@ -39,7 +42,12 @@ const Profile = () => {
               <p> at: {comment.createdAt}</p>
             </li>
           ))) : <div> no comments yet!</div>}
-         
+         {ratingData ?(ratingData.map((rating) => (
+            <li key={rating._id}>
+              <p>rating:{rating.rating} </p>
+              <p>on: {rating.site.siteName} </p>
+            </li>
+          ))) : <div> no ratings yet!</div>}
         </ul>
       </div>
     </div>

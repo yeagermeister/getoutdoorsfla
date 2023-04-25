@@ -18,7 +18,7 @@ scalar Date
   type Rating {
     ratingId: ID!
     rating: Int!
-    username: Users!
+    userID: Users!
     site: Site!
   }
   type NewSite {
@@ -71,6 +71,7 @@ scalar Date
     findAllSites: [Site]
     findOneSite(_id: ID!): Site 
     findUserComments(userID: String!): [Comment]
+    findUserRatings(userID: ID!): [Rating]
   }
 
   type Mutation {
