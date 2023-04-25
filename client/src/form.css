@@ -43,13 +43,15 @@ h1 {
   
   label {
     color: #3d3d3d;
-    display: block;
     font-family: sans-serif;
     font-size: 14px;
     font-weight: 500;
     margin-left: 10px !important;
     margin-bottom: 5px;
+    float: right; 
+    width: calc(100%/3)
   }
+
  
   .error {
     color: red;
