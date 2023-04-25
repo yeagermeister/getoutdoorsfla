@@ -97,16 +97,10 @@ mutation Mutation($deleteSiteId: ID!) {
 `;
 
 export const NEW_RATING = gql`
-mutation Mutation($rating: Int!, $username: String!, $siteId: ID!) {
-  addRating(rating: $rating, username: $username, siteId: $siteId) {
+mutation Mutation($rating: Int!, $siteId: ID!) {
+  addRating(rating: $rating, siteId: $siteId) {
     rating
     ratingId
-    site {
-      _id
-    }
-    username {
-      username
-    }
   }
 }
 `

@@ -110,6 +110,16 @@ query Query($userID: String!) {
   }
 }
 `
+
+export const FIND_USER_RATINGS = gql`
+query Query($userID: ID!) {
+  findUserRatings(userID: $userID) {
+    rating
+    site {
+      siteName
+    }
+  }
+}`
 export const FIND_ALL_SITES = gql`
 query FindAllSites {
   findAllSites {

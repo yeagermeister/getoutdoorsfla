@@ -27,7 +27,7 @@ const userSchema = new Schema({
   ratings: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Ratings',
+      ref: 'Rating',
     },
   ],
   comments: [    
