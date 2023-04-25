@@ -9,6 +9,7 @@ import Submit from './pages/Submit';
 import Profile from './pages/Profile';
 import AdminNewSite from './pages/AdminNewSite';
 import Site from './pages/Site'
+import NotFound from './pages/NotFound'
 import { SiteProvider } from './context/SiteContext'
 
 import { BrowserRouter as Router, Routes, Route}from 'react-router-dom';
@@ -24,7 +25,7 @@ import { setContext } from '@apollo/client/link/context';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: 'http://localhost:3001/graphql',
 });
 
 // Construct request middleware that will attach the JWT token to every request as an `authorization` header
@@ -76,6 +77,7 @@ function App() {
           <Route exact path='/submit' element={<Submit />} />
           <Route exact path='/Profile' element={<Profile />} />
           <Route exact path='/admin' element={<Admin />} />
+          <Route path='*' element={<NotFound />}/>
           <Route exact path='/site/:id' element={<Site />} />
         </Routes>
         </Router>
