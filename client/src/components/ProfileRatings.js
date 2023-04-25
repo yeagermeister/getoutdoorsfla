@@ -12,12 +12,15 @@ const ProfileRatings = (props) => {
       
         setUserID(props.userid);
       
-    }, []);
-
-    const { load, data: dater } = useQuery(FIND_USER_RATINGS, {
+    }, [props.userid]);
+    console.log(props)
+    const { loading, data } = useQuery(FIND_USER_RATINGS, {
         variables: { userID: userID || "" }, // provide a default value if username is falsy
       });
-      const ratingData = dater && dater.findUserRatings;
+      if (loading) {
+        return <div>Loading...</div>;
+      }
+      const ratingData = data && data.findUserRatings;
     return (
         <>
         <h2>My Ratings:</h2>

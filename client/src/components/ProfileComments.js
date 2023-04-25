@@ -13,11 +13,15 @@ const ProfileComments = (props) => {
       
         setUserID(props.userid);
       
-    }, []);
+    }, [props.userid]);
+    
     
     const { loading, data } = useQuery(FIND_USER_COMMENTS, {
         variables: { userID: userID || "" }, // provide a default value if username is falsy
       });
+      if (loading) {
+        return <div>Loading...</div>;
+      }
 
 console.log(props)
 
