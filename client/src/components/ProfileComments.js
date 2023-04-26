@@ -28,10 +28,10 @@ console.log(props)
   const commentData = data && data.findUserComments
     return (
 <>
-<h2>My Comments:</h2>
+<h2 className='rounded'>My Comments:</h2>
 {commentData ?(commentData.map((comment) => (
-            <li key={comment._id}>
-              <p>comment:{comment.comment} </p>
+            <li className='rounded border border-success' key={comment._id}>
+              <p >comment:{comment.comment} </p>
               <p>on: {comment.site.siteName} </p>
               <p> at: {comment.createdAt}</p>
             </li>
