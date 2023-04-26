@@ -23,11 +23,11 @@ const ProfileRatings = (props) => {
       const ratingData = data && data.findUserRatings;
     return (
         <>
-        <h2 className='rounded'>My Ratings:</h2>
+        <h2 className='rounded flex justify-content-center row'>My Ratings:</h2>
         {ratingData ?(ratingData.map((rating) => (
-            <li className='rounded border border-success' key={rating._id}>
-              <p>rating:{rating.rating} </p>
-              <p>on: {rating.site.siteName} </p>
+            <li className='rounded flex justify-content-center align-items-center col-3 border border-success' key={rating._id}>
+              <p className="head">rating: </p>{rating.rating}
+              <p className="head">on:  </p>{rating.site.siteName}
             </li>
           ))) : <div> no ratings yet!</div>}
           </>

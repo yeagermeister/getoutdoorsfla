@@ -28,12 +28,12 @@ console.log(props)
   const commentData = data && data.findUserComments
     return (
 <>
-<h2 className='rounded'>My Comments:</h2>
+<h2 className='rounded flex justify-content-center row'>My Comments:</h2>
 {commentData ?(commentData.map((comment) => (
-            <li className='rounded border border-success' key={comment._id}>
-              <p >comment:{comment.comment} </p>
-              <p>on: {comment.site.siteName} </p>
-              <p> at: {comment.createdAt}</p>
+            <li className='rounded flex justify-content-center  col-3 border border-success' key={comment._id}>
+              <p className="head">comment: </p>{comment.comment}
+              <p className="head">on:  </p>{comment.site.siteName}
+              <p className="head"> at: </p>{comment.createdAt}
             </li>
           ))) : <div> no comments yet!</div>}
 </>
