@@ -5,15 +5,12 @@ import { latitude, longitude } from '../utils/location';
 import Auth from '../utils/auth'
 
 const SiteCard = ({ sites }) => {
-  const [enrichedSites, setEnrichedSites] = useState([]);
-  const [distances, setDistances] = useState([]);
-
-  console.log(enrichedSites);
+  
+  const icon = "https://" + iconUrl;
+  let [enrichedSites, setEnrichedSites] = useState([]);
   enrichedSites.sort((a, b) => a.distance - b.distance);
 
-  const icon = "https://" + iconUrl;
   const [checked, setChecked] = useState({
-
     camping: false,
     pets: false,
     statepark: false,
@@ -23,14 +20,51 @@ const SiteCard = ({ sites }) => {
     spring: false,
     free: false,
     });
-  
+
   const handleInputChange = (e) => {
     // Getting the value and name of the input which triggered the change
-   const {name, value } = e.target;
-  
-   setChecked({
-   });
+   const {name, checked: isChecked } = e.target;
+   setChecked(prevState => {
+    return {
+      ...prevState, // Copying the previous state
+      [name]: isChecked // Updating the specific property with the new value
+    }
+  });
   };
+  console.log(checked);
+
+  useEffect(() => {
+    let filteredSites = [...enrichedSites]; // Create a copy of 'enrichedSites'
+    
+    filteredSites.sort((a, b) => a.distance - b.distance);
+    // Filter 'filteredSites' based on 'checked' state values
+    if (checked.camping) {
+      filteredSites = filteredSites.filter(site => site.camping);
+    }
+    if (checked.pets) {
+      filteredSites = filteredSites.filter(site => site.pets);
+    }
+    if (checked.statepark) {
+      filteredSites = filteredSites.filter(site => site.statepark);
+    }
+    if (checked.park) {
+      filteredSites = filteredSites.filter(site => site.park);
+    }
+    if (checked.beach) {
+      filteredSites = filteredSites.filter(site => site.beach);
+    }
+    if (checked.swimmingHole) {
+      filteredSites = filteredSites.filter(site => site.swimmingHole);
+    }
+    if (checked.spring) {
+      filteredSites = filteredSites.filter(site => site.spring);
+    }
+    if (checked.free) {
+      filteredSites = filteredSites.filter(site => site.free);
+    }
+  
+    setEnrichedSites(filteredSites); // Update 'enrichedSites' with filtered array
+  }, [checked]);
 
   useEffect(() => {
     const getDistance = (lat1, lon1, lat2, lon2) => {
@@ -72,7 +106,6 @@ const SiteCard = ({ sites }) => {
     fetchData();
   }, [sites]);
 
-
   return (
     <>
     { Auth.loggedIn () ? (
@@ -80,35 +113,35 @@ const SiteCard = ({ sites }) => {
         <div className='row'>
               <div className="form-group">
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input" type="checkbox" id="statePark" value="option1" onChange={handleInputChange} />
+                  <input className="form-check-input" type="checkbox" name="statepark" value="option1" onChange={handleInputChange} />
                   <label className="form-check-label" htmlFor="inlineCheckbox1">State Park</label>
                 </div>
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input" type="checkbox" id="petFriendly" value="option2" onChange={handleInputChange} />
+                  <input className="form-check-input" type="checkbox" name="pets" value="option2" onChange={handleInputChange} />
                   <label className="form-check-label" htmlFor="inlineCheckbox2">Pet Friendly</label>
                 </div>
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input" type="checkbox" id="campingAllowed" value="option3" onChange={handleInputChange} />
+                  <input className="form-check-input" type="checkbox" name="camping" value="option3" onChange={handleInputChange} />
                   <label className="form-check-label" htmlFor="inlineCheckbox3">Camping Onsite</label>
                 </div>
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input" type="checkbox" id="spring" value="option3"onChange={handleInputChange} />
+                  <input className="form-check-input" type="checkbox" name="spring" value="option3"onChange={handleInputChange} />
                   <label className="form-check-label" htmlFor="inlineCheckbox3">Spring</label>
                 </div>
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input" type="checkbox" id="beach" value="option3" onChange={handleInputChange}/>
+                  <input className="form-check-input" type="checkbox" name="beach" value="option3" onChange={handleInputChange}/>
                   <label className="form-check-label" htmlFor="inlineCheckbox3">Beach</label>
                 </div>
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input" type="checkbox" id="swimmingHole" value="option3" onChange={handleInputChange}/>
+                  <input className="form-check-input" type="checkbox" name="swimmingHole" value="option3" onChange={handleInputChange}/>
                   <label className="form-check-label" htmlFor="inlineCheckbox3">Swimming Hole</label>
                 </div>
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input" type="checkbox" id="park" value="option3" onChange={handleInputChange}/>
+                  <input className="form-check-input" type="checkbox" name="park" value="option3" onChange={handleInputChange}/>
                   <label className="form-check-label" htmlFor="inlineCheckbox3">City Park</label>
                 </div>
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input" type="checkbox" id="free" value="option3" onChange={handleInputChange}/>
+                  <input className="form-check-input" type="checkbox" name="free" value="option3" onChange={handleInputChange}/>
                   <label className="form-check-label" htmlFor="inlineCheckbox3">Free Admission</label>
                 </div>
               </div>
@@ -119,20 +152,20 @@ const SiteCard = ({ sites }) => {
       <div></div>
     )}
 
-    <div className='submitterinoouter p-1 my-5 container'>
-      <div className='row flex submitterinoinner flex-wrap m-5 p-5'>
+    <div className='container'>
+      <div className='row w-60 m-5 p-5'>
         {enrichedSites.map((site, index) => (
-          <div key={site.id} className=' col-lg-6 col-md-12'>
-            <div className='card border col-md- col-sm- box border-rounded shadow myCard'>
-              <h5 className='card-title  text-center'>{site.siteName}</h5>
-              <div className='text-center '>
+          <div key={site.id} className='col-sm'>
+            <div className='card border box border-rounded shadow myCard'>
+              <h5 className='card-title text-center'>{site.siteName}</h5>
+              <div className='text-center'>
                 <img
                   src={site.imageURL}
                   className='card-img-top border rounded img-border w-75'
                   alt={site.altText}
                 />
               </div>
-              <div className='card-body '>
+              <div className='card-body'>
                 <p className='card-description'>{site.description}</p>
               </div>
               <p className='text-center'>
