@@ -15,7 +15,6 @@ const Start = () => {
 return (
     <>
     <Navbar />
-    <SearchBar />
     </>
 
     
