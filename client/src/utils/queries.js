@@ -131,6 +131,14 @@ query FindAllSites {
     siteName
     zipcode
     altText
+    camping
+    pets
+    statepark
+    park
+    beach
+    swimmingHole
+    spring
+    free
   }
 }
 `
