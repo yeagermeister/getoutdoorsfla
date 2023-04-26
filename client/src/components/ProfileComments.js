@@ -14,6 +14,10 @@ const ProfileComments = (props) => {
         setUserID(props.userid);
       
     }, [props.userid]);
+    useEffect(() => {
+      // Update the userID state value when the userid prop changes
+      setUserID(props.userid);
+  }, [props.userid]);
     
     
     const { loading, data } = useQuery(FIND_USER_COMMENTS, {
@@ -26,18 +30,22 @@ const ProfileComments = (props) => {
 console.log(props)
 
   const commentData = data && data.findUserComments
-    return (
-<>
-<h2 className='rounded flex justify-content-center row'>My Comments:</h2>
-{commentData ?(commentData.map((comment) => (
-            <li className='rounded flex justify-content-center  col-3 border border-success' key={comment._id}>
-              <p className="head">comment: </p>{comment.comment}
-              <p className="head">on:  </p>{comment.site.siteName}
-              <p className="head"> at: </p>{comment.createdAt}
-            </li>
-          ))) : <div> no comments yet!</div>}
-</>
-        
-    )
+  return (
+    <>
+        <h2 className='rounded flex justify-content-center row'>My Comments:</h2>
+        <div className="d-flex flex-wrap align-content-start">
+            {commentData ? (commentData.map((comment) => (
+                <div className='col-4 mb-3' key={comment._id}>
+                    <li className='rounded border border-success'>
+                        <p className="head">comment: </p>{comment.comment}
+                        <p className="head">on:  </p>{comment.site.siteName}
+                        <p className="head"> at: </p>{comment.createdAt}
+                    </li>
+                </div>
+            ))) : <div> no comments yet!</div>}
+        </div>
+    </>
+)
 }
+
 export default ProfileComments

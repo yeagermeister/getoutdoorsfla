@@ -24,12 +24,16 @@ const ProfileRatings = (props) => {
     return (
         <>
         <h2 className='rounded flex justify-content-center row'>My Ratings:</h2>
+        <div className="d-flex flex-wrap align-content-start">
         {ratingData ?(ratingData.map((rating) => (
-            <li className='rounded flex justify-content-center align-items-center col-3 border border-success' key={rating._id}>
+          <div className='col-4 mb-3' key={rating._id}>
+            <li className='rounded border border-success' key={rating._id}>
               <p className="head">rating: </p>{rating.rating}
               <p className="head">on:  </p>{rating.site.siteName}
             </li>
+            </div>
           ))) : <div> no ratings yet!</div>}
+          </div>
           </>
 
     )
