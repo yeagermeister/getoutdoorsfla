@@ -14,6 +14,7 @@ const ProfileComments = (props) => {
         setUserID(props.userid);
       
     }, [props.userid]);
+    
     useEffect(() => {
       // Update the userID state value when the userid prop changes
       setUserID(props.userid);

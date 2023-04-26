@@ -66,6 +66,8 @@ const SiteCard = ({ sites }) => {
     setEnrichedSites(filteredSites); // Update 'enrichedSites' with filtered array
   }, [checked]);
 
+  
+
   useEffect(() => {
     const getDistance = (lat1, lon1, lat2, lon2) => {
       const R = 6371e3; // metres
@@ -152,20 +154,20 @@ const SiteCard = ({ sites }) => {
       <div></div>
     )}
 
-    <div className='container'>
-      <div className='row w-60 m-5 p-5'>
+<div className='submitterinoouter p-1 my-5 container'>
+      <div className='row flex submitterinoinner flex-wrap m-5 p-5'>
         {enrichedSites.map((site, index) => (
-          <div key={site.id} className='col-sm'>
-            <div className='card border box border-rounded shadow myCard'>
-              <h5 className='card-title text-center'>{site.siteName}</h5>
-              <div className='text-center'>
+          <div key={site.id} className=' col-lg-6 col-md-12'>
+            <div className='card border col-md- col-sm- box border-rounded shadow myCard'>
+              <h5 className='card-title  text-center'>{site.siteName}</h5>
+              <div className='text-center '>
                 <img
                   src={site.imageURL}
                   className='card-img-top border rounded img-border w-75'
                   alt={site.altText}
                 />
               </div>
-              <div className='card-body'>
+              <div className='card-body '>
                 <p className='card-description'>{site.description}</p>
               </div>
               <p className='text-center'>
