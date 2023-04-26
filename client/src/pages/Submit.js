@@ -89,8 +89,8 @@ function Submit() {
       };
 
     return (
-        <div className='container'>
-          <form className="form" onSubmit={handleFormSubmit}>
+        <div className='mt-5  container'>
+          <form className="submitterinoinner form" onSubmit={handleFormSubmit}>
             <p className="text-center">Please enter the information below to add a new location to the site.</p>
             <div className="row">
                 <div className="col-sm">
