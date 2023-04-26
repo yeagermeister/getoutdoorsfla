@@ -20,9 +20,9 @@ const Profile = () => {
   }
   return (
     <div>
-      <h1>Welcome to {user.data.username}'s Profile</h1>
+      <h1 classname="bg">Welcome to {user.data.username}'s Profile</h1>
       <div>
-        <ul>
+        <ul className=' m-5 submitterinoouter'>
          <ProfileComments userid={userID}/>
          <ProfileRatings userid={userID}/>
         </ul>

@@ -68,9 +68,19 @@ const Comments = ({ site }) => {
   };
 
   return (
-    <div>
+    <div className=' siteCard rounded'>
+      {sitecomments ? (
+        sitecomments.map(comment => (
+        <div key={comment._id}>
+          <p >{comment.comment}</p>
+          <p>
+            Posted by {comment.userID ? comment.userID.username : 'Unknown'}{' '}
+            on {comment.createdAt}
+          </p>
+        </div>
+      ))): <div>no comments yet!</div>}
       {Auth.loggedIn() && (
-        <form onSubmit={handleFormSubmit}>
+        <form className='rounded specform siteCard m-2' onSubmit={handleFormSubmit}>
           <textarea
             placeholder="Leave a comment about this site..."
             value={commentText}
@@ -85,16 +95,7 @@ const Comments = ({ site }) => {
           <Link to="/login">Click here to log in.</Link>
         </p>
       )}
-      {sitecomments ? (
-        sitecomments.map(comment => (
-        <div key={comment._id}>
-          <p>{comment.comment}</p>
-          <p>
-            Posted by {comment.userID ? comment.userID.username : 'Unknown'}{' '}
-            on {comment.createdAt}
-          </p>
-        </div>
-      ))): <div>no comments yet!</div>}
+      
     </div>
   );
 };
