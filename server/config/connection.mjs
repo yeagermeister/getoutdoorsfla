@@ -1,5 +1,8 @@
 import mongoose from 'mongoose';
-const db = mongoose.connect('mongodb+srv://getoudoorsfla_admin:RV7TmUKAsqzlIccV@cluster0.v9ej8dw.mongodb.net/getoutdoorsfla');
+import dotenv from 'dotenv';
+dotenv.config();
+
+const db = mongoose.connect(process.env.MONGODB_URI);
 
 export default db;
 
