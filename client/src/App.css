@@ -13,13 +13,13 @@ body {
 }
 
 .navbar {
-  background-image: linear-gradient(to bottom right, var(--sky), #1e657c);
+  background-image: linear-gradient(to bottom right, #1e657c, var(--sky));
   background-color: var(--sky) !important;
   color: #ffffff;
 }
 
 .searchbar {
-  background-image: linear-gradient(to top right, var(--sky), #1e657c);
+  background-image: linear-gradient(to top right, #1e657c , var(--sky));
   background-color: var(--sky) !important;
   color: #ffffff;
 }

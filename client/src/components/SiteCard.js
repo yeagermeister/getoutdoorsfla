@@ -122,7 +122,7 @@ const SiteCard = ({ sites }) => {
     { Auth.loggedIn () ? (
       <div className="container-fluid searchbar pb-2">
         <div className='row'>
-              <div className="form-group">
+              <div className="form-group top-spacing">
                 <div className="form-check form-check-inline">
                   <input className="form-check-input" type="checkbox" name="statepark" value="option1" onChange={handleInputChange} />
                   <label className="form-check-label" htmlFor="inlineCheckbox1">State Park</label>

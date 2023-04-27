@@ -42,14 +42,14 @@ h1 {
   }
   
   label {
+    display: inline-block;
     color: #3d3d3d;
     font-family: sans-serif;
     font-size: 14px;
     font-weight: 500;
-    margin-left: 10px !important;
+    margin-left: 5px !important;
     margin-bottom: 5px;
-    float: right; 
-    width: calc(100%/3)
+    width: 120px
   }
 
  
@@ -70,6 +70,10 @@ h1 {
 
   .spacing {
     margin-bottom: 15px;
+  }
+
+  .top-spacing {
+    margin-top: 15px !important;
   }
 
   .left-margin {
