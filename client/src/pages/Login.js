@@ -50,7 +50,7 @@ const Login = (props) => {
                 <Link to="/">back to the homepage.</Link>
               </p>
             ) : (
-              <form onSubmit={handleFormSubmit}>
+              <form className='small-form' onSubmit={handleFormSubmit}>
                 <label>Email:</label>
                 <input className="spacing" name="email" type="string" value={formState.username} onChange={handleChange} />
                 <label>Password:</label>

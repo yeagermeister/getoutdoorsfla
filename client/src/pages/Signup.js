@@ -48,7 +48,7 @@ const Signup = () => {
                 <Link to="/">back to the homepage.</Link>
               </p>
             ) : (
-              <form onSubmit={handleFormSubmit}>
+              <form className="small-form"onSubmit={handleFormSubmit}>
                 <label>Username:</label>
                 <input className="spacing"  name="username" type="text" value={formState.name} onChange={handleChange} />
                 <label>Email Address:</label>
