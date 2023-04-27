@@ -95,9 +95,10 @@ const Comments = ({ site }) => {
 
   return (
     <div className=' siteCard rounded'>
+      {console.log(sitecomments)}
       {sitecomments ? (
         sitecomments.map(comment => (
-        <div key={comment._id}>
+        <div key={comment.commentId}>
           <p >{comment.comment}</p>
           <p>
             Posted by {comment.userID ? comment.userID.username : 'Unknown'}{' '}
