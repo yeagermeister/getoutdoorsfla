@@ -103,7 +103,7 @@ const Comments = ({ site }) => {
             Posted by {comment.userID ? comment.userID.username : 'Unknown'}{' '}
             on {comment.createdAt}
             {Auth.loggedIn() ? (Auth.getProfile().data.username === comment.userID?.username && (
-              <button onClick={() => handleDeleteComment(comment._id)}>Delete</button>
+              <button className='rounded ' onClick={() => handleDeleteComment(comment._id)}>Delete</button>
             )) : ( <p></p>)}
           </p>
         </div>
