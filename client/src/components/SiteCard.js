@@ -96,45 +96,29 @@ const SiteCard = ({ sites }) => {
       return distance // convert to miles
     };
 
-    const fetchWeather = async () => {
+    const fetchData = async () => {
       try {
-        const enrichedData = await Promise.all(sites.map(async (site) => {
-          const weather = await getWeather(site.zipcode);
-          return { ...site, weather };
+        const [weatherData, locationData] = await Promise.all([
+          Promise.all(sites.map(async (site) => {
+            const weather = await getWeather(site.zipcode);
+            return { ...site, weather };
+          })),
+          Promise.all(sites.map(async (site) => {
+            const distance = getDistance(site.lat, site.lon, latitude, longitude);
+            return { ...site, distance };
+          }))
+        ]);
+        const enrichedData = weatherData.map((site, index) => ({
+          ...site,
+          ...locationData[index]
         }));
         setEnrichedSites(enrichedData);
-
-        // const distanceData = await Promise.all(sites.map(async (site) => {
-        //   const distance = getDistance(site.lat, site.lon, latitude, longitude);
-        //   return { ...site, distance };
-        // }));
-        // setEnrichedSites(distanceData);
-      } catch (error) {
-        console.error('Error enriching data:', error)
-      }
-    };
-
-    fetchWeather();
-
-    const fetchLocation = async () => {
-      try {
-        // const enrichedData = await Promise.all(sites.map(async (site) => {
-        //   const weather = await getWeather(site.zipcode);
-        //   return { ...site, weather };
-        // }));
-        // setEnrichedSites(enrichedData);
-  
-        const distanceData = await Promise.all(sites.map(async (site) => {
-          const distance = getDistance(site.lat, site.lon, latitude, longitude);
-          return { ...site, distance };
-        }));
-        setEnrichedSites(distanceData);
       } catch (error) {
         console.error('Error enriching data:', error)
       }
     };
   
-    fetchLocation();
+    fetchData();
   }, [sites]);
 
   return (
