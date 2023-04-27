@@ -76,6 +76,14 @@ h1 {
     margin-left: 15px !important;
   }
 
-  .specform {
-    margin: ;
-  }
+ .small-form {
+  max-width: 75%;
+ }
+
+ 
+
+ @media only screen and (min-width: 768px){
+  .small-form {
+    max-width: 50%;
+   }
+}
