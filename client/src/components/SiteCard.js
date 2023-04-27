@@ -96,45 +96,29 @@ const SiteCard = ({ sites }) => {
       return distance // convert to miles
     };
 
-    const fetchWeather = async () => {
+    const fetchData = async () => {
       try {
-        const enrichedData = await Promise.all(sites.map(async (site) => {
-          const weather = await getWeather(site.zipcode);
-          return { ...site, weather };
+        const [weatherData, locationData] = await Promise.all([
+          Promise.all(sites.map(async (site) => {
+            const weather = await getWeather(site.zipcode);
+            return { ...site, weather };
+          })),
+          Promise.all(sites.map(async (site) => {
+            const distance = getDistance(site.lat, site.lon, latitude, longitude);
+            return { ...site, distance };
+          }))
+        ]);
+        const enrichedData = weatherData.map((site, index) => ({
+          ...site,
+          ...locationData[index]
         }));
         setEnrichedSites(enrichedData);
-
-        // const distanceData = await Promise.all(sites.map(async (site) => {
-        //   const distance = getDistance(site.lat, site.lon, latitude, longitude);
-        //   return { ...site, distance };
-        // }));
-        // setEnrichedSites(distanceData);
-      } catch (error) {
-        console.error('Error enriching data:', error)
-      }
-    };
-
-    fetchWeather();
-
-    const fetchLocation = async () => {
-      try {
-        // const enrichedData = await Promise.all(sites.map(async (site) => {
-        //   const weather = await getWeather(site.zipcode);
-        //   return { ...site, weather };
-        // }));
-        // setEnrichedSites(enrichedData);
-  
-        const distanceData = await Promise.all(sites.map(async (site) => {
-          const distance = getDistance(site.lat, site.lon, latitude, longitude);
-          return { ...site, distance };
-        }));
-        setEnrichedSites(distanceData);
       } catch (error) {
         console.error('Error enriching data:', error)
       }
     };
   
-    fetchLocation();
+    fetchData();
   }, [sites]);
 
   return (
@@ -186,7 +170,7 @@ const SiteCard = ({ sites }) => {
     <div className='submitterinoouter p-1 my-5 container'>
     <div className='row flex submitterinoinner flex-wrap m-5 p-5'>
         {displaySites.map((site, index) => (
-          <div key={site.id} className='col-lg-6 col-md-12'>
+          <div key={site._id} className='col-lg-6 col-md-12'>
             <div className='card border col-md- col-sm- box border-rounded shadow myCard'>
               <h5 className='card-title text-center'>{site.siteName}</h5>
               <div className='text-center image-container'>
@@ -216,7 +200,7 @@ const SiteCard = ({ sites }) => {
       <div className='submitterinoouter p-1 my-5 container'>
       <div className='row flex submitterinoinner flex-wrap m-5 p-5'>
       {enrichedSites.map((site, index) => (
-        <div key={site.id} className='col-lg-6 col-md-12'>
+        <div key={site._id} className='col-lg-6 col-md-12'>
           <div className='card border col-md- col-sm- box border-rounded shadow myCard '>
             <h5 className='card-title text-center'>{site.siteName}</h5>
             <div className='text-center image-container'>
