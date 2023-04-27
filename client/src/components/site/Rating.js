@@ -4,7 +4,6 @@ import '../../rating.css';
 import { NEW_RATING } from "../../utils/mutations";
 import Auth from '../../utils/auth';
 
-
 const StarRating = ({site}) => {  
     const [rating, setRating] = useState(0);
 
@@ -18,8 +17,9 @@ const StarRating = ({site}) => {
 
     const handleRatingChange = async (newRating) => {
         setRating(newRating);
+        console.log(newRating, rating)
         try {
-            const response = await updateRating({ variables: {rating: rating, siteId: siteId} });
+            const response = await updateRating({ variables: {rating: newRating, siteId: siteId} });
             console.log('Deleted something:', response);
         } catch (err) {
             // Handle error
@@ -34,13 +34,16 @@ const StarRating = ({site}) => {
           return (
             <button
               type="button"
-              key={index}
+              id={`${index}`}
+              
               className={index <= rating ? "on" : "off"}
-              onClick={() => handleRatingChange(index)}
+              onClick={() => 
+                handleRatingChange(index) }
             >
               <img
-                src={`${process.env.PUBLIC_URL}/images/seashell-${index <= rating ? 'blue' : 'white'}.ico`}
+                src={`/images/seashell-${index <= rating ? 'blue' : 'white'}.ico`}
                 alt="seashell"
+                id={`${index}`}
                 className="star"
               />
             </button>
