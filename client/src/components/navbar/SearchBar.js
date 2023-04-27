@@ -30,7 +30,8 @@ function SearchBar() {
         { Auth.loggedIn () ? (
         <div className="container-fluid searchbar pb-2">
           <div className='row'>
-                <div className="form-group">
+            <p>test</p>
+                <div className="form-group top-spacing">
                   <div className="form-check form-check-inline">
                     <input className="form-check-input" type="checkbox" id="statePark" value="option1" onChange={handleInputChange} />
                     <label className="form-check-label" for="inlineCheckbox1">State Park</label>

@@ -72,6 +72,10 @@ h1 {
     margin-bottom: 15px;
   }
 
+  .top-spacing {
+    margin-top: 15px !important;
+  }
+
   .left-margin {
     margin-left: 15px !important;
   }
