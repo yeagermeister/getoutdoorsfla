@@ -4,7 +4,6 @@ import '../../rating.css';
 import { NEW_RATING } from "../../utils/mutations";
 import Auth from '../../utils/auth';
 
-
 const StarRating = ({site}) => {  
     const [rating, setRating] = useState(0);
 
@@ -39,7 +38,7 @@ const StarRating = ({site}) => {
               onClick={() => handleRatingChange(index)}
             >
               <img
-                src={`${process.env.PUBLIC_URL}/images/seashell-${index <= rating ? 'blue' : 'white'}.ico`}
+                src={`../../../public/images/seashell-${index <= rating ? 'blue' : 'white'}.ico`}
                 alt="seashell"
                 className="star"
               />
