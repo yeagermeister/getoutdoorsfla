@@ -38,10 +38,8 @@ const Detail = (props) => {
                   {props.site.camping && <span className="tag">camping</span>}
                 </p>
                 <p>Average Rating:</p>
-                <p>
                   Your Rating:
                   <StarRating site={props} />
-                </p>
               </div>
             </div>
           </div>
