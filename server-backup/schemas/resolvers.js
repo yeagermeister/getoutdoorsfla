@@ -1,5 +1,5 @@
 const { Users, NewSite, Site, Comment, Rating } = require('../models');
-const { AuthenticationError } = require('apollo-server-express');
+const { AuthenticationError } = require('@apollo/server');
 const { signToken } = require('../utils/auth');
 const mongooseLeanVirtuals = require('mongoose-lean-virtuals')
 const resolvers = {
