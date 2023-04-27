@@ -12,11 +12,15 @@ const StarRating = ({site}) => {
     const [userId, setUserID] = useState('')
 
     const token = localStorage.getItem('id_token');
-    //const decodedToken = jwt_decode(token);
 
-    //const userId = decodedToken.data._id;
-    
+    if (token){
+    const decodedToken = jwt_decode(token);
+
+    const userId = decodedToken.data._id;
+
     console.log(userId);
+    } else{ let userId = null}
+   
 
     const { loading, data } = useQuery(GET_RATING_BY_USER_AND_SITE, {
         variables: { userId: Auth.getProfile().data._id, siteId: site.site._id }
