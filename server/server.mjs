@@ -6,6 +6,9 @@ import http from 'http';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import path from 'path';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 import { typeDefs, resolvers } from './schemas/index.js';
 import db from './config/connection.mjs';
