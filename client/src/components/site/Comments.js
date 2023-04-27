@@ -100,13 +100,13 @@ const Comments = ({ site }) => {
         sitecomments.map(comment => (
         <div key={comment.commentId}>
           <p >{comment.comment}</p>
-          <p>
+          <span>
             Posted by {comment.userID ? comment.userID.username : 'Unknown'}{' '}
             on {comment.createdAt}
             {Auth.loggedIn() ? (Auth.getProfile().data.username === comment.userID?.username && (
               <button className='rounded ' onClick={() => handleDeleteComment(comment._id)}>Delete</button>
-            )) : ( <p></p>)}
-          </p>
+            )) : ( <span></span>)}
+          </span>
         </div>
       ))): <div>no comments yet!</div>}
       {Auth.loggedIn() && (

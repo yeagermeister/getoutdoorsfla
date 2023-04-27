@@ -2,16 +2,24 @@ import React, { useState, useEffect } from "react";
 import { useMutation } from '@apollo/client';
 import '../../rating.css';
 import { NEW_RATING } from "../../utils/mutations";
-import Auth from '../../utils/auth';
+import jwt_decode from 'jwt-decode';
+
 
 const StarRating = ({site}) => {  
     const [rating, setRating] = useState(0);
-
     const [updateRating] = useMutation(NEW_RATING);
-    const [siteId, setUsernum] = useState('');
+    const [siteId, setSiteID] = useState('');
+    // const [userId, setUserID] = useState('')
+
+    const token = localStorage.getItem('id_token');
+    const decodedToken = jwt_decode(token);
+
+    const userId = decodedToken.data._id;
+    
+    console.log(userId);
 
     useEffect(() => {
-        setUsernum(site.site._id);
+        setSiteID(site.site._id);
              
     }, [site]);
 
@@ -34,7 +42,7 @@ const StarRating = ({site}) => {
           return (
             <button
               type="button"
-              id={`${index}`}
+              key={`${index}`}
               
               className={index <= rating ? "on" : "off"}
               onClick={() => 
@@ -43,7 +51,7 @@ const StarRating = ({site}) => {
               <img
                 src={`/images/seashell-${index <= rating ? 'blue' : 'white'}.ico`}
                 alt="seashell"
-                id={`${index}`}
+                key={`${index}`}
                 className="star"
               />
             </button>

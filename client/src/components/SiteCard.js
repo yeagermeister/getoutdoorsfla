@@ -40,9 +40,6 @@ const SiteCard = ({ sites }) => {
 
 
   useEffect(() => {
-    // filterOn = true; 
-    // console.log("effect", filterOn)
-
     let filteredSites = [...enrichedSites]; // Create a copy of 'enrichedSites'
     
     filteredSites.sort((a, b) => a.distance - b.distance);
@@ -215,7 +212,6 @@ const SiteCard = ({ sites }) => {
             </div>
             <p id={`distance${site.id}`} className='text-center'>
             {site.distance} miles away
-            {console.log(site)}
               </p>
               <Link to={`/Site/${site._id}`}><button className='btn text-white btn-info btn-sm active myButton'>More Information</button></Link>
               <p>
