@@ -12,11 +12,13 @@ const StarRating = ({site}) => {
     // const [userId, setUserID] = useState('')
 
     const token = localStorage.getItem('id_token');
+    if (token){
     const decodedToken = jwt_decode(token);
 
     const userId = decodedToken.data._id;
-    
     console.log(userId);
+    } else{ let userId = null}
+   
 
     useEffect(() => {
         setSiteID(site.site._id);
