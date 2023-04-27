@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useMutation } from '@apollo/client';
-import { ADD_COMMENT} from '../../utils/mutations';
+import { ADD_COMMENT, DELETE_COMMENT } from '../../utils/mutations';
 import { Link } from 'react-router-dom'
 import { gql } from '@apollo/client'
 import Auth from '../../utils/auth'
@@ -13,7 +13,7 @@ const Comments = ({ site }) => {
   const [sitenum, setUsernum] = useState('');
   const [usernamed, setUsername] = useState('');
   const [comments, setComments] = useState(site.comment);
-
+  const [commentid, setcommentid] = useState('')
   useEffect(() => {
     
     setUsernum(site.site._id);
@@ -23,6 +23,7 @@ const Comments = ({ site }) => {
     }
     
     setComments(site.site.comment);
+    
     
   }, [site]);
  
@@ -55,6 +56,21 @@ const Comments = ({ site }) => {
     },
   });
 
+  const [deleteComment, { deleteError }] = useMutation(DELETE_COMMENT, {
+    update(cache, { data: { deleteComment } }) {
+      cache.modify({
+        id: cache.identify(site.site._id),
+        fields: {
+          comments(existingComments = []) {
+            return existingComments.filter(
+              (commentRef) => commentRef.__ref !== `Comment:${deleteComment.commentId}`
+            );
+          },
+        },
+      });
+    },
+  });
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -64,6 +80,16 @@ const Comments = ({ site }) => {
       setCommentText('');
     } catch (err) {
       console.error(err);
+    }
+  };
+  const handleDeleteComment = async (commentId) => {
+    setcommentid(commentId)
+    try {
+      await deleteComment({
+        variables: { commentId },
+      });
+    } catch (deleteError) {
+      console.error(deleteError);
     }
   };
 
@@ -76,6 +102,9 @@ const Comments = ({ site }) => {
           <p>
             Posted by {comment.userID ? comment.userID.username : 'Unknown'}{' '}
             on {comment.createdAt}
+            {Auth.getProfile().data.username === comment.userID?.username && (
+              <button onClick={() => handleDeleteComment(comment._id)}>Delete</button>
+            )}
           </p>
         </div>
       ))): <div>no comments yet!</div>}
