@@ -38,8 +38,7 @@ body {
   border-radius: 25px;
   background-image: linear-gradient(to bottom left, #408475, var(--water) );
   margin-bottom: 5%;
-  height: 35rem !important;
-
+  height: 25rem !important;
 }
 
 #map {
@@ -118,9 +117,28 @@ h2 {
   font-weight: bold;
 }
 
-/* daarkest */
-/* #b9ac8e; */
-/* dark */
-/* background-color: #c4b9a2; */
-/* light */
-/* background-color: #e9e0cd; */
+.image-cover {
+  height: 78px !important;
+  object-fit: cover;
+  object-position: right top;
+}
+
+.image-container {
+  height: 80px !important;
+}
+
+@media only screen and (min-width: 768px){
+  .myCard {
+    height: 35rem !important;
+  }
+
+  .image-cover {
+    height: 248px !important;
+    object-fit: cover;
+    object-position: right top;
+  }
+  
+  .image-container {
+    height: 250px !important;
+  }
+}

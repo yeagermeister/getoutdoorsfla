@@ -96,7 +96,7 @@ const SiteCard = ({ sites }) => {
       return distance // convert to miles
     };
 
-    const fetchData = async () => {
+    const fetchWeather = async () => {
       try {
         const enrichedData = await Promise.all(sites.map(async (site) => {
           const weather = await getWeather(site.zipcode);
@@ -104,17 +104,37 @@ const SiteCard = ({ sites }) => {
         }));
         setEnrichedSites(enrichedData);
 
-        const distanceData = sites.map((site) => {
-          const distance = getDistance(site.lat, site.lon, latitude, longitude);
-          return { ...site, distance };
-        });
-        setEnrichedSites(distanceData);
+        // const distanceData = await Promise.all(sites.map(async (site) => {
+        //   const distance = getDistance(site.lat, site.lon, latitude, longitude);
+        //   return { ...site, distance };
+        // }));
+        // setEnrichedSites(distanceData);
       } catch (error) {
         console.error('Error enriching data:', error)
       }
     };
 
-    fetchData();
+    fetchWeather();
+
+    const fetchLocation = async () => {
+      try {
+        // const enrichedData = await Promise.all(sites.map(async (site) => {
+        //   const weather = await getWeather(site.zipcode);
+        //   return { ...site, weather };
+        // }));
+        // setEnrichedSites(enrichedData);
+  
+        const distanceData = await Promise.all(sites.map(async (site) => {
+          const distance = getDistance(site.lat, site.lon, latitude, longitude);
+          return { ...site, distance };
+        }));
+        setEnrichedSites(distanceData);
+      } catch (error) {
+        console.error('Error enriching data:', error)
+      }
+    };
+  
+    fetchLocation();
   }, [sites]);
 
   return (
@@ -169,10 +189,10 @@ const SiteCard = ({ sites }) => {
           <div key={site.id} className='col-lg-6 col-md-12'>
             <div className='card border col-md- col-sm- box border-rounded shadow myCard'>
               <h5 className='card-title text-center'>{site.siteName}</h5>
-              <div className='text-center'>
+              <div className='text-center image-container'>
                 <img
                   src={site.imageURL}
-                  className='card-img-top border rounded img-border w-75'
+                  className='card-img-top border rounded img-border w-75 h-50 image-cover'
                   alt={site.altText}
                 />
               </div>
@@ -185,7 +205,7 @@ const SiteCard = ({ sites }) => {
                 </p>
                 <Link to={`/Site/${site._id}`}><button className='btn text-white btn-info btn-sm active myButton'>More Information</button></Link>
                 <p>
-                <span id={`weather${site._id}`} className=''><img src={icon} alt='weather icon' /></span>
+                <span id={`weather${site._id}`} className=''><img src={`https://${site.weather}`} alt='weather icon' /></span>
               </p>
             </div>
           </div>
@@ -197,12 +217,12 @@ const SiteCard = ({ sites }) => {
       <div className='row flex submitterinoinner flex-wrap m-5 p-5'>
       {enrichedSites.map((site, index) => (
         <div key={site.id} className='col-lg-6 col-md-12'>
-          <div className='card border col-md- col-sm- box border-rounded shadow myCard'>
+          <div className='card border col-md- col-sm- box border-rounded shadow myCard '>
             <h5 className='card-title text-center'>{site.siteName}</h5>
-            <div className='text-center'>
+            <div className='text-center image-container'>
               <img
                 src={site.imageURL}
-                className='card-img-top border rounded img-border w-75'
+                className='card-img-top border rounded img-border w-75 image-cover'
                 alt={site.altText}
               />
             </div>
@@ -211,11 +231,11 @@ const SiteCard = ({ sites }) => {
             </div>
             <p id={`distance${site.id}`} className='text-center'>
             {site.distance} miles away
-            {console.log("enriched", checked.filterOn)}
+            {console.log(site)}
               </p>
               <Link to={`/Site/${site._id}`}><button className='btn text-white btn-info btn-sm active myButton'>More Information</button></Link>
               <p>
-              <span id={`weather${site._id}`} className=''><img src={icon} alt='weather icon' /></span>
+              <span id={`weather${site._id}`} className=''><img src={`https://${site.weather}`} alt='weather icon' /></span>
             </p>
           </div>
         </div>
