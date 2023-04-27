@@ -7,7 +7,6 @@ const Map = (props) => {
 
     
     function MyMapComponent({ center, zoom }) {
-     console.log(center)
         const ref = useRef();
     
         useEffect(() => {
@@ -26,7 +25,6 @@ const Map = (props) => {
             return <div></div>;
           }
         let center={lat: site.lat, lng: site.lon}
-        console.log(site)
         
             return (
                 <Wrapper apiKey={'AIzaSyCPmuYKoJgPVO2j1Z8L-lwQp89bKOOP8ic'}>

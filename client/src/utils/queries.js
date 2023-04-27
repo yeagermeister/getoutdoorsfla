@@ -61,6 +61,7 @@ query FindOneSite($id: ID!) {
     lon
     altText
     comments {
+      commentId
       comment
       createdAt
       userID {
