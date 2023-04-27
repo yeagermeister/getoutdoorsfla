@@ -10,6 +10,10 @@ const SiteCard = ({ sites }) => {
   let [enrichedSites, setEnrichedSites] = useState([]);
   enrichedSites.sort((a, b) => a.distance - b.distance);
 
+  let [displaySites, setDisplaySites] = useState([]);
+
+  // let filterOn = false;
+
   const [checked, setChecked] = useState({
     camping: false,
     pets: false,
@@ -19,6 +23,7 @@ const SiteCard = ({ sites }) => {
     swimmingHole: false,
     spring: false,
     free: false,
+    filterOn: false
     });
 
   const handleInputChange = (e) => {
@@ -27,20 +32,24 @@ const SiteCard = ({ sites }) => {
    setChecked(prevState => {
     return {
       ...prevState, // Copying the previous state
-      [name]: isChecked // Updating the specific property with the new value
+      [name]: isChecked,
+      filterOn: true // Updating the specific property with the new value
     }
   });
   };
-  console.log(checked);
+
 
   useEffect(() => {
+    // filterOn = true; 
+    // console.log("effect", filterOn)
+
     let filteredSites = [...enrichedSites]; // Create a copy of 'enrichedSites'
     
     filteredSites.sort((a, b) => a.distance - b.distance);
     // Filter 'filteredSites' based on 'checked' state values
     if (checked.camping) {
       filteredSites = filteredSites.filter(site => site.camping);
-    }
+    } 
     if (checked.pets) {
       filteredSites = filteredSites.filter(site => site.pets);
     }
@@ -62,8 +71,8 @@ const SiteCard = ({ sites }) => {
     if (checked.free) {
       filteredSites = filteredSites.filter(site => site.free);
     }
-  
-    setEnrichedSites(filteredSites); // Update 'enrichedSites' with filtered array
+
+    setDisplaySites(filteredSites); // Update 'enrichedSites' with filtered array
   }, [checked]);
 
   
@@ -153,14 +162,15 @@ const SiteCard = ({ sites }) => {
     ) : (
       <div></div>
     )}
-
-<div className='submitterinoouter p-1 my-5 container'>
-      <div className='row flex submitterinoinner flex-wrap m-5 p-5'>
-        {enrichedSites.map((site, index) => (
-          <div key={site.id} className=' col-lg-6 col-md-12'>
-            <div className='card border col-md- col-sm- box border-rounded shadow myCard'>
-              <h5 className='card-title  text-center'>{site.siteName}</h5>
-              <div className='text-center '>
+    { checked.filterOn ? (
+    <div className='container'>
+      {console.log("filter", checked.filterOn)}
+      <div className='row w-60 m-5 p-5'>
+        {displaySites.map((site, index) => (
+          <div key={site.id} className='col-sm'>
+            <div className='card border box border-rounded shadow myCard'>
+              <h5 className='card-title text-center'>{site.siteName}</h5>
+              <div className='text-center'>
                 <img
                   src={site.imageURL}
                   className='card-img-top border rounded img-border w-75'
@@ -170,11 +180,12 @@ const SiteCard = ({ sites }) => {
               <div className='card-body '>
                 <p className='card-description'>{site.description}</p>
               </div>
-              <p className='text-center'>
-              <p id={`distance${site.id}`} className=''>
+         
+              <p id={`distance${site.id}`} className='text-center'>
               {site.distance} miles away
                 </p>
                 <Link to={`/Site/${site._id}`}><button className='btn text-white btn-info btn-sm active myButton'>More Information</button></Link>
+                <p>
                 <span id={`weather${site._id}`} className=''><img src={icon} alt='weather icon' /></span>
               </p>
             </div>
@@ -182,6 +193,38 @@ const SiteCard = ({ sites }) => {
         ))}
       </div>
     </div>
+    ) : (
+    <div className='container'>
+    <div className='row w-60 m-5 p-5'>
+      {enrichedSites.map((site, index) => (
+        <div key={site.id} className='col-sm'>
+          <div className='card border box border-rounded shadow myCard'>
+            <h5 className='card-title text-center'>{site.siteName}</h5>
+            <div className='text-center'>
+              <img
+                src={site.imageURL}
+                className='card-img-top border rounded img-border w-75'
+                alt={site.altText}
+              />
+            </div>
+            <div className='card-body'>
+              <p className='card-description'>{site.description}</p>
+            </div>
+            <p id={`distance${site.id}`} className='text-center'>
+            {site.distance} miles away
+            {console.log("enriched", checked.filterOn)}
+              </p>
+              <Link to={`/Site/${site._id}`}><button className='btn text-white btn-info btn-sm active myButton'>More Information</button></Link>
+              <p>
+              <span id={`weather${site._id}`} className=''><img src={icon} alt='weather icon' /></span>
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+    )
+}
     </>
   );
 };
