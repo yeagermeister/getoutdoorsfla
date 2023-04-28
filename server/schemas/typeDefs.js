@@ -75,7 +75,7 @@ scalar Date
     findOneSite(_id: ID!): Site 
     findUserComments(userID: String!): [Comment]
     findUserRatings(userID: ID!): [Rating]
-    getRatingByUserAndSite(userId: ID!, siteId: ID!): Rating
+    getRatingByUserAndSite(userId: ID!, siteId: String!): Rating
   }
 
   type Mutation {

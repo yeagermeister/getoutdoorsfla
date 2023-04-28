@@ -103,9 +103,9 @@ const Comments = ({ site }) => {
           <p>
             Posted by {comment.userID ? comment.userID.username : 'Unknown'}{' '}
             on {comment.createdAt}
-            {Auth.loggedIn() ? (Auth.getProfile().data.username === comment.userID?.username && (
+            {/* {Auth.loggedIn() ? (Auth.getProfile().data.username === comment.userID?.username && (
               <button className='rounded ' onClick={() => handleDeleteComment(comment._id)}>Delete</button>
-            )) : ( <span></span>)}
+            )) : ( <span></span>)} */}
           </p>
         </div>
       ))): <div>no comments yet!</div>}

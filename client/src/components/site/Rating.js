@@ -2,23 +2,29 @@ import React, { useState, useEffect } from "react";
 import { useMutation, useQuery } from '@apollo/client';
 import '../../rating.css';
 import { NEW_RATING } from "../../utils/mutations";
-import { GET_RATING_BY_USER_AND_SITE } from '../../utils/queries';
+import { GET_RATING_BY_USER_AND_SITE, FIND_USER_RATINGS } from '../../utils/queries';
 import Auth from '../../utils/auth';
 
 // adding a comment to try a repush
 
 const StarRating = ({site}) => {  
-    const [rating, setRating] = useState(0);
+    
     const [updateRating] = useMutation(NEW_RATING);
     const [siteId, setSiteID] = useState('');
     const [userId, setUserID] = useState('')
 
     console.log("User", Auth.getProfile().data._id, "Site", site.site._id )
-    const { loading, data } = useQuery(GET_RATING_BY_USER_AND_SITE, {
-        variables: { userId: Auth.getProfile().data._id, siteId: site.site._id }
+    const { loading, data } = useQuery(FIND_USER_RATINGS, {
+        variables: { userID: Auth.getProfile().data._id, siteId: site.site._id }
+        
     });
-
-    console.log(data);
+    const [rating, setRating] = useState(() => {
+        if(data) {
+            return data?.findUserRatings?.[0]?.rating}
+            else { return 0}
+    });
+   console.log(rating, "whoop", data?.findUserRatings?.[0]?.rating,"whoop", data)
+    
 
     useEffect(() => {
         setSiteID(site.site._id);
@@ -26,14 +32,15 @@ const StarRating = ({site}) => {
     }, [site]);
 
     useEffect(() => {
-        if (!loading && data && data.ratings.length > 0) {
+        if (!loading && data && data?.findUserRatings?.[0]?.rating > 0) {
             // User has already rated the site
-            setRating(data.ratings[0].rating);
+            setRating(data?.findUserRatings?.[0]?.rating);
+            
         }
     }, [loading, data]);
 
     const handleRatingChange = async (newRating) => {
-        if (data && data.ratings.length > 0) {
+        if (data && data?.ratings?.length > 0) {
             // User has already rated the site, update existing rating
             try {
                 const response = await updateRating({
