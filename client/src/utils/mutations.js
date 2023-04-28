@@ -110,12 +110,12 @@ mutation Mutation($rating: Int!, $siteId: ID!) {
   }
 }
 `
-// export const GET_RATING_BY_USER_AND_SITE = gql`
-//   query getRatingByUserAndSite($userId: ID!, $siteId: ID!) {
-//     ratings(userId: $userId, siteId: $siteId) {
-//       _id
-//       rating
-//     }
-//   }
-// `
+export const GET_RATING_BY_USER_AND_SITE = gql`
+  query getRatingByUserAndSite($userId: ID!, $siteId: ID!) {
+    ratings(userId: $userId, siteId: $siteId) {
+      _id
+      rating
+    }
+  }
+`
 ;
