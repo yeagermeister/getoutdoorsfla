@@ -110,4 +110,3 @@ mutation Mutation($rating: Int!, $siteId: ID!) {
   }
 }
 `
-;

@@ -143,12 +143,3 @@ query FindAllSites {
   }
 }
 `
-
-export const GET_RATING_BY_USER_AND_SITE = gql`
-  query getRatingByUserAndSite($userId: ID!, $siteId: String!) {
-    rating(userId: $userId, siteId: $siteId) {
-      _id
-      rating
-    }
-  }
-`

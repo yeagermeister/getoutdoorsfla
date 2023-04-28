@@ -173,7 +173,7 @@ const SiteCard = ({ sites }) => {
               <div className='text-center image-container'>
                 <img
                   src={site.imageURL}
-                  className='card-img-top border rounded img-border w-75 h-100 image-cover'
+                  className='card-img-top border rounded img-border w-75 h-50 image-cover'
                   alt={site.altText}
                 />
               </div>

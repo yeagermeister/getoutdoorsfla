@@ -3,7 +3,6 @@ import Map from '../../components/site/Map';
 import Weather from '../../components/site/Weather';
 import Comments from '../../components/site/Comments';
 import StarRating from "../../components/site/Rating";
-import Auth from '../../utils/auth'
 
 const Detail = (props) => {
     console.log(props.site);
@@ -39,13 +38,8 @@ const Detail = (props) => {
                   {props.site.camping && <span className="tag">camping</span>}
                 </p>
                 <p>Average Rating:</p>
-                {Auth.loggedIn() && (
-                  <>
-                  <p>Your Rating:</p>
+                  Your Rating:
                   <StarRating site={props} />
-                  </>
-                )}
-                {!Auth.loggedIn() && (<></>)}
               </div>
             </div>
           </div>
