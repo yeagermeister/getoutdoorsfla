@@ -95,18 +95,18 @@ const Comments = ({ site }) => {
 
   return (
     <div className=' siteCard rounded'>
-      {console.log(commentText)}
+      {console.log(sitecomments)}
       {sitecomments ? (
         sitecomments.map(comment => (
         <div key={comment.commentId}>
           <p >{comment.comment}</p>
-          <p>
+          <span>
             Posted by {comment.userID ? comment.userID.username : 'Unknown'}{' '}
             on {comment.createdAt}
-            {/* {Auth.loggedIn() ? (Auth.getProfile().data.username === comment.userID?.username && (
+            {Auth.loggedIn() ? (Auth.getProfile().data.username === comment.userID?.username && (
               <button className='rounded ' onClick={() => handleDeleteComment(comment._id)}>Delete</button>
-            )) : ( <span></span>)} */}
-          </p>
+            )) : ( <span></span>)}
+          </span>
         </div>
       ))): <div>no comments yet!</div>}
       {Auth.loggedIn() && (
