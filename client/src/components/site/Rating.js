@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useMutation, useQuery } from '@apollo/client';
 import '../../rating.css';
-import { NEW_RATING, GET_RATING_BY_USER_AND_SITE } from "../../utils/mutations";
+import { NEW_RATING } from "../../utils/mutations";
+import { GET_RATING_BY_USER_AND_SITE } from '../../utils/queries';
 import Auth from '../../utils/auth';
 
 // adding a comment to try a repush
