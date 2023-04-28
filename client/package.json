@@ -10,6 +10,7 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@googlemaps/js-api-loader": "^1.15.1",
     "@googlemaps/react-wrapper": "^1.1.35",
+    "@graphql-tools/merge": "^8.4.1",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.5.0",
@@ -28,8 +29,7 @@
     "react-icons": "^4.8.0",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.1",
-    "styled-components": "^5.3.9",
-    "@graphql-tools/merge": "^8.4.1"
+    "styled-components": "^5.3.9"
   },
   "scripts": {
     "start": "react-scripts start",

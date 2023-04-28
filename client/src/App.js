@@ -62,13 +62,13 @@ function App() {
         <Routes>
           <Route exact path='/' element={<Home />} />
           <Route exact path='/AdminNewSite/:id/:siteName/:description/:zipcode/:camping/:pets/:statepark/:park/:beach/:swimmingHole/:spring/:free' element={<AdminNewSite />} />
-          <Route exact path='/login' element={<Login />} />
-          <Route exact path='/signup' element={<Signup />} />
-          <Route exact path='/submit' element={<Submit />} />
+          <Route exact path='/Login' element={<Login />} />
+          <Route exact path='/Signup' element={<Signup />} />
+          <Route exact path='/Submit' element={<Submit />} />
           <Route exact path='/Profile' element={<Profile />} />
-          <Route exact path='/admin' element={<Admin />} />
+          <Route exact path='/Admin' element={<Admin />} />
           <Route path='*' element={<NotFound />}/>
-          <Route exact path='/site/:id' element={<Site />} />
+          <Route exact path='/Site/:id' element={<Site />} />
         </Routes>
         </Router>
       </SiteProvider>
