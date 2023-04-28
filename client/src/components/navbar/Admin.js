@@ -11,7 +11,7 @@ const Admin = () => {
     <>
     
         <li className="nav-item">
-          <Link to={`/admin`} className="nav-link active">Admin</Link>
+          <Link to={`/Admin`} className="nav-link active">Admin</Link>
         </li>
    
     </>
