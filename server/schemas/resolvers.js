@@ -116,21 +116,22 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    addRating: async (parent, { siteID, rating }, { user }) => {
+    addRating: async (parent, { siteId, rating }, { user }) => {
       if (user) {
-        const existingRating = await Rating.findOne({ site: siteID, userID: user._id });
+        const existingRating = await Rating.findOne({ site: siteId, userID: user._id });
         if (existingRating) {
           existingRating.rating = rating;
           await existingRating.save();
           return existingRating;
         }
+        console.log(user._id);
         const newRating = await Rating.create({
-          site: siteID,
+          site: siteId,
           rating,
           userID: user._id,
         });
         await Site.findOneAndUpdate(
-          { _id: siteID },
+          { _id: siteId },
           { $addToSet:  { ratings: newRating._id } }
         );
         return newRating;

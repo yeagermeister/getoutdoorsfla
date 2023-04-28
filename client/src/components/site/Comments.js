@@ -105,7 +105,7 @@ const Comments = ({ site }) => {
             on {comment.createdAt}
             {Auth.loggedIn() ? (Auth.getProfile().data.username === comment.userID?.username && (
               <button className='rounded ' onClick={() => handleDeleteComment(comment._id)}>Delete</button>
-            )) : ( <p></p>)}
+            )) : ( <span></span>)}
           </p>
         </div>
       ))): <div>no comments yet!</div>}
