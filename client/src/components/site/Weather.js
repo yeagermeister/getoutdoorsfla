@@ -39,8 +39,8 @@ const Weather = (props) => {
   }
 
   return (
-    <div className='submitterinoinner '>
-      <article id="weather" className="submitterinoinner rounded springs-container bg-custom ">
+    <div className='weatherouter'>
+      <article id="weather" className="weatherinner rounded springs-container bg-custom ">
         <h3 className="text-center">{weatherData.cityName}</h3>
         <img id="icon" src={weatherData.iconUrl} alt="Weather icon"></img>
         <span className="text-center">{weatherData.temperature}</span>
