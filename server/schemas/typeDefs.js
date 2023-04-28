@@ -1,13 +1,15 @@
 const { gql } = require('apollo-server-express');
 
-const typeDefs = gql`
+const typeDefs = `
 scalar Date
+
   type Users {
     _id: ID!
     username: String!
     email: String!
     admin: Boolean
   }
+
   type Comment {
     commentId: ID!
     comment: String!
@@ -15,12 +17,14 @@ scalar Date
     userID: Users!
     site: Site!
   }
+
   type Rating {
     ratingId: ID!
     rating: Int!
     userID: Users!
     site: Site!
   }
+
   type NewSite {
     _id: ID!
     siteName: String!
@@ -57,7 +61,6 @@ scalar Date
     comments: [Comment]
   }
 
-
   type Auth {
     token: ID!
     user: Users
@@ -72,6 +75,7 @@ scalar Date
     findOneSite(_id: ID!): Site 
     findUserComments(userID: String!): [Comment]
     findUserRatings(userID: ID!): [Rating]
+    getRatingByUserAndSite(userId: ID!, siteId: String!): Rating
   }
 
   type Mutation {
@@ -101,7 +105,6 @@ scalar Date
     free: Boolean
   }
 
-
   input prodSiteInput {
     siteName: String!
     description: String!
@@ -117,6 +120,24 @@ scalar Date
     lat: Float!
     lon: Float!
   }
+
+  input ratingInput {
+    rating: Int!
+    site: ID!
+  }
+
+  input commentInput {
+    comment: String!
+    userID: String!
+    siteId: ID!
+  }
+
+  type Subscription {
+    newSite: NewSite!
+    newComment(siteId: ID!): Comment!
+    newRating(siteId: ID!): Rating!
+  }
+
 `;
 
 module.exports = typeDefs;
