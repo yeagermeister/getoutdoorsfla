@@ -4,6 +4,8 @@ import '../../rating.css';
 import { NEW_RATING, GET_RATING_BY_USER_AND_SITE } from "../../utils/mutations";
 import Auth from '../../utils/auth';
 
+// adding a comment to try a repush
+
 const StarRating = ({site}) => {  
     const [rating, setRating] = useState(0);
     const [updateRating] = useMutation(NEW_RATING);
