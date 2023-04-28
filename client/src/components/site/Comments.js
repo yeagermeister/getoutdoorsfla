@@ -95,7 +95,7 @@ const Comments = ({ site }) => {
 
   return (
     <div className=' siteCard rounded'>
-      {console.log(sitecomments)}
+      {console.log(commentText)}
       {sitecomments ? (
         sitecomments.map(comment => (
         <div key={comment.commentId}>
