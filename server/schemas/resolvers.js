@@ -89,21 +89,17 @@ const resolvers = {
       const prodSite = await Site.create({ siteName, description, zipcode, camping, pets, statepark, park, beach, swimmingHole, spring, free, lat, lon, imageURL, altText });
       return prodSite;
     },
-    addComment: async (parent, { siteID, commentText }, { user }) => {
-      if (user) {
-        const comment = await Comment.create({
-          site: siteID,
-          commentText,
-          userID: user._id,
-        });
-        await Site.findOneAndUpdate(
-          { _id: siteID },
-          { $addToSet: { comments: comment._id } }
-        );
-        return comment;
-      }
-      throw new AuthenticationError('You need to be logged in!');
-    },
+    addComment: async (parent, { comment, siteId, userID }) => {
+      const newComment = await Comment.create({
+        comment,
+        userID: userID,
+        site: siteId,
+      });
+      const site = await Site.findByIdAndUpdate(siteId);
+     site.comments.push(newComment);
+     await site.save()
+      return newComment;
+  },
     deleteComment: async (parent, { commentID }, { user }) => {
       if (user) {
         const comment = await Comment.findById(commentID);
