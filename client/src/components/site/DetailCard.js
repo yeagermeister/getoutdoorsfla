@@ -17,16 +17,16 @@ const Detail = (props) => {
           </div>
           <div className="col-md-4">
            
-            <div className="row">
-              <div className="col-md-12 rounded siteCard">
+            <div className="row justify-content-center">
+              <div className="col-md-12 flex  rounded siteCard">
                 <p>{props.site.description}</p>
                 <img
-                  className="w-30 imgthumbnail px-1"
+                  className="w-30 mx-1 imgthumbnail px-1"
                   src={props.site.imageURL}
                   alt={props.site.altText}
                 />
                 {props.site.free && <p>This site has free admission!</p>}
-                <p className="siteCard">
+                <p className="siteCard amenitay">
                   Amenities:
                   {props.site.beach && <span className="tag">Beach</span>}
                   {props.site.pets && <span className="tag">Pet Friendly</span>}
@@ -36,9 +36,9 @@ const Detail = (props) => {
                   {props.site.swimmingHole && (
                     <span className="tag">Swimming Hole</span>
                   )}
-                  {props.site.camping && <span className="tag">camping</span>}
+                  {props.site.camping && <span className="tag">Camping</span>}
                 </p>
-                <p>Average Rating:</p>
+                
                 {Auth.loggedIn() && (
                   <>
                   <p>Your Rating:</p>
