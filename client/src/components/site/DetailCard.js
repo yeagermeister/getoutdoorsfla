@@ -38,7 +38,7 @@ const Detail = (props) => {
                   )}
                   {props.site.camping && <span className="tag">Camping</span>}
                 </p>
-                <p>Average Rating:</p>
+                
                 {Auth.loggedIn() && (
                   <>
                   <p>Your Rating:</p>
