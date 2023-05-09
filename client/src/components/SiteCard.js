@@ -164,7 +164,7 @@ const SiteCard = ({ sites }) => {
       <div></div>
     )}
     { checked.filterOn ? (
-    <div className='submitterinoouter p-1 my-5 container'>
+    <div className='submitterinoouter p-1 my-5 blah'>
     <div className='row flex submitterinoinner flex-wrap m-5 p-5'>
         {displaySites.map((site, index) => (
           <div key={site._id} className='col-lg-6 col-md-12'>
@@ -194,11 +194,11 @@ const SiteCard = ({ sites }) => {
       </div>
     </div>
     ) : (
-      <div className='submitterinoouter p-1 my-5 container'>
-      <div className='row flex submitterinoinner flex-wrap m-5 p-5'>
+      <div className='submitterinoouter p-1 my-5 blah'>
+      <div className='row flex submitterinoinner flex-wrap m-5 p-2 pt-3'>
       {enrichedSites.map((site, index) => (
         <div key={site._id} className='col-lg-6 col-md-12'>
-          <div className='card border col-md- col-sm- box border-rounded shadow myCard '>
+          <div className='card border box border-rounded shadow myCard '>
             <h5 className='card-title text-center'>{site.siteName}</h5>
             <div className='text-center image-container'>
               <img
