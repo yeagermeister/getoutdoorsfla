@@ -38,7 +38,7 @@ body {
   border-radius: 25px;
   background-image: linear-gradient(to bottom left, #408475, var(--water) );
   margin-bottom: 5%;
-  height: 25rem !important;
+  height: 26rem !important;
 }
 
 #map {
@@ -128,7 +128,7 @@ h2 {
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 .submitterinoinner {
-  border-radius: 1%;
+  border-radius: 10px;
   margin: 20px !important;
   background-color: #e9e0cd9c;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;

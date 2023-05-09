@@ -5,7 +5,7 @@ const Login = () => {
     return (
         <>
             <li className="nav-item">
-            <Link to={`/login`} className="nav-link active">Login</Link>
+            <Link to={`/Login`} className="nav-link active">Login</Link>
             </li>
         </>
     )
