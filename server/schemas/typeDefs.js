@@ -58,7 +58,7 @@ scalar Date
     lon: Float!
     averageRating: Float!
     altText: String!
-    rating: [Rating]
+    ratings: [Rating]
     comments: [Comment]
   }
 

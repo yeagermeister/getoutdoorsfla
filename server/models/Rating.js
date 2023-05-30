@@ -18,7 +18,7 @@ const ratingSchema = new Schema({
       },
   site: 
     {
-        type: String,
+        type: Schema.Types.ObjectId,
         ref: 'Site',
       },
 },

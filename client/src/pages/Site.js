@@ -15,7 +15,7 @@ const Site = (props) => {
   })
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
+  if (error) return <p>Error </p>;
 
   // const free = data.findOneSite.free
 console.log(data.findOneSite);
