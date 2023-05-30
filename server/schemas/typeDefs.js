@@ -56,6 +56,7 @@ scalar Date
     free: Boolean
     lat: Float!
     lon: Float!
+    averageRating: Float!
     altText: String!
     rating: [Rating]
     comments: [Comment]
