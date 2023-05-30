@@ -60,6 +60,7 @@ query FindOneSite($id: ID!) {
     lat
     lon
     altText
+    averageRating
     comments {
       commentId
       comment
@@ -82,6 +83,7 @@ query sites {
     altText
     lat
     lon
+    averageRating
     rating {
       rating
     }
@@ -121,6 +123,13 @@ query Query($userID: ID!) {
     }
   }
 }`
+
+export const AVERAGE_RATING  = gql`
+query Query($siteId: Id!) {
+  findAverageRating(siteID: $siteID)
+    averageRating
+}
+`
 export const FIND_ALL_SITES = gql`
 query FindAllSites {
   findAllSites {
