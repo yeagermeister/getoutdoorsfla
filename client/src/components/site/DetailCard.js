@@ -8,6 +8,16 @@ import Auth from '../../utils/auth'
 const Detail = (props) => {
     console.log(props.site);
   
+    console.log(props.site.ratings)
+    let length = props.site.ratings.length;
+    console.log(length, "length")
+    let ratingsArr = props.site.ratings;
+    let total = 0
+    ratingsArr.forEach(e => {
+        total = total + e.rating
+    });
+    let average = total/length;
+    console.log(average)
     return (
       <>
         <div className=" mt-5 row">
@@ -43,6 +53,10 @@ const Detail = (props) => {
                   <>
                   <p>Your Rating:</p>
                   <StarRating site={props} />
+                  {average ? (<p>Average Rating: {average}</p>)
+                  : <div></div>} 
+                
+                  
                   </>
                 )}
                 {!Auth.loggedIn() && (<></>)}

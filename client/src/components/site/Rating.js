@@ -8,12 +8,11 @@ import Auth from '../../utils/auth';
 // adding a comment to try a repush
 
 const StarRating = ({site}) => {  
-    
     const [updateRating] = useMutation(NEW_RATING);
     const [siteId, setSiteID] = useState('');
     const [userId, setUserID] = useState('')
 
-    console.log("User", Auth.getProfile().data._id, "Site", site.site._id )
+    
     const { loading, data } = useQuery(FIND_USER_RATINGS, {
         variables: { userID: Auth.getProfile().data._id, siteId: site.site._id }
         
@@ -23,7 +22,7 @@ const StarRating = ({site}) => {
             return data?.findUserRatings?.[0]?.rating}
             else { return 0}
     });
-   console.log(rating, "whoop", data?.findUserRatings?.[0]?.rating,"whoop", data)
+   
     
 
     useEffect(() => {
@@ -89,7 +88,9 @@ const StarRating = ({site}) => {
                     </button>
                 );
             })}
+            
         </div>
+        
     );
 };
 

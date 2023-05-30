@@ -60,7 +60,9 @@ query FindOneSite($id: ID!) {
     lat
     lon
     altText
-    averageRating
+    ratings {
+      rating
+    }
     comments {
       commentId
       comment

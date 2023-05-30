@@ -28,8 +28,9 @@ const resolvers = {
           select: 'username',
         },
       })
-      .populate('ratings')
-      .lean({ virtuals: true });
+      .populate({
+        path: 'ratings',
+        })
       return site;
     },
     findUserComments: async (parent, { userID }) => {
