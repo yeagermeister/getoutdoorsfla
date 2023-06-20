@@ -1,10 +1,10 @@
 import React from "react";
-import { SITE_QUERY } from '../../utils/queries';
+import { FIND_ALL_SITES } from '../../utils/queries';
 import { useQuery } from '@apollo/client'
 
 const Sites = () => {
 
-  const { data, loading, error } = useQuery(SITE_QUERY);
+  const { data, loading, error } = useQuery(FIND_ALL_SITES);
   if (loading) return "Loading...";
   if (error) return <pre>{error.message}</pre>;
   return (
