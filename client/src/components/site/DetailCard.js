@@ -54,7 +54,7 @@ const Detail = (props) => {
                   <p>Your Rating:</p>
                   <StarRating site={props} />
                   {average ? (<p>Average Rating: {average}</p>)
-                  : <div></div>} 
+                  : <div>git </div>} 
                 
                   
                   </>
