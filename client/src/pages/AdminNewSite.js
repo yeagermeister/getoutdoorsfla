@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 // import { SiteContext } from '../context/SiteContext'
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate} from 'react-router-dom';
 import '../form.css';
 import { useMutation } from '@apollo/client';
 import { SEND_TO_PROD, DELETE_NEW_SITE} from '../utils/mutations';
@@ -106,11 +106,12 @@ const AdminNewSite = (props) => {
 
     const [deleteNewSite] = useMutation(DELETE_NEW_SITE);
 
-    const handleDelete = async (id) => {
+    const handleDelete = async (event, id) => {
+        event.preventDefault();
         try {
             const response = await deleteNewSite({ variables: {deleteSiteId: id } });
             console.log('Deleted something:', response);
-            navigate.push('/admin'); // Redirect to /admin
+            navigate('/admin'); // Redirect to /admin
          } catch (err) {
         // Handle error
         console.error('Error deleting something:', err);
@@ -194,7 +195,7 @@ const AdminNewSite = (props) => {
                             </div>
                         </div>
                     </form>
-                    <button type="delete" onClick={() => handleDelete(id)}>Delete</button>
+                    <button type="delete" onClick={(event) => handleDelete(event, id)}>Delete</button>
                 </div>
             </div>
         {error && (
