@@ -36,7 +36,7 @@ console.log("userquery", data)
         <ul>
             {userData.map((user) => (
                 <li key={user._id}>{user._id}, {user.username}, {user.email}, {user.admin} <button onClick={() => handleDelete(user._id)}>Delete User</button></li>
-            ))};
+            ))}
         </ul>
     </div>
     </>

@@ -17,7 +17,7 @@ const Sites = () => {
               <button id={site._id}>Edit Site</button>
             </li>
           ))}
-          ;
+          
         </ul>
       </div>
     </>

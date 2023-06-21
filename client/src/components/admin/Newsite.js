@@ -40,7 +40,7 @@ const NewSite = () => {
                             <button id={site._id}>Review Submission</button>
                         </Link>
                     </li>
-                ))};
+                ))}
             </ul>
         </div>
         </>
