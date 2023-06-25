@@ -102,7 +102,7 @@ const handleInputChange = (e) => {
     else{
     try { 
         
-        const {data} = await addProdSite({
+        const {proddata} = await addProdSite({
             variables: {...myData}
         }) 
     } catch(e) {
@@ -144,7 +144,7 @@ const handleDelete = async (event, id) => {
                     //     </Link>
                     // </li>
                     <div className='container-fluid'>
-                       { console.log(site.beach)}
+                       { console.log(site.camping)}
                     <h3>{id}</h3>
                     <div className="row">
                         <div className="col-sm">
@@ -162,9 +162,9 @@ const handleDelete = async (event, id) => {
                                         <label>altText:</label>
                                         <input value={site.altText} name="altText" onChange={handleInputChange} type="text" />
                                         <label>Latitude:</label>
-                                        <input value={site.latitude} name="latitude" onChange={handleInputChange} type="number" />
+                                        <input value={site.latitude} name="latitude" onChange={handleInputChange} type="number" step="0.000000001"/>
                                         <label>Longitude:</label>
-                                        <input value={site.longitude} name="longitude" onChange={handleInputChange} type="number" />
+                                        <input value={site.longitude} name="longitude" onChange={handleInputChange} type="number" step="0.000000001"/>
                                     </div>
                                     <div className="form-group col-sm-3 col-md-6">
                                         <p className="text-center">Please check all that apply</p>
@@ -172,7 +172,7 @@ const handleDelete = async (event, id) => {
                                         <span className="input-group-addon">
                                                     <input value={checked.camping} name="camping" onChange={handleCheckboxChange} type="checkbox" />
                                                     </span>
-                                                {site.camping ? true (
+                                                {site.camping ? (
                                                 <>
                                                 <p className="left-margin">Camping Allowed? ===== Allowed</p> 
                                                 </>
@@ -186,7 +186,7 @@ const handleDelete = async (event, id) => {
                                             <span className="input-group-addon">
                                                 <input value={checked.pets} name="pets" onChange={handleCheckboxChange} type="checkbox" />
                                             </span>
-                                            {site.camping ? true (
+                                            {site.pets ? (
                                                 <>
                                                 <p className="left-margin">Pets Allowed? ===== Allowed </p>
                                                 </>
@@ -201,7 +201,7 @@ const handleDelete = async (event, id) => {
                                             <span className="input-group-addon">
                                                 <input value={checked.statepark} name="statepark" onChange={handleCheckboxChange} type="checkbox" />
                                             </span>
-                                            {site.camping ? true (
+                                            {site.statepark ? (
                                                 <>
                                                 <p className="left-margin">Statepark ===== True</p>
                                                 </>
@@ -216,7 +216,7 @@ const handleDelete = async (event, id) => {
                                             <span className="input-group-addon">
                                                 <input value={checked.park} name="park" onChange={handleCheckboxChange} type="checkbox" />
                                             </span>
-                                            {site.camping ? true (
+                                            {site.park ? (
                                                 <>
                                                 <p className="left-margin">City/County Park ===== True</p>
                                                 </>
@@ -231,7 +231,7 @@ const handleDelete = async (event, id) => {
                                             <span className="input-group-addon">
                                                 <input value={checked.beach} name="beach" onChange={handleCheckboxChange} type="checkbox" />
                                             </span>                                  
-                                            {site.camping ? true (
+                                            {site.beach ? (
                                                 <>
                                                 <p className="left-margin">Beach ===== True</p>
                                                 </>
@@ -246,7 +246,7 @@ const handleDelete = async (event, id) => {
                                             <span className="input-group-addon">
                                                 <input value={checked.swimmingHole} name="swimmingHole" onChange={handleCheckboxChange} type="checkbox" />
                                             </span>
-                                            {site.camping ? true (
+                                            {site.swimmingHole ? (
                                                 <>
                                                 <p className="left-margin">Swimming Hole ===== True</p>
                                                 </>
@@ -261,7 +261,7 @@ const handleDelete = async (event, id) => {
                                             <span className="input-group-addon">
                                                 <input value={checked.spring} name="spring" onChange={handleCheckboxChange} type="checkbox" />
                                             </span>
-                                            {site.camping ? true (
+                                            {site.spring ? (
                                                 <>
                                                 <p className="left-margin">Spring ===== True</p> 
                                                 </>
@@ -276,7 +276,7 @@ const handleDelete = async (event, id) => {
                                             <span className="input-group-addon">
                                             <input value={checked.free} name="free" onChange={handleCheckboxChange} type="checkbox" />
                                             </span>
-                                            {site.camping ? true (
+                                            {site.free ? (
                                                 <>
                                                 <p className="left-margin">Free Admission? ===== Free</p>
                                                 </>
