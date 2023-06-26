@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { NEWSITE_QUERY } from '../../utils/queries';
 import { useQuery, useMutation } from '@apollo/client'
 import { Link } from 'react-router-dom';
@@ -15,7 +15,7 @@ const {id, siteName, description, zipcode, camping, pets, statepark, park, beach
 // const { siteData } = useContext(SiteContext); // Access the global state
 const navigate = useNavigate();
 
-const [addProdSite, {proddata }] = useMutation(SEND_TO_PROD);
+const [addProdSite, proddata] = useMutation(SEND_TO_PROD);
 
 // const inCamping = camping.toString();
 // const inPets = pets.toString();
@@ -68,15 +68,38 @@ const handleInputChange = (e) => {
     });
   };
 
+  const zipRef = useRef(null);
+  const nameRef = useRef(null);
+  const descRef = useRef(null);
+
+  useEffect(() => {
+    // Access the value after the component mounts
+    if (zipRef.current) {
+        formState.zipcode = zipRef.current.value
+    //   const zipValue = zipRef.current.value;
+    //   console.log(zipValue); // Do something with the value
+    }
+    if (nameRef.current) {
+        const nameValue = nameRef.current.value;
+        console.log(nameValue); // Do something with the value
+      }
+      if (descRef.current) {
+        const descValue = descRef.current.value;
+        console.log(descValue); // Do something with the value
+      }
+  }, []);
+
   const handleFormSubmit = async (e) => {
     // Preventing the default behavior of the form submit (which is to refresh the page)
     e.preventDefault();
-    const zipcode = parseInt(formState.zipcode);
+
+    console.log("Zip", zipRef.current.value);
+    const zipcode = parseInt(zipRef.current.value);
     const lat = parseFloat(formState.latitude);
     const lon = parseFloat(formState.longitude);
     let myData = {
-      siteName: formState.siteName,
-      description: formState.description,
+      siteName: nameRef.current.value,
+      description: descRef.current.value,
       altText: formState.altText,
       zipcode: zipcode,
       camping: checked.camping,
@@ -91,9 +114,11 @@ const handleInputChange = (e) => {
       lat: lat,
       lon: lon
     };
+    console.log(myData);
+    console.log(formState);
     
     // First we check to see if the email is not valid or if the userName is empty. If so we set an error message to be displayed on the page.
-    if (!formState.zipcode || !formState.siteName || !formState.description) {
+    if (!myData.zipcode || !myData.siteName || !myData.description) {
     //   setErrorMessage('Site submission requires a name, description, and the zipcode');
       // We want to exit out of this code block if something is wrong so that the user can correct it
       
@@ -105,6 +130,7 @@ const handleInputChange = (e) => {
         const {proddata} = await addProdSite({
             variables: {...myData}
         }) 
+        console.log(myData)
     } catch(e) {
         console.error(e);
     }}
@@ -138,13 +164,7 @@ const handleDelete = async (event, id) => {
         <div>
             <ul>
                 {data.findAllNewSites.map((site) => (
-                    // <li key={site._id}>{site._id}, {site.siteName}, 
-                    //     <Link to={`/AdminNewSite/${site._id}/${site.siteName}/${site.description}/${site.zipcode}/${site.camping}/${site.pets}/${site.statepark}/${site.park}/${site.beach}/${site.swimmingHole}/${site.spring}/${site.free}/`}>
-                    //         <button id={site._id}>Review Submission</button>
-                    //     </Link>
-                    // </li>
                     <div className='container-fluid'>
-                       { console.log(site.camping)}
                     <h3>{id}</h3>
                     <div className="row">
                         <div className="col-sm">
@@ -152,11 +172,11 @@ const handleDelete = async (event, id) => {
                                 <div className="row">
                                     <div className="form-group col-sm-3 col-md-6">          
                                         <label>Location Name:</label>
-                                        <input value={site.siteName} name="siteName" onChange={handleInputChange} type="text" />
+                                        <input value={site.siteName} name="siteName" ref={nameRef} onChange={handleInputChange} type="text" />
                                         <label>Description:</label>
-                                        <textarea value={site.description} name="description" onChange={handleInputChange}  rows={4} cols={40}/>
+                                        <textarea value={site.description} ref={descRef}  name="description" onChange={handleInputChange}  rows={4} cols={40}/>
                                         <label>Zipcode:</label>
-                                        <input value={site.zipcode} name="zipcode" onChange={handleInputChange} type="number" />
+                                        <input value={site.zipcode} ref={zipRef} name="zipcode" onChange={handleInputChange} type="number" />
                                         <label>imageURL:</label>
                                         <input value={site.imageURL} name="imageURL" onChange={handleInputChange} type="text" />
                                         <label>altText:</label>
