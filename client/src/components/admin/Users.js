@@ -11,7 +11,7 @@ const Users = () => {
         update(cache, { data: { deleteUser } }) {
             setUserData((prevUsers) =>
       prevUsers.filter((user) => user._id !== deleteUser._id)
-    );
+    ) 
         }
     });
 

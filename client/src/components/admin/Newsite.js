@@ -114,38 +114,36 @@ const handleInputChange = (e) => {
         const {proddata} = await addProdSite({
             variables: {...myData}
         }) 
-        console.log(myData)
+    handleDelete()
     } catch(e) {
         console.error(e);
     }}
 
   };
-const [deleteNewSite] = useMutation(DELETE_NEW_SITE, {
-    update(cache, { data: { deleteNewSite } }) {
-        setData((prevSites) => 
-            prevSites.filter((site) => site._id !== deleteNewSite._id)
-        );
+const [deleteNewSite] = useMutation(DELETE_NEW_SITE);
+const [componentKey, setComponentKey] = useState(0);
+
+// const handleDelete = (userId) => {
+//     deleteUser({
+//         variables: { deleteUserId: userId }
+//     });
+//     setUserData((prevUsers) => prevUsers.filter((user) => user._id !== userId));
+// };
+
+const handleDelete = async (event, id) => {
+    event.preventDefault();
+    try {
+            const response = await deleteNewSite({ variables: { deleteSiteId: id }, refetchQueries: [{ query: NEWSITE_QUERY }] });
+            console.log(response)
+            // Assuming response.data contains the updated data after deletion
+            const deletedSiteId = response.data.deleteSite._id;
+            setData((prevSites) => prevSites.filter((site) => site._id !== deletedSiteId));
+            setComponentKey((prevKey) => prevKey + 1);
+    } catch (err) {
+      // Handle error
+      console.error('Error deleting something:', err);
     }
-});
-
-const handleDelete = (siteId) => {
-    deleteNewSite({
-        variables: { deleteSiteId: siteId }
-    });
-    setData((prevSites) => prevSites.filter((site) => site._id !== siteId));
-};
-
-// const handleDelete = async (event, id) => {
-//     event.preventDefault();
-//     try {
-//         const response = await deleteNewSite({ variables: {deleteSiteId: id } });
-
-//         // navigate('/admin'); // Redirect to /admin
-//      } catch (err) {
-//     // Handle error
-//     console.error('Error deleting something:', err);
-//   }
-// };  
+  };
 
     // Querry to get all sites in the new site collection that need moderation.  The button links to the component and from to view a single new site and push it to prod.
     const { data, loading, error } = useQuery(NEWSITE_QUERY, {
