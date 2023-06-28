@@ -29,7 +29,7 @@ const Users = () => {
     });
     if (loading) return "Loading...";
     if (error) return <pre>{error.message}</pre>
-console.log("userquery", data)
+
     return (
     <>
     <div>

@@ -17,15 +17,6 @@ const navigate = useNavigate();
 
 const [addProdSite, proddata] = useMutation(SEND_TO_PROD);
 
-// const inCamping = camping.toString();
-// const inPets = pets.toString();
-// const inStatepark = statepark.toString();
-// const inPark = park.toString();
-// const inBeach = beach.toString();
-// const inSwimmingHole = swimmingHole.toString();
-// const inSpring = spring.toString();
-// const inFree = free.toString();
-
 const [formState, setFormState] = useState({
     siteName: siteName,
     description: description,
@@ -38,7 +29,6 @@ const [formState, setFormState] = useState({
 });
   
 const [checked, setChecked] = useState({
-
   camping: false,
   pets: false,
   statepark: false,
@@ -73,27 +63,21 @@ const handleInputChange = (e) => {
   const descRef = useRef(null);
 
   useEffect(() => {
-    // Access the value after the component mounts
     if (zipRef.current) {
         formState.zipcode = zipRef.current.value
-    //   const zipValue = zipRef.current.value;
-    //   console.log(zipValue); // Do something with the value
     }
     if (nameRef.current) {
         const nameValue = nameRef.current.value;
-        console.log(nameValue); // Do something with the value
+        console.log(nameValue);
       }
       if (descRef.current) {
         const descValue = descRef.current.value;
-        console.log(descValue); // Do something with the value
+        console.log(descValue); 
       }
   }, []);
 
   const handleFormSubmit = async (e) => {
-    // Preventing the default behavior of the form submit (which is to refresh the page)
     e.preventDefault();
-
-    console.log("Zip", zipRef.current.value);
     const zipcode = parseInt(zipRef.current.value);
     const lat = parseFloat(formState.latitude);
     const lon = parseFloat(formState.longitude);
@@ -136,19 +120,32 @@ const handleInputChange = (e) => {
     }}
 
   };
-const [deleteNewSite] = useMutation(DELETE_NEW_SITE);
+const [deleteNewSite] = useMutation(DELETE_NEW_SITE, {
+    update(cache, { data: { deleteNewSite } }) {
+        setData((prevSites) => 
+            prevSites.filter((site) => site._id !== deleteNewSite._id)
+        );
+    }
+});
 
-const handleDelete = async (event, id) => {
-    event.preventDefault();
-    try {
-        const response = await deleteNewSite({ variables: {deleteSiteId: id } });
-        console.log('Deleted something:', response);
-        navigate('/admin'); // Redirect to /admin
-     } catch (err) {
-    // Handle error
-    console.error('Error deleting something:', err);
-  }
-};  
+const handleDelete = (siteId) => {
+    deleteNewSite({
+        variables: { deleteSiteId: siteId }
+    });
+    setData((prevSites) => prevSites.filter((site) => site._id !== siteId));
+};
+
+// const handleDelete = async (event, id) => {
+//     event.preventDefault();
+//     try {
+//         const response = await deleteNewSite({ variables: {deleteSiteId: id } });
+
+//         // navigate('/admin'); // Redirect to /admin
+//      } catch (err) {
+//     // Handle error
+//     console.error('Error deleting something:', err);
+//   }
+// };  
 
     // Querry to get all sites in the new site collection that need moderation.  The button links to the component and from to view a single new site and push it to prod.
     const { data, loading, error } = useQuery(NEWSITE_QUERY, {
@@ -165,7 +162,8 @@ const handleDelete = async (event, id) => {
             <ul>
                 {data.findAllNewSites.map((site) => (
                     <div className='container-fluid'>
-                    <h3>{id}</h3>
+                        {console.log(site)}
+                    <h3>{site._id}</h3>
                     <div className="row">
                         <div className="col-sm">
                             <form className="w-100" onSubmit={handleFormSubmit}>
@@ -311,7 +309,7 @@ const handleDelete = async (event, id) => {
                                     </div>
                                 </div>
                             </form>
-                            <button type="delete" onClick={(event) => handleDelete(event, id)}>Delete</button>
+                            <button type="delete" onClick={(event) => handleDelete(event, site._id)}>Delete</button>
                         </div>
                     </div>
                 {error && (
