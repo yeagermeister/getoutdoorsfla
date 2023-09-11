@@ -17,10 +17,15 @@ const navigate = useNavigate();
 
 const [addProdSite, proddata] = useMutation(SEND_TO_PROD);
 
+const [IdState, SetIdState] = useState({
+
+})
+
 const [formState, setFormState] = useState({
     siteName: siteName,
     description: description,
     zipcode: zipcode,
+    id: '',
     imageURL: '',
     altText: '',
     latitude: '',
@@ -61,6 +66,7 @@ const handleInputChange = (e) => {
   const zipRef = useRef(null);
   const nameRef = useRef(null);
   const descRef = useRef(null);
+  const idRef = useRef(null);
 
   useEffect(() => {
     if (zipRef.current) {
@@ -68,16 +74,20 @@ const handleInputChange = (e) => {
     }
     if (nameRef.current) {
         const nameValue = nameRef.current.value;
-        console.log(nameValue);
+       
       }
       if (descRef.current) {
         const descValue = descRef.current.value;
-        console.log(descValue); 
+        
+      }
+      if (idRef.current) {
+        formState.id = idRef.current.value;
       }
   }, []);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    
     const zipcode = parseInt(zipRef.current.value);
     const lat = parseFloat(formState.latitude);
     const lon = parseFloat(formState.longitude);
@@ -86,6 +96,7 @@ const handleInputChange = (e) => {
       description: descRef.current.value,
       altText: formState.altText,
       zipcode: zipcode,
+      id: formState.id,
       camping: checked.camping,
       pets: checked.pets,
       statepark: checked.statepark,
@@ -110,11 +121,16 @@ const handleInputChange = (e) => {
     }
     else{
     try { 
-        
+        console.log(myData)
         const {proddata} = await addProdSite({
             variables: {...myData}
         }) 
-    handleDelete()
+        const response = await deleteNewSite({ variables: { deleteSiteId: id }, refetchQueries: [{ query: NEWSITE_QUERY }] });
+        console.log(response)
+        // Assuming response.data contains the updated data after deletion
+        const deletedSiteId = response.data.deleteSite._id;
+        setData((prevSites) => prevSites.filter((site) => site._id !== deletedSiteId));
+        setComponentKey((prevKey) => prevKey + 1);
     } catch(e) {
         console.error(e);
     }}
@@ -161,7 +177,7 @@ const handleDelete = async (event, id) => {
                 {data.findAllNewSites.map((site) => (
                     <div className='container-fluid'>
                         {console.log(site)}
-                    <h3>{site._id}</h3>
+                    
                     <div className="row">
                         <div className="col-sm">
                             <form className="w-100" onSubmit={handleFormSubmit}>
@@ -181,6 +197,8 @@ const handleDelete = async (event, id) => {
                                         <input value={site.latitude} name="latitude" onChange={handleInputChange} type="number" step="0.000000001"/>
                                         <label>Longitude:</label>
                                         <input value={site.longitude} name="longitude" onChange={handleInputChange} type="number" step="0.000000001"/>
+                                        <label>site-id</label>
+                                        <input value={site._id} ref={idRef} type="text" name="siteId" onChange={handleInputChange} />
                                     </div>
                                     <div className="form-group col-sm-3 col-md-6">
                                         <p className="text-center">Please check all that apply</p>
